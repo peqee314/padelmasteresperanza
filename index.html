@@ -22,6 +22,7 @@
             line-height: 1.6;
         }
 
+        /* Navegación */
         nav {
             background: #000;
             padding: 1rem;
@@ -38,10 +39,16 @@
         nav a { color: white; text-decoration: none; font-weight: bold; text-transform: uppercase; font-size: 0.75rem; cursor: pointer; padding: 8px 12px; border-radius: 5px; }
         nav a:hover { background: rgba(212, 255, 0, 0.1); color: var(--primary); }
 
+        /* Header */
         header {
             padding: 40px 20px;
             text-align: center;
             background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
+        }
+
+        .logo-sede-header {
+            height: 80px;
+            margin-bottom: 15px;
         }
 
         header h1 { font-size: 2.5rem; margin: 0; color: var(--primary); text-transform: uppercase; letter-spacing: 2px; }
@@ -49,47 +56,28 @@
 
         .container { max-width: 900px; margin: auto; padding: 20px; min-height: 70vh; }
 
-        h2 { border-left: 4px solid var(--primary); padding-left: 15px; margin-top: 40px; text-transform: uppercase; color: var(--primary); }
+        h2 { border-left: 4px solid var(--primary); padding-left: 15px; margin: 40px 0 20px; text-transform: uppercase; color: var(--primary); }
 
-        .regla-box {
-            background: var(--card-bg);
-            padding: 25px;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            border: 1px solid #333;
-        }
+        /* Tablas */
+        .table-container { overflow-x: auto; background: var(--card-bg); border-radius: 15px; border: 1px solid #333; margin-bottom: 30px; }
+        table { width: 100%; border-collapse: collapse; }
+        th { text-align: left; padding: 15px; background: #252525; color: var(--primary); font-size: 0.85rem; text-transform: uppercase; }
+        td { padding: 15px; border-bottom: 1px solid #333; font-size: 0.95rem; }
+        
+        .win-tag { color: var(--primary); font-weight: bold; font-size: 0.8rem; border: 1px solid var(--primary); padding: 2px 6px; border-radius: 4px; }
 
-        .regla-box h3 { color: var(--primary); margin-top: 0; display: flex; align-items: center; gap: 10px; }
-        .regla-box ul { padding-left: 20px; }
-        .regla-box li { margin-bottom: 10px; }
-
-        .importante {
-            border-left: 4px solid var(--accent);
-            background: rgba(255, 193, 7, 0.1);
-            padding: 15px;
-            border-radius: 0 10px 10px 0;
-            margin: 20px 0;
-        }
-
-        .sede-badge {
-            background: #333;
-            color: var(--primary);
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-weight: bold;
-            display: inline-block;
-            margin-bottom: 15px;
-            border: 1px solid var(--primary);
-        }
-
+        /* Reglamento Boxes */
+        .regla-box { background: var(--card-bg); padding: 20px; border-radius: 15px; margin-bottom: 15px; border: 1px solid #333; }
+        
         .hidden { display: none; }
+        
+        /* Equipos Grid */
         .teams-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
         .team-card { background: var(--card-bg); padding: 20px; border-radius: 15px; border: 1px solid #333; cursor: pointer; }
         .member-list { margin-top: 15px; border-top: 1px solid #444; padding-top: 10px; display: none; }
-        
+
         footer { background: #000; padding: 40px 20px; border-top: 2px solid var(--primary); text-align: center; margin-top: 50px; }
-        .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; max-width: 600px; margin: 20px auto; }
-        .ws-button { background: var(--whatsapp); color: white; text-decoration: none; padding: 10px; border-radius: 5px; font-weight: bold; font-size: 0.8rem; }
+        .ws-button { background: var(--whatsapp); color: white; text-decoration: none; padding: 10px 20px; border-radius: 5px; font-weight: bold; display: inline-block; margin: 5px; }
     </style>
 </head>
 <body>
@@ -103,49 +91,85 @@
 </nav>
 
 <header>
+    <img src="esperanza-padel.png" alt="Esperanza Padel Logo" class="logo-sede-header" onerror="this.style.display='none'">
     <h1>LIGA PADEL MASTER</h1>
     <p>EDICIÓN POR EQUIPOS | ESPERANZA</p>
 </header>
 
 <div class="container">
     
-    <section id="reglamento" class="hidden">
-        <div class="sede-badge">Sede Oficial: Esperanza Padel</div>
-        <h2>Reglamento Oficial</h2>
-        
-        <div class="regla-box">
-            <h3>1. Formato y Sede</h3>
-            <ul>
-                <li>La liga está compuesta por 6 equipos de 6 jugadores.</li>
-                <li>Todos los encuentros se disputan exclusivamente en <strong>Esperanza Padel</strong> los días jueves.</li>
-            </ul>
+    <section id="partidos" class="hidden">
+        <h2>Próximos Cruces (Jueves)</h2>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Cancha</th>
+                        <th>Local</th>
+                        <th>vs</th>
+                        <th>Visitante</th>
+                        <th>Horario</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Cancha 1</td><td>Equipo A</td><td>vs</td><td>Equipo B</td><td>20:00 hs</td></tr>
+                    <tr><td>Cancha 2</td><td>Equipo C</td><td>vs</td><td>Equipo D</td><td>20:00 hs</td></tr>
+                    <tr><td>Cancha 3</td><td>Equipo E</td><td>vs</td><td>Equipo F</td><td>21:30 hs</td></tr>
+                </tbody>
+            </table>
         </div>
 
-        <div class="regla-box">
-            <h3>2. Regla de Oro y Rotación</h3>
-            <ul>
-                <li><strong>Obligación:</strong> Los 6 integrantes deben jugar un partido por fecha.</li>
-                <li><strong>Excepción:</strong> Si un jugador se ausenta, otro integrante podrá jugar dos partidos el mismo día.</li>
-                <li><strong>Compensación:</strong> Si un jugador cubre una ausencia jugando 2 veces, en la <strong>próxima fecha</strong> queda obligado a que el jugador que no pudo asistir juegue 2 partidos, asegurando así la paridad absoluta.</li>
-            </ul>
+        <h2>Resultados Fecha Anterior</h2>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Encuentro</th>
+                        <th>P1</th>
+                        <th>P2</th>
+                        <th>P3</th>
+                        <th>Global</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>E1 vs E6</td>
+                        <td>6-4 / 6-2</td>
+                        <td>3-6 / 4-6</td>
+                        <td>7-5 / 6-3</td>
+                        <td><span class="win-tag">GANÓ E1 (2-1)</span></td>
+                    </tr>
+                    </tbody>
+            </table>
         </div>
+    </section>
 
-        <div class="regla-box">
-            <h3>3. El Comodín Estratégico</h3>
-            <ul>
-                <li>Cada equipo dispone de <strong>1 comodín mensual</strong> (no acumulable).</li>
-                <li><strong>Función:</strong> Permite conocer la lista de parejas del rival antes de presentar la propia.</li>
-                <li><strong>Restricción:</strong> Dos equipos que se enfrentan no pueden usar el comodín en la misma fecha. Lo obtendrá el equipo cuyo capitán lo solicite <strong>primero</strong> a la organización.</li>
-            </ul>
+    <section id="posiciones" class="hidden">
+        <h2>Tabla de Posiciones</h2>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Pos</th>
+                        <th>Equipo</th>
+                        <th>PJ</th>
+                        <th>PG</th>
+                        <th>PP</th>
+                        <th>Sets +/-</th>
+                        <th>Pts</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>Nombre Equipo 1</td><td>1</td><td>1</td><td>0</td><td>+2</td><td>**3**</td></tr>
+                    <tr><td>2</td><td>Nombre Equipo 2</td><td>1</td><td>0</td><td>1</td><td>-2</td><td>**0**</td></tr>
+                    <tr><td>3</td><td>Nombre Equipo 3</td><td>0</td><td>0</td><td>0</td><td>0</td><td>**0**</td></tr>
+                    <tr><td>4</td><td>Nombre Equipo 4</td><td>0</td><td>0</td><td>0</td><td>0</td><td>**0**</td></tr>
+                    <tr><td>5</td><td>Nombre Equipo 5</td><td>0</td><td>0</td><td>0</td><td>0</td><td>**0**</td></tr>
+                    <tr><td>6</td><td>Nombre Equipo 6</td><td>0</td><td>0</td><td>0</td><td>0</td><td>**0**</td></tr>
+                </tbody>
+            </table>
         </div>
-
-        <div class="regla-box">
-            <h3>4. Capitanía y Nexo</h3>
-            <ul>
-                <li>Cada equipo tiene un capitán asignado.</li>
-                <li><strong>Comunicación:</strong> El capitán es el <strong>único nexo válido</strong> entre el equipo y la organización para informes, reclamos o uso de comodines.</li>
-            </ul>
-        </div>
+        <p><small>* Puntuación: 1 pto por partido ganado en la serie. +1 pto extra por ganar la serie 3-0.</small></p>
     </section>
 
     <section id="inicio">
@@ -172,18 +196,28 @@
         </div>
     </section>
 
-    <section id="partidos" class="hidden"><h2>Partidos</h2><p>Esperanza Padel - Jueves</p></section>
-    <section id="posiciones" class="hidden"><h2>Tabla</h2><p>Próximamente.</p></section>
-    <section id="inscripcion" class="hidden"><h2>Inscripciones</h2><p>Formulario oficial...</p></section>
+    <section id="reglamento" class="hidden">
+        <div style="background:white; padding:10px; border-radius:10px; display:inline-block; margin-bottom:10px;">
+            <img src="esperanza-padel.png" alt="Sede" style="height:40px;">
+        </div>
+        <h2>Reglamento Oficial</h2>
+        <div class="regla-box">
+            <h3>Sede: Esperanza Padel</h3>
+            <p>Todos los encuentros se disputarán los jueves en el complejo oficial.</p>
+        </div>
+        </section>
+
+    <section id="inscripcion" class="hidden">
+        <h2>Inscripciones</h2>
+        <p>Formulario de Google Forms aquí...</p>
+    </section>
 </div>
 
 <footer>
     <h3>ORGANIZACIÓN</h3>
-    <div class="contact-grid">
-        <a href="https://wa.me/5493496461500" class="ws-button" target="_blank">C. Franco</a>
-        <a href="https://wa.me/5493496510129" class="ws-button" target="_blank">Fefi</a>
-        <a href="https://wa.me/5493482677784" class="ws-button" target="_blank">Puche</a>
-    </div>
+    <a href="https://wa.me/5493496461500" class="ws-button" target="_blank">C. Franco</a>
+    <a href="https://wa.me/5493496510129" class="ws-button" target="_blank">Fefi</a>
+    <a href="https://wa.me/5493482677784" class="ws-button" target="_blank">Puche</a>
 </footer>
 
 <script>
