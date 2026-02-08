@@ -19,9 +19,6 @@
             background-color: var(--dark-bg);
             color: var(--text);
             line-height: 1.6;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
         }
 
         nav {
@@ -32,98 +29,83 @@
             z-index: 100;
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 15px;
             border-bottom: 2px solid var(--primary);
+            flex-wrap: wrap;
         }
 
-        nav a { color: white; text-decoration: none; font-weight: bold; text-transform: uppercase; font-size: 0.9rem; cursor: pointer; }
+        nav a { color: white; text-decoration: none; font-weight: bold; text-transform: uppercase; font-size: 0.8rem; cursor: pointer; padding: 5px 10px; }
         nav a:hover { color: var(--primary); }
 
         header {
-            padding: 50px 20px;
+            padding: 40px 20px;
             text-align: center;
             background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
         }
 
-        header h1 { font-size: 3rem; margin: 0; color: var(--primary); text-transform: uppercase; }
-        header p { font-size: 1.2rem; margin: 5px 0; opacity: 0.9; }
+        header h1 { font-size: 2.5rem; margin: 0; color: var(--primary); text-transform: uppercase; }
+        header p { font-size: 1rem; margin: 5px 0; opacity: 0.9; }
 
-        .container { max-width: 1100px; margin: auto; padding: 20px; flex: 1; }
+        .container { max-width: 1100px; margin: auto; padding: 20px; min-height: 70vh; }
 
+        h2 { border-left: 4px solid var(--primary); padding-left: 10px; margin-top: 30px; }
+
+        /* Equipos */
         .teams-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
-            margin-bottom: 40px;
         }
 
         .team-card {
             background: var(--card-bg);
             padding: 20px;
             border-radius: 15px;
-            text-align: center;
             border: 1px solid #333;
             cursor: pointer;
             transition: 0.3s;
         }
 
-        .team-card:hover { border-color: var(--primary); transform: translateY(-3px); }
+        .team-card:hover { border-color: var(--primary); }
 
         .member-list {
             margin-top: 15px;
-            text-align: left;
             border-top: 1px solid #444;
             padding-top: 10px;
             display: none;
         }
 
-        .member-item { display: flex; justify-content: space-between; font-size: 0.9rem; padding: 4px 0; }
-        .position-badge { font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; background: #444; color: var(--primary); }
+        .member-item { display: flex; justify-content: space-between; font-size: 0.85rem; padding: 4px 0; }
+        .position-badge { font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; background: #333; color: var(--primary); }
 
-        .table-container { overflow-x: auto; background: var(--card-bg); border-radius: 10px; padding: 10px; }
+        /* Tablas */
+        .table-container { overflow-x: auto; background: var(--card-bg); border-radius: 10px; margin-bottom: 20px; }
         table { width: 100%; border-collapse: collapse; }
-        th { text-align: left; padding: 15px; border-bottom: 2px solid #333; color: var(--primary); }
-        td { padding: 15px; border-bottom: 1px solid #333; }
+        th { text-align: left; padding: 12px; border-bottom: 2px solid #333; color: var(--primary); font-size: 0.9rem; }
+        td { padding: 12px; border-bottom: 1px solid #333; font-size: 0.9rem; }
+
+        .win { color: var(--primary); font-weight: bold; }
+
         .hidden { display: none; }
 
-        /* FOOTER Y WHATSAPP */
+        /* Footer */
         footer {
             background: #000;
             padding: 40px 20px;
-            margin-top: 50px;
             border-top: 2px solid var(--primary);
             text-align: center;
+            margin-top: 50px;
         }
 
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            max-width: 800px;
-            margin: 20px auto;
-        }
-
-        .ws-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            background: var(--whatsapp);
-            color: white;
-            text-decoration: none;
-            padding: 12px;
-            border-radius: 8px;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-
-        .ws-button:hover { transform: scale(1.05); filter: brightness(1.1); }
+        .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; max-width: 600px; margin: 20px auto; }
+        .ws-button { background: var(--whatsapp); color: white; text-decoration: none; padding: 10px; border-radius: 5px; font-weight: bold; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
 <nav>
-    <a onclick="showSection('inicio')">Inicio</a>
+    <a onclick="showSection('inicio')">Equipos</a>
+    <a onclick="showSection('partidos')">Partidos</a>
     <a onclick="showSection('posiciones')">Posiciones</a>
     <a onclick="showSection('reglas')">Reglas</a>
 </nav>
@@ -134,23 +116,64 @@
 </header>
 
 <div class="container">
+    
     <section id="inicio">
-        <h2>Equipos (Click para ver integrantes)</h2>
-        <div class="teams-grid" id="lista-equipos">
-            <div class="team-card" onclick="toggleTeam(this)">
-                <div style="font-size: 2.5rem;">🎾</div>
-                <h3>Nombre Equipo 1</h3>
-                <p><small>Capitán: Por asignar</small></p>
-                <div class="member-list">
-                    <div class="member-item"><span>1. Jugador 1</span> <span class="position-badge">Revés</span></div>
-                    <div class="member-item"><span>2. Jugador 2</span> <span class="position-badge">Drive</span></div>
-                    <div class="member-item"><span>3. Jugador 3</span> <span class="position-badge">Revés</span></div>
-                    <div class="member-item"><span>4. Jugador 4</span> <span class="position-badge">Drive</span></div>
-                    <div class="member-item"><span>5. Jugador 5</span> <span class="position-badge">Revés</span></div>
-                    <div class="member-item"><span>6. Jugador 6</span> <span class="position-badge">Drive</span></div>
-                </div>
-            </div>
-            </div>
+        <h2>Equipos Confirmados</h2>
+        <p><small>Haz clic en cada equipo para ver sus integrantes y posiciones.</small></p>
+        <div class="teams-grid">
+            <script>
+                const equipos = ["Equipo 1", "Equipo 2", "Equipo 3", "Equipo 4", "Equipo 5", "Equipo 6"];
+                equipos.forEach((nombre, index) => {
+                    document.write(`
+                        <div class="team-card" onclick="toggleTeam(this)">
+                            <div style="font-size: 2rem; margin-bottom:10px;">🎾</div>
+                            <h3 style="margin:0">${nombre}</h3>
+                            <p style="margin:5px 0; font-size:0.8rem; color:#aaa;">Capitán: Por definir</p>
+                            <div class="member-list">
+                                <div class="member-item"><span>1. Jugador</span> <span class="position-badge">Revés</span></div>
+                                <div class="member-item"><span>2. Jugador</span> <span class="position-badge">Drive</span></div>
+                                <div class="member-item"><span>3. Jugador</span> <span class="position-badge">Revés</span></div>
+                                <div class="member-item"><span>4. Jugador</span> <span class="position-badge">Drive</span></div>
+                                <div class="member-item"><span>5. Jugador</span> <span class="position-badge">Revés</span></div>
+                                <div class="member-item"><span>6. Jugador</span> <span class="position-badge">Drive</span></div>
+                            </div>
+                        </div>
+                    `);
+                });
+            </script>
+        </div>
+    </section>
+
+    <section id="partidos" class="hidden">
+        <h2>Próximos Cruces</h2>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr><th>Cancha</th><th>Local</th><th>vs</th><th>Visitante</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Cancha 1</td><td>Equipo 1</td><td>-</td><td>Equipo 6</td></tr>
+                    <tr><td>Cancha 2</td><td>Equipo 2</td><td>-</td><td>Equipo 5</td></tr>
+                    <tr><td>Cancha 3</td><td>Equipo 3</td><td>-</td><td>Equipo 4</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>Resultados Última Fecha</h2>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr><th>Encuentro</th><th>P1</th><th>P2</th><th>P3</th><th>Global</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>E1 vs E6</td>
+                        <td>6-4</td><td>2-6</td><td>7-5</td>
+                        <td class="win">2 - 1</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </section>
 
     <section id="posiciones" class="hidden">
@@ -158,49 +181,56 @@
         <div class="table-container">
             <table>
                 <thead>
-                    <tr><th>Pos</th><th>Equipo</th><th>PJ</th><th>Pts</th></tr>
+                    <tr>
+                        <th>Pos</th>
+                        <th>Equipo</th>
+                        <th>PJ</th>
+                        <th>PG</th>
+                        <th>PP</th>
+                        <th>Pts</th>
+                    </tr>
                 </thead>
                 <tbody>
-                    <tr><td>1</td><td>Pendiente</td><td>0</td><td>0</td></tr>
+                    <tr><td>1</td><td>Equipo 1</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+                    <tr><td>2</td><td>Equipo 2</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+                    <tr><td>3</td><td>Equipo 3</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+                    <tr><td>4</td><td>Equipo 4</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+                    <tr><td>5</td><td>Equipo 5</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+                    <tr><td>6</td><td>Equipo 6</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
                 </tbody>
             </table>
         </div>
     </section>
 
     <section id="reglas" class="hidden">
-        <h2>Reglamento Rápido</h2>
-        <div class="team-card" style="text-align: left; cursor: default;">
-            <p>• <strong>Día de juego:</strong> Todos los jueves.</p>
-            <p>• <strong>Formato:</strong> 6 equipos de 6 personas.</p>
-            <p>• <strong>Partidos:</strong> 3 partidos por equipo cada jueves.</p>
-            <p>• <strong>Estrategia:</strong> Rotación obligatoria de los 6 participantes.</p>
+        <h2>Reglamento</h2>
+        <div class="team-card" style="cursor: default;">
+            <ul>
+                <li>Cada jueves se juegan 3 partidos por cruce.</li>
+                <li>Los 6 integrantes deben ser utilizados estratégicamente.</li>
+                <li>Puntaje: Partido ganado suma 1 punto al global del equipo.</li>
+            </ul>
         </div>
     </section>
 </div>
 
 <footer>
-    <h3>CONTACTO ORGANIZACIÓN</h3>
-    <p>Haz clic para enviar un mensaje directo</p>
+    <h3>ORGANIZACIÓN</h3>
     <div class="contact-grid">
-        <a href="https://wa.me/5493496461500?text=Hola!%20Tengo%20una%20consulta%20sobre%20la%20Liga%20Padel%20Master" class="ws-button" target="_blank">
-            C. Franco
-        </a>
-        <a href="https://wa.me/5493496510129?text=Hola!%20Tengo%20una%20consulta%20sobre%20la%20Liga%20Padel%20Master" class="ws-button" target="_blank">
-            Fefi
-        </a>
-        <a href="https://wa.me/5493482677784?text=Hola!%20Tengo%20una%20consulta%20sobre%20la%20Liga%20Padel%20Master" class="ws-button" target="_blank">
-            Puche
-        </a>
+        <a href="https://wa.me/5493496461500" class="ws-button" target="_blank">C. Franco</a>
+        <a href="https://wa.me/5493496510129" class="ws-button" target="_blank">Fefi</a>
+        <a href="https://wa.me/5493482677784" class="ws-button" target="_blank">Puche</a>
     </div>
-    <p style="margin-top: 30px; opacity: 0.6; font-size: 0.8rem;">© 2026 Liga Padel Master - Esperanza, Santa Fe</p>
 </footer>
 
 <script>
     function showSection(id) {
-        document.getElementById('inicio').classList.add('hidden');
-        document.getElementById('posiciones').classList.add('hidden');
-        document.getElementById('reglas').classList.add('hidden');
+        // Ocultar todas las secciones
+        document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
+        // Mostrar la seleccionada
         document.getElementById(id).classList.remove('hidden');
+        // Scroll al inicio
+        window.scrollTo(0, 0);
     }
 
     function toggleTeam(card) {
