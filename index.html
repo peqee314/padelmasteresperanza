@@ -11,6 +11,7 @@
             --card-bg: #1e1e1e;
             --text: #ffffff;
             --whatsapp: #25d366;
+            --accent: #ffc107;
         }
 
         body {
@@ -29,12 +30,12 @@
             z-index: 100;
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 10px;
             border-bottom: 2px solid var(--primary);
             flex-wrap: wrap;
         }
 
-        nav a { color: white; text-decoration: none; font-weight: bold; text-transform: uppercase; font-size: 0.8rem; cursor: pointer; padding: 5px 10px; border-radius: 5px; }
+        nav a { color: white; text-decoration: none; font-weight: bold; text-transform: uppercase; font-size: 0.75rem; cursor: pointer; padding: 8px 12px; border-radius: 5px; }
         nav a:hover { background: rgba(212, 255, 0, 0.1); color: var(--primary); }
 
         header {
@@ -46,47 +47,37 @@
         header h1 { font-size: 2.5rem; margin: 0; color: var(--primary); text-transform: uppercase; letter-spacing: 2px; }
         header p { font-size: 1rem; margin: 5px 0; opacity: 0.8; }
 
-        .container { max-width: 1100px; margin: auto; padding: 20px; min-height: 70vh; }
+        .container { max-width: 900px; margin: auto; padding: 20px; min-height: 70vh; }
 
-        h2 { border-left: 4px solid var(--primary); padding-left: 10px; margin-top: 30px; text-transform: uppercase; }
+        h2 { border-left: 4px solid var(--primary); padding-left: 15px; margin-top: 40px; text-transform: uppercase; color: var(--primary); }
 
-        /* Estilo Formulario */
-        .form-container {
-            position: relative;
-            overflow: hidden;
-            width: 100%;
-            padding-top: 120%; /* Proporción para celulares */
+        /* Estilos Reglamento */
+        .regla-box {
             background: var(--card-bg);
+            padding: 25px;
             border-radius: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #333;
         }
 
-        @media (min-width: 768px) {
-            .form-container { padding-top: 800px; }
+        .regla-box h3 { color: var(--primary); margin-top: 0; display: flex; align-items: center; gap: 10px; }
+        .regla-box ul { padding-left: 20px; }
+        .regla-box li { margin-bottom: 10px; }
+
+        .importante {
+            border-left: 4px solid var(--accent);
+            background: rgba(255, 193, 7, 0.1);
+            padding: 15px;
+            border-radius: 0 10px 10px 0;
+            margin: 20px 0;
         }
 
-        .form-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        /* Equipos y Tablas (Se mantienen del anterior) */
-        .teams-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-        .team-card { background: var(--card-bg); padding: 20px; border-radius: 15px; border: 1px solid #333; cursor: pointer; transition: 0.3s; }
-        .team-card:hover { border-color: var(--primary); }
-        .member-list { margin-top: 15px; border-top: 1px solid #444; padding-top: 10px; display: none; }
-        .member-item { display: flex; justify-content: space-between; font-size: 0.85rem; padding: 4px 0; }
-        .position-badge { font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; background: #333; color: var(--primary); }
-
-        .table-container { overflow-x: auto; background: var(--card-bg); border-radius: 10px; margin-bottom: 20px; }
-        table { width: 100%; border-collapse: collapse; }
-        th { text-align: left; padding: 12px; border-bottom: 2px solid #333; color: var(--primary); font-size: 0.8rem; }
-        td { padding: 12px; border-bottom: 1px solid #333; font-size: 0.9rem; }
+        /* Auxiliares */
         .hidden { display: none; }
-
+        .teams-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .team-card { background: var(--card-bg); padding: 20px; border-radius: 15px; border: 1px solid #333; cursor: pointer; }
+        .member-list { margin-top: 15px; border-top: 1px solid #444; padding-top: 10px; display: none; }
+        
         footer { background: #000; padding: 40px 20px; border-top: 2px solid var(--primary); text-align: center; margin-top: 50px; }
         .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; max-width: 600px; margin: 20px auto; }
         .ws-button { background: var(--whatsapp); color: white; text-decoration: none; padding: 10px; border-radius: 5px; font-weight: bold; font-size: 0.8rem; }
@@ -98,6 +89,7 @@
     <a onclick="showSection('inicio')">Equipos</a>
     <a onclick="showSection('partidos')">Partidos</a>
     <a onclick="showSection('posiciones')">Posiciones</a>
+    <a onclick="showSection('reglamento')">Reglamento</a>
     <a onclick="showSection('inscripcion')" style="background: var(--primary); color: black;">Inscribirse</a>
 </nav>
 
@@ -108,11 +100,46 @@
 
 <div class="container">
     
-    <section id="inscripcion" class="hidden">
-        <h2>Formulario de Inscripción</h2>
-        <p>Completa tus datos para formar parte de la liga. La organización te contactará para asignarte un equipo.</p>
-        <div class="form-container">
-            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdRELM4SUdZuFpZ4TEqqhduF2LYGpu6dOcJ5MNoN8YyAoRvtw/viewform?usp=dialog">Cargando formulario...</iframe>
+    <section id="reglamento" class="hidden">
+        <h2>Reglamento Oficial</h2>
+        
+        <div class="regla-box">
+            <h3>1. Formato de la Liga</h3>
+            <ul>
+                <li>La liga está compuesta por <strong>6 equipos</strong> de <strong>6 jugadores</strong> cada uno (36 participantes en total).</li>
+                <li>Los encuentros se disputarán todos los <strong>jueves</strong> en los horarios y complejos asignados por la organización.</li>
+            </ul>
+        </div>
+
+        <div class="regla-box">
+            <h3>2. Dinámica de los Encuentros</h3>
+            <ul>
+                <li>Cada jueves, un equipo se enfrenta a otro en una serie de <strong>3 partidos</strong>.</li>
+                <li>Para cada partido, el capitán debe elegir una pareja representante (2 personas).</li>
+                <li><strong>Regla de Oro:</strong> Los 6 integrantes del equipo deben jugar obligatoriamente un partido cada jueves. Ningún jugador puede jugar dos veces el mismo día, asegurando la rotación total.</li>
+            </ul>
+        </div>
+
+        <div class="importante">
+            <strong>ESTRATEGIA:</strong> Los capitanes deben entregar la planilla de sus 3 parejas a la organización antes del inicio del primer turno del jueves. ¡Elegir bien quién juega contra quién es parte del juego!
+        </div>
+
+        <div class="regla-box">
+            <h3>3. Puntuación y Tabla</h3>
+            <ul>
+                <li>Cada partido ganado dentro de la serie suma <strong>1 punto</strong> para la tabla general.</li>
+                <li>Si un equipo gana la serie completa (3-0), se le otorgará un <strong>punto extra</strong> por "Clean Sheet".</li>
+                <li>En caso de empate en la tabla al final de la temporada, se definirá por diferencia de sets y luego por diferencia de games.</li>
+            </ul>
+        </div>
+
+        <div class="regla-box">
+            <h3>4. Capitanía y Disciplina</h3>
+            <ul>
+                <li>Cada equipo designará un <strong>Capitán</strong>, quien será el único responsable de comunicar las decisiones y recibir información oficial.</li>
+                <li>La puntualidad es clave: 15 minutos de retraso implicarán la pérdida del primer set por 6-0.</li>
+                <li>Cualquier comportamiento antideportivo podrá resultar en la quita de puntos o expulsión de la liga.</li>
+            </ul>
         </div>
     </section>
 
@@ -124,14 +151,14 @@
                     document.write(`
                         <div class="team-card" onclick="toggleTeam(this)">
                             <h3>Equipo ${i}</h3>
-                            <p><small>Haga clic para ver integrantes</small></p>
+                            <p style="font-size:0.8rem; color:#aaa;">Haga clic para ver integrantes</p>
                             <div class="member-list">
-                                <div class="member-item"><span>1. Pendiente</span> <span class="position-badge">-</span></div>
-                                <div class="member-item"><span>2. Pendiente</span> <span class="position-badge">-</span></div>
-                                <div class="member-item"><span>3. Pendiente</span> <span class="position-badge">-</span></div>
-                                <div class="member-item"><span>4. Pendiente</span> <span class="position-badge">-</span></div>
-                                <div class="member-item"><span>5. Pendiente</span> <span class="position-badge">-</span></div>
-                                <div class="member-item"><span>6. Pendiente</span> <span class="position-badge">-</span></div>
+                                <div style="display:flex; justify-content:space-between; font-size:0.8rem;"><span>Jugador 1</span><span>Revés</span></div>
+                                <div style="display:flex; justify-content:space-between; font-size:0.8rem;"><span>Jugador 2</span><span>Drive</span></div>
+                                <div style="display:flex; justify-content:space-between; font-size:0.8rem;"><span>Jugador 3</span><span>Revés</span></div>
+                                <div style="display:flex; justify-content:space-between; font-size:0.8rem;"><span>Jugador 4</span><span>Drive</span></div>
+                                <div style="display:flex; justify-content:space-between; font-size:0.8rem;"><span>Jugador 5</span><span>Revés</span></div>
+                                <div style="display:flex; justify-content:space-between; font-size:0.8rem;"><span>Jugador 6</span><span>Drive</span></div>
                             </div>
                         </div>
                     `);
@@ -140,32 +167,14 @@
         </div>
     </section>
 
-    <section id="partidos" class="hidden">
-        <h2>Próximos Cruces</h2>
-        <div class="table-container">
-            <table>
-                <tr><th>Cancha</th><th>Local</th><th>vs</th><th>Visitante</th></tr>
-                <tr><td>Cancha 1</td><td>Por definir</td><td>-</td><td>Por definir</td></tr>
-            </table>
-        </div>
-    </section>
-
-    <section id="posiciones" class="hidden">
-        <h2>Tabla General</h2>
-        <div class="table-container">
-            <table>
-                <thead><tr><th>Pos</th><th>Equipo</th><th>PJ</th><th>Pts</th></tr></thead>
-                <tbody>
-                    <tr><td>1</td><td>Equipo 1</td><td>0</td><td>0</td></tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
+    <section id="partidos" class="hidden"><h2>Calendario y Resultados</h2><p>Próximamente...</p></section>
+    <section id="posiciones" class="hidden"><h2>Tabla de Posiciones</h2><p>La competencia aún no ha comenzado.</p></section>
+    <section id="inscripcion" class="hidden"><h2>Inscripciones</h2><p>Contacta a la organización para sumarte.</p></section>
 
 </div>
 
 <footer>
-    <h3>CONSULTAS ORGANIZACIÓN</h3>
+    <h3>ORGANIZACIÓN LIGA PADEL MASTER</h3>
     <div class="contact-grid">
         <a href="https://wa.me/5493496461500" class="ws-button" target="_blank">C. Franco</a>
         <a href="https://wa.me/5493496510129" class="ws-button" target="_blank">Fefi</a>
@@ -179,7 +188,6 @@
         document.getElementById(id).classList.remove('hidden');
         window.scrollTo(0, 0);
     }
-
     function toggleTeam(card) {
         const list = card.querySelector('.member-list');
         const isVisible = list.style.display === 'block';
