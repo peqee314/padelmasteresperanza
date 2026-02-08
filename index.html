@@ -51,7 +51,6 @@
 
         h2 { border-left: 4px solid var(--primary); padding-left: 15px; margin-top: 40px; text-transform: uppercase; color: var(--primary); }
 
-        /* Estilos Reglamento */
         .regla-box {
             background: var(--card-bg);
             padding: 25px;
@@ -72,7 +71,17 @@
             margin: 20px 0;
         }
 
-        /* Auxiliares */
+        .sede-badge {
+            background: #333;
+            color: var(--primary);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 15px;
+            border: 1px solid var(--primary);
+        }
+
         .hidden { display: none; }
         .teams-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
         .team-card { background: var(--card-bg); padding: 20px; border-radius: 15px; border: 1px solid #333; cursor: pointer; }
@@ -101,44 +110,40 @@
 <div class="container">
     
     <section id="reglamento" class="hidden">
+        <div class="sede-badge">Sede Oficial: Esperanza Padel</div>
         <h2>Reglamento Oficial</h2>
         
         <div class="regla-box">
-            <h3>1. Formato de la Liga</h3>
+            <h3>1. Formato y Sede</h3>
             <ul>
-                <li>La liga está compuesta por <strong>6 equipos</strong> de <strong>6 jugadores</strong> cada uno (36 participantes en total).</li>
-                <li>Los encuentros se disputarán todos los <strong>jueves</strong> en los horarios y complejos asignados por la organización.</li>
+                <li>La liga está compuesta por 6 equipos de 6 jugadores.</li>
+                <li>Todos los encuentros se disputan exclusivamente en <strong>Esperanza Padel</strong> los días jueves.</li>
             </ul>
         </div>
 
         <div class="regla-box">
-            <h3>2. Dinámica de los Encuentros</h3>
+            <h3>2. Regla de Oro y Rotación</h3>
             <ul>
-                <li>Cada jueves, un equipo se enfrenta a otro en una serie de <strong>3 partidos</strong>.</li>
-                <li>Para cada partido, el capitán debe elegir una pareja representante (2 personas).</li>
-                <li><strong>Regla de Oro:</strong> Los 6 integrantes del equipo deben jugar obligatoriamente un partido cada jueves. Ningún jugador puede jugar dos veces el mismo día, asegurando la rotación total.</li>
-            </ul>
-        </div>
-
-        <div class="importante">
-            <strong>ESTRATEGIA:</strong> Los capitanes deben entregar la planilla de sus 3 parejas a la organización antes del inicio del primer turno del jueves. ¡Elegir bien quién juega contra quién es parte del juego!
-        </div>
-
-        <div class="regla-box">
-            <h3>3. Puntuación y Tabla</h3>
-            <ul>
-                <li>Cada partido ganado dentro de la serie suma <strong>1 punto</strong> para la tabla general.</li>
-                <li>Si un equipo gana la serie completa (3-0), se le otorgará un <strong>punto extra</strong> por "Clean Sheet".</li>
-                <li>En caso de empate en la tabla al final de la temporada, se definirá por diferencia de sets y luego por diferencia de games.</li>
+                <li><strong>Obligación:</strong> Los 6 integrantes deben jugar un partido por fecha.</li>
+                <li><strong>Excepción:</strong> Si un jugador se ausenta, otro integrante podrá jugar dos partidos el mismo día.</li>
+                <li><strong>Compensación:</strong> Si un jugador cubre una ausencia jugando 2 veces, en la <strong>próxima fecha</strong> queda obligado a que el jugador que no pudo asistir juegue 2 partidos, asegurando así la paridad absoluta.</li>
             </ul>
         </div>
 
         <div class="regla-box">
-            <h3>4. Capitanía y Disciplina</h3>
+            <h3>3. El Comodín Estratégico</h3>
             <ul>
-                <li>Cada equipo designará un <strong>Capitán</strong>, quien será el único responsable de comunicar las decisiones y recibir información oficial.</li>
-                <li>La puntualidad es clave: 15 minutos de retraso implicarán la pérdida del primer set por 6-0.</li>
-                <li>Cualquier comportamiento antideportivo podrá resultar en la quita de puntos o expulsión de la liga.</li>
+                <li>Cada equipo dispone de <strong>1 comodín mensual</strong> (no acumulable).</li>
+                <li><strong>Función:</strong> Permite conocer la lista de parejas del rival antes de presentar la propia.</li>
+                <li><strong>Restricción:</strong> Dos equipos que se enfrentan no pueden usar el comodín en la misma fecha. Lo obtendrá el equipo cuyo capitán lo solicite <strong>primero</strong> a la organización.</li>
+            </ul>
+        </div>
+
+        <div class="regla-box">
+            <h3>4. Capitanía y Nexo</h3>
+            <ul>
+                <li>Cada equipo tiene un capitán asignado.</li>
+                <li><strong>Comunicación:</strong> El capitán es el <strong>único nexo válido</strong> entre el equipo y la organización para informes, reclamos o uso de comodines.</li>
             </ul>
         </div>
     </section>
@@ -151,7 +156,7 @@
                     document.write(`
                         <div class="team-card" onclick="toggleTeam(this)">
                             <h3>Equipo ${i}</h3>
-                            <p style="font-size:0.8rem; color:#aaa;">Haga clic para ver integrantes</p>
+                            <p style="font-size:0.8rem; color:#aaa;">Click para ver integrantes</p>
                             <div class="member-list">
                                 <div style="display:flex; justify-content:space-between; font-size:0.8rem;"><span>Jugador 1</span><span>Revés</span></div>
                                 <div style="display:flex; justify-content:space-between; font-size:0.8rem;"><span>Jugador 2</span><span>Drive</span></div>
@@ -167,14 +172,13 @@
         </div>
     </section>
 
-    <section id="partidos" class="hidden"><h2>Calendario y Resultados</h2><p>Próximamente...</p></section>
-    <section id="posiciones" class="hidden"><h2>Tabla de Posiciones</h2><p>La competencia aún no ha comenzado.</p></section>
-    <section id="inscripcion" class="hidden"><h2>Inscripciones</h2><p>Contacta a la organización para sumarte.</p></section>
-
+    <section id="partidos" class="hidden"><h2>Partidos</h2><p>Esperanza Padel - Jueves</p></section>
+    <section id="posiciones" class="hidden"><h2>Tabla</h2><p>Próximamente.</p></section>
+    <section id="inscripcion" class="hidden"><h2>Inscripciones</h2><p>Formulario oficial...</p></section>
 </div>
 
 <footer>
-    <h3>ORGANIZACIÓN LIGA PADEL MASTER</h3>
+    <h3>ORGANIZACIÓN</h3>
     <div class="contact-grid">
         <a href="https://wa.me/5493496461500" class="ws-button" target="_blank">C. Franco</a>
         <a href="https://wa.me/5493496510129" class="ws-button" target="_blank">Fefi</a>
