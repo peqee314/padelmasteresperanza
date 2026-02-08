@@ -34,8 +34,8 @@
             flex-wrap: wrap;
         }
 
-        nav a { color: white; text-decoration: none; font-weight: bold; text-transform: uppercase; font-size: 0.8rem; cursor: pointer; padding: 5px 10px; }
-        nav a:hover { color: var(--primary); }
+        nav a { color: white; text-decoration: none; font-weight: bold; text-transform: uppercase; font-size: 0.8rem; cursor: pointer; padding: 5px 10px; border-radius: 5px; }
+        nav a:hover { background: rgba(212, 255, 0, 0.1); color: var(--primary); }
 
         header {
             padding: 40px 20px;
@@ -43,60 +43,51 @@
             background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
         }
 
-        header h1 { font-size: 2.5rem; margin: 0; color: var(--primary); text-transform: uppercase; }
-        header p { font-size: 1rem; margin: 5px 0; opacity: 0.9; }
+        header h1 { font-size: 2.5rem; margin: 0; color: var(--primary); text-transform: uppercase; letter-spacing: 2px; }
+        header p { font-size: 1rem; margin: 5px 0; opacity: 0.8; }
 
         .container { max-width: 1100px; margin: auto; padding: 20px; min-height: 70vh; }
 
-        h2 { border-left: 4px solid var(--primary); padding-left: 10px; margin-top: 30px; }
+        h2 { border-left: 4px solid var(--primary); padding-left: 10px; margin-top: 30px; text-transform: uppercase; }
 
-        /* Equipos */
-        .teams-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
-
-        .team-card {
+        /* Estilo Formulario */
+        .form-container {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            padding-top: 120%; /* Proporción para celulares */
             background: var(--card-bg);
-            padding: 20px;
             border-radius: 15px;
-            border: 1px solid #333;
-            cursor: pointer;
-            transition: 0.3s;
         }
 
+        @media (min-width: 768px) {
+            .form-container { padding-top: 800px; }
+        }
+
+        .form-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Equipos y Tablas (Se mantienen del anterior) */
+        .teams-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .team-card { background: var(--card-bg); padding: 20px; border-radius: 15px; border: 1px solid #333; cursor: pointer; transition: 0.3s; }
         .team-card:hover { border-color: var(--primary); }
-
-        .member-list {
-            margin-top: 15px;
-            border-top: 1px solid #444;
-            padding-top: 10px;
-            display: none;
-        }
-
+        .member-list { margin-top: 15px; border-top: 1px solid #444; padding-top: 10px; display: none; }
         .member-item { display: flex; justify-content: space-between; font-size: 0.85rem; padding: 4px 0; }
         .position-badge { font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; background: #333; color: var(--primary); }
 
-        /* Tablas */
         .table-container { overflow-x: auto; background: var(--card-bg); border-radius: 10px; margin-bottom: 20px; }
         table { width: 100%; border-collapse: collapse; }
-        th { text-align: left; padding: 12px; border-bottom: 2px solid #333; color: var(--primary); font-size: 0.9rem; }
+        th { text-align: left; padding: 12px; border-bottom: 2px solid #333; color: var(--primary); font-size: 0.8rem; }
         td { padding: 12px; border-bottom: 1px solid #333; font-size: 0.9rem; }
-
-        .win { color: var(--primary); font-weight: bold; }
-
         .hidden { display: none; }
 
-        /* Footer */
-        footer {
-            background: #000;
-            padding: 40px 20px;
-            border-top: 2px solid var(--primary);
-            text-align: center;
-            margin-top: 50px;
-        }
-
+        footer { background: #000; padding: 40px 20px; border-top: 2px solid var(--primary); text-align: center; margin-top: 50px; }
         .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; max-width: 600px; margin: 20px auto; }
         .ws-button { background: var(--whatsapp); color: white; text-decoration: none; padding: 10px; border-radius: 5px; font-weight: bold; font-size: 0.8rem; }
     </style>
@@ -107,39 +98,44 @@
     <a onclick="showSection('inicio')">Equipos</a>
     <a onclick="showSection('partidos')">Partidos</a>
     <a onclick="showSection('posiciones')">Posiciones</a>
-    <a onclick="showSection('reglas')">Reglas</a>
+    <a onclick="showSection('inscripcion')" style="background: var(--primary); color: black;">Inscribirse</a>
 </nav>
 
 <header>
     <h1>LIGA PADEL MASTER</h1>
-    <p>EDICIÓN POR EQUIPOS</p>
+    <p>EDICIÓN POR EQUIPOS | ESPERANZA</p>
 </header>
 
 <div class="container">
     
+    <section id="inscripcion" class="hidden">
+        <h2>Formulario de Inscripción</h2>
+        <p>Completa tus datos para formar parte de la liga. La organización te contactará para asignarte un equipo.</p>
+        <div class="form-container">
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdRELM4SUdZuFpZ4TEqqhduF2LYGpu6dOcJ5MNoN8YyAoRvtw/viewform?usp=dialog">Cargando formulario...</iframe>
+        </div>
+    </section>
+
     <section id="inicio">
         <h2>Equipos Confirmados</h2>
-        <p><small>Haz clic en cada equipo para ver sus integrantes y posiciones.</small></p>
         <div class="teams-grid">
             <script>
-                const equipos = ["Equipo 1", "Equipo 2", "Equipo 3", "Equipo 4", "Equipo 5", "Equipo 6"];
-                equipos.forEach((nombre, index) => {
+                for(let i=1; i<=6; i++){
                     document.write(`
                         <div class="team-card" onclick="toggleTeam(this)">
-                            <div style="font-size: 2rem; margin-bottom:10px;">🎾</div>
-                            <h3 style="margin:0">${nombre}</h3>
-                            <p style="margin:5px 0; font-size:0.8rem; color:#aaa;">Capitán: Por definir</p>
+                            <h3>Equipo ${i}</h3>
+                            <p><small>Haga clic para ver integrantes</small></p>
                             <div class="member-list">
-                                <div class="member-item"><span>1. Jugador</span> <span class="position-badge">Revés</span></div>
-                                <div class="member-item"><span>2. Jugador</span> <span class="position-badge">Drive</span></div>
-                                <div class="member-item"><span>3. Jugador</span> <span class="position-badge">Revés</span></div>
-                                <div class="member-item"><span>4. Jugador</span> <span class="position-badge">Drive</span></div>
-                                <div class="member-item"><span>5. Jugador</span> <span class="position-badge">Revés</span></div>
-                                <div class="member-item"><span>6. Jugador</span> <span class="position-badge">Drive</span></div>
+                                <div class="member-item"><span>1. Pendiente</span> <span class="position-badge">-</span></div>
+                                <div class="member-item"><span>2. Pendiente</span> <span class="position-badge">-</span></div>
+                                <div class="member-item"><span>3. Pendiente</span> <span class="position-badge">-</span></div>
+                                <div class="member-item"><span>4. Pendiente</span> <span class="position-badge">-</span></div>
+                                <div class="member-item"><span>5. Pendiente</span> <span class="position-badge">-</span></div>
+                                <div class="member-item"><span>6. Pendiente</span> <span class="position-badge">-</span></div>
                             </div>
                         </div>
                     `);
-                });
+                }
             </script>
         </div>
     </section>
@@ -148,74 +144,28 @@
         <h2>Próximos Cruces</h2>
         <div class="table-container">
             <table>
-                <thead>
-                    <tr><th>Cancha</th><th>Local</th><th>vs</th><th>Visitante</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td>Cancha 1</td><td>Equipo 1</td><td>-</td><td>Equipo 6</td></tr>
-                    <tr><td>Cancha 2</td><td>Equipo 2</td><td>-</td><td>Equipo 5</td></tr>
-                    <tr><td>Cancha 3</td><td>Equipo 3</td><td>-</td><td>Equipo 4</td></tr>
-                </tbody>
-            </table>
-        </div>
-
-        <h2>Resultados Última Fecha</h2>
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr><th>Encuentro</th><th>P1</th><th>P2</th><th>P3</th><th>Global</th></tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>E1 vs E6</td>
-                        <td>6-4</td><td>2-6</td><td>7-5</td>
-                        <td class="win">2 - 1</td>
-                    </tr>
-                </tbody>
+                <tr><th>Cancha</th><th>Local</th><th>vs</th><th>Visitante</th></tr>
+                <tr><td>Cancha 1</td><td>Por definir</td><td>-</td><td>Por definir</td></tr>
             </table>
         </div>
     </section>
 
     <section id="posiciones" class="hidden">
-        <h2>Tabla de Clasificación</h2>
+        <h2>Tabla General</h2>
         <div class="table-container">
             <table>
-                <thead>
-                    <tr>
-                        <th>Pos</th>
-                        <th>Equipo</th>
-                        <th>PJ</th>
-                        <th>PG</th>
-                        <th>PP</th>
-                        <th>Pts</th>
-                    </tr>
-                </thead>
+                <thead><tr><th>Pos</th><th>Equipo</th><th>PJ</th><th>Pts</th></tr></thead>
                 <tbody>
-                    <tr><td>1</td><td>Equipo 1</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-                    <tr><td>2</td><td>Equipo 2</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-                    <tr><td>3</td><td>Equipo 3</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-                    <tr><td>4</td><td>Equipo 4</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-                    <tr><td>5</td><td>Equipo 5</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-                    <tr><td>6</td><td>Equipo 6</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+                    <tr><td>1</td><td>Equipo 1</td><td>0</td><td>0</td></tr>
                 </tbody>
             </table>
         </div>
     </section>
 
-    <section id="reglas" class="hidden">
-        <h2>Reglamento</h2>
-        <div class="team-card" style="cursor: default;">
-            <ul>
-                <li>Cada jueves se juegan 3 partidos por cruce.</li>
-                <li>Los 6 integrantes deben ser utilizados estratégicamente.</li>
-                <li>Puntaje: Partido ganado suma 1 punto al global del equipo.</li>
-            </ul>
-        </div>
-    </section>
 </div>
 
 <footer>
-    <h3>ORGANIZACIÓN</h3>
+    <h3>CONSULTAS ORGANIZACIÓN</h3>
     <div class="contact-grid">
         <a href="https://wa.me/5493496461500" class="ws-button" target="_blank">C. Franco</a>
         <a href="https://wa.me/5493496510129" class="ws-button" target="_blank">Fefi</a>
@@ -225,11 +175,8 @@
 
 <script>
     function showSection(id) {
-        // Ocultar todas las secciones
         document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
-        // Mostrar la seleccionada
         document.getElementById(id).classList.remove('hidden');
-        // Scroll al inicio
         window.scrollTo(0, 0);
     }
 
