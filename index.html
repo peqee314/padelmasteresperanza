@@ -21,6 +21,16 @@
             line-height: 1.6;
         }
 
+        #countdown {
+            background: var(--primary);
+            color: #000;
+            font-weight: bold;
+            padding: 8px;
+            font-size: 0.9rem;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
         nav {
             background: #000;
             padding: 1rem;
@@ -44,40 +54,22 @@
         }
 
         header h1 { font-size: 2.5rem; margin: 0; color: var(--primary); text-transform: uppercase; letter-spacing: 2px; }
-        header p { font-size: 1rem; margin: 5px 0; opacity: 0.8; }
-
+        
         .container { max-width: 1100px; margin: auto; padding: 20px; min-height: 70vh; }
 
         h2 { border-left: 4px solid var(--primary); padding-left: 10px; margin-top: 30px; text-transform: uppercase; }
 
-        .form-container {
-            position: relative;
-            overflow: hidden;
-            width: 100%;
-            padding-top: 120%; 
-            background: var(--card-bg);
-            border-radius: 15px;
-        }
-
-        @media (min-width: 768px) {
-            .form-container { padding-top: 800px; }
-        }
-
-        .form-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
+        .form-container { position: relative; overflow: hidden; width: 100%; padding-top: 120%; background: var(--card-bg); border-radius: 15px; }
+        @media (min-width: 768px) { .form-container { padding-top: 800px; } }
+        .form-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
         .teams-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-        .team-card { background: var(--card-bg); padding: 20px; border-radius: 15px; border: 1px solid #333; cursor: pointer; transition: 0.3s; }
+        .team-card { background: var(--card-bg); padding: 20px; border-radius: 15px; border: 1px solid #333; cursor: pointer; transition: 0.3s; position: relative; }
         .team-card:hover { border-color: var(--primary); }
+        .comodin-status { position: absolute; top: 15px; right: 15px; font-size: 0.7rem; padding: 3px 8px; border-radius: 20px; background: #222; border: 1px solid var(--primary); color: var(--primary); }
+        
         .member-list { margin-top: 15px; border-top: 1px solid #444; padding-top: 10px; display: none; }
         .member-item { display: flex; justify-content: space-between; font-size: 0.85rem; padding: 6px 0; border-bottom: 1px solid #2a2a2a; }
-        
         .capitan-name { font-weight: bold; color: var(--primary); }
         .position-badge { font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; background: var(--primary); color: #000; font-weight: bold; }
 
@@ -86,7 +78,6 @@
         th { text-align: left; padding: 12px; border-bottom: 2px solid #333; color: var(--primary); font-size: 0.8rem; }
         td { padding: 12px; border-bottom: 1px solid #333; font-size: 0.9rem; }
         
-        /* Estilo Reglamento */
         .regla-card { background: var(--card-bg); padding: 20px; border-radius: 15px; margin-bottom: 15px; border-left: 4px solid var(--primary); }
         .regla-card h3 { color: var(--primary); margin-top: 0; font-size: 1.1rem; text-transform: uppercase; }
         .regla-card p { margin-bottom: 10px; font-size: 0.95rem; }
@@ -96,11 +87,14 @@
         .hidden { display: none; }
 
         footer { background: #000; padding: 40px 20px; border-top: 2px solid var(--primary); text-align: center; margin-top: 50px; }
+        .map-button { background: #333; color: white; text-decoration: none; padding: 10px 20px; border-radius: 5px; font-size: 0.8rem; margin: 15px 0; display: inline-block; border: 1px solid var(--primary); }
         .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; max-width: 600px; margin: 20px auto; }
-        .ws-button { background: var(--whatsapp); color: white; text-decoration: none; padding: 10px; border-radius: 5px; font-weight: bold; font-size: 0.8rem; }
+        .ws-button { background: var(--whatsapp); color: white; text-decoration: none; padding: 10px; border-radius: 5px; font-weight: bold; font-size: 0.8rem; display: inline-block; }
     </style>
 </head>
 <body>
+
+<div id="countdown">PRÓXIMA FECHA: Jueves 5 de Marzo, 19:30hs</div>
 
 <nav>
     <a onclick="showSection('inicio')">Equipos</a>
@@ -125,12 +119,13 @@
     </section>
 
     <section id="inicio">
-        <h2>Equipos Confirmados</h2>
+        <h2>Equipos y Comodines</h2>
         <div class="teams-grid">
             <script>
                 for(let i=1; i<=6; i++){
                     document.write(`
                         <div class="team-card" onclick="toggleTeam(this)">
+                            <span class="comodin-status">Comodín: DISPONIBLE</span>
                             <h3>Equipo ${i}</h3>
                             <p><small>Haga clic para ver integrantes</small></p>
                             <div class="member-list">
@@ -190,29 +185,11 @@
         <h2>Tabla General</h2>
         <div class="table-container">
             <table>
-                <thead>
-                    <tr>
-                        <th>Pos</th>
-                        <th>Equipo</th>
-                        <th>PJ</th>
-                        <th>Sets F</th>
-                        <th>Sets C</th>
-                        <th>Pts</th>
-                    </tr>
-                </thead>
+                <thead><tr><th>Pos</th><th>Equipo</th><th>PJ</th><th>Sets F</th><th>Sets C</th><th>Pts</th></tr></thead>
                 <tbody>
                     <script>
                         for(let i=1; i<=6; i++){
-                            document.write(`
-                                <tr>
-                                    <td>${i}</td>
-                                    <td>Equipo ${i}</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                            `);
+                            document.write(`<tr><td>${i}</td><td>Equipo ${i}</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>`);
                         }
                     </script>
                 </tbody>
@@ -230,48 +207,49 @@
 
         <div class="regla-card">
             <h3>2. Sistema de Puntaje</h3>
-            <ul>
-                <li><strong>Ganado en 2 sets:</strong> +3 puntos.</li>
-                <li><strong>Ganado en 3 sets:</strong> +2 puntos.</li>
-                <li><strong>Premio Especial:</strong> El equipo que gane los 3 partidos de una jornada recibirá <strong>+1 punto extra</strong> de premio.</li>
-            </ul>
+            <p>Ganado en 2 sets: <strong>+3 puntos</strong>. Ganado en 3 sets: <strong>+2 puntos</strong>.</p>
+            <p><strong>Premio Especial:</strong> El equipo que en una fecha gane los 3 partidos llevará <strong>+1 punto</strong> de premio extra.</p>
         </div>
 
         <div class="regla-card">
             <h3>3. El Capitán</h3>
-            <p>Cada equipo designará un capitán, quien será el <strong>único nexo oficial</strong> entre la organización y el equipo.</p>
+            <p>Cada equipo designará un capitán que será el <strong>único nexo</strong> entre la organización y el equipo.</p>
         </div>
 
         <div class="regla-card">
-            <h3>4. Horarios y Estrategia</h3>
-            <p>Para evitar cambios de último momento, cada equipo tendrá 1 partido en cada horario disponible todos los jueves. El equipo decide internamente su formación para cada turno según disponibilidad y estrategia.</p>
-            <p><strong>Ausencias:</strong> Si un jugador falta, otro integrante deberá jugar 2 partidos ese día. Para evitar ventajas deportivas, ese jugador descansará la fecha siguiente y el ausente deberá jugar 2 partidos. Cualquier excepción por caso fortuito deberá ser negociada y aceptada por el capitán rival.</p>
+            <h3>4. Horarios y Ventana Horaria</h3>
+            <p>Para evitar cambios de último momento, cada equipo tendrá 1 partido en cada horario posible todos los jueves. El equipo decide cómo salir a cancha en cada turno según disponibilidad y estrategia.</p>
+            <p><strong>Ausencias:</strong> Si un jugador falta, otro integrante deberá jugar 2 partidos ese día. Ese jugador que disputó 2 partidos no jugará la fecha siguiente, y el que se perdió el partido deberá jugar 2 partidos (para evitar ventajas deportivas).</p>
+            <p>Si por caso fortuito esto no es posible, deberán negociar con el capitán del equipo rival para aceptar las condiciones si no considera que hay ventaja.</p>
         </div>
 
         <div class="regla-card">
             <h3>5. Puntualidad y Formación</h3>
-            <p>La formación interna es privada del equipo. Si un integrante llega <strong>10 minutos tarde</strong> por cualquier motivo, se otorgará <strong>W.O.</strong> automático. El equipo presente ganará con un resultado de <strong>6-0 / 6-0</strong>.</p>
+            <p>La organización no consultará la formación de cada partido; se maneja en privado entre los jugadores. Si un integrante llega <strong>10 minutos tarde</strong>, se le dará <strong>W.O.</strong> a ese partido, con un resultado de <strong>6-0 / 6-0</strong> para el equipo que se presentó a tiempo.</p>
         </div>
 
         <div class="regla-card">
-            <h3>6. El Comodín (Estrategia Mensual)</h3>
-            <p>Cada equipo dispone de <strong>1 comodín mensual</strong>. Al usarlo, la organización exigirá al equipo rival que presente su formación antes del martes previo a la fecha, permitiendo al equipo que usó el comodín armar sus cruces a beneficio.</p>
-            <p><em>Nota:</em> Si el equipo rival no cumple con la formación presentada, se aplicará un castigo decidido por los 6 capitanes. En caso de doble solicitud de comodín en un mismo cruce, se otorgará al capitán que lo pidió primero.</p>
+            <h3>6. Comodín (Estrategia Mensual)</h3>
+            <p>Se otorga <strong>1 comodín mensual</strong> a cada equipo. Al usarlo, el capitán informa a la organización, la cual exigirá al equipo contrario presentar su formación antes del martes previo.</p>
+            <p>El equipo rival no podrá mentir con su formación; en caso de incumplir, se aplicará un castigo a decidir entre los 6 capitanes. Si dos equipos que se enfrentan piden comodín, se le otorgará al primero que lo solicitó.</p>
         </div>
 
         <div class="nota-importante">
-            <strong>ACLARACIONES IMPORTANTES:</strong> La organización es ajena a problemas climáticos, eléctricos o desperfectos de terceros. Ante complicaciones, la solución se decidirá en conjunto entre capitanes y organización.
+            <strong>ACLARACIONES IMPORTANTES:</strong> La organización es ajena a problemas de clima, electricidad o desperfectos de terceros. Ante complicaciones, se decidirá cómo afrontarlas entre capitanes y organización.
         </div>
 
         <div class="alerta-expulsion">
-            Ser responsables, cordiales y respetuosos. No se tolerará agresión física ni faltas de respeto. Motivo de EXPULSIÓN INMEDIATA.
+            SER RESPONSABLES, CORDIALES Y RESPETUOSOS. NO SE TOLERARÁ AGRESIÓN FÍSICA NI FALTAS DE RESPETO. EXPULSIÓN INMEDIATA.
         </div>
     </section>
 
 </div>
 
 <footer>
-    <h3>CONSULTAS ORGANIZACIÓN</h3>
+    <h3>SEDE: ESPERANZA PADEL CENTER</h3>
+    <p>Pte Sáenz Peña 1151, Esperanza, Santa Fe</p>
+    <a href="https://maps.google.com/?q=Pte+Saenz+Peña+1151+Esperanza+Santa+Fe" target="_blank" class="map-button">📍 VER UBICACIÓN EN MAPA</a>
+    
     <div class="contact-grid">
         <a href="https://wa.me/5493496461500" class="ws-button" target="_blank">C. Franco</a>
         <a href="https://wa.me/5493496510129" class="ws-button" target="_blank">Fefi</a>
@@ -283,7 +261,6 @@
     function showSection(id) {
         document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
         document.getElementById(id).classList.remove('hidden');
-        window.scrollTo(0, 0);
     }
 
     function toggleTeam(card) {
@@ -292,6 +269,19 @@
         document.querySelectorAll('.member-list').forEach(el => el.style.display = 'none');
         list.style.display = isVisible ? 'none' : 'block';
     }
+
+    function updateCountdown() {
+        const target = new Date('2026-03-05T19:30:00');
+        const now = new Date();
+        const diff = target - now;
+        if (diff <= 0) { document.getElementById('countdown').innerHTML = "¡LA FECHA HA COMENZADO!"; return; }
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        document.getElementById('countdown').innerHTML = `PRÓXIMA FECHA: ${days}d ${hours}h ${mins}m`;
+    }
+    setInterval(updateCountdown, 60000);
+    updateCountdown();
 </script>
 
 </body>
