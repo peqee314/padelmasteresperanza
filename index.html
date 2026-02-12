@@ -5,131 +5,213 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liga Padel Master</title>
     <style>
-        body { font-family: 'Roboto', sans-serif; background-color: #121212; color: #e0e0e0; margin: 0; padding: 0; }
-        header { background-color: #1f1f1f; padding: 20px; text-align: center; border-bottom: 3px solid #00e676; }
-        nav { display: flex; justify-content: center; background-color: #2c2c2c; padding: 10px; position: sticky; top: 0; z-index: 1000; }
-        nav a { color: #00e676; text-decoration: none; margin: 0 15px; font-weight: bold; font-size: 0.9em; text-transform: uppercase; }
+        :root {
+            --primary: #d4ff00;
+            --dark-bg: #121212;
+            --card-bg: #1e1e1e;
+            --text: #ffffff;
+            --whatsapp: #25d366;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            background-color: var(--dark-bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        nav {
+            background: #000;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            border-bottom: 2px solid var(--primary);
+            flex-wrap: wrap;
+        }
+
+        nav a { color: white; text-decoration: none; font-weight: bold; text-transform: uppercase; font-size: 0.8rem; cursor: pointer; padding: 5px 10px; border-radius: 5px; }
+        nav a:hover { background: rgba(212, 255, 0, 0.1); color: var(--primary); }
+
+        header {
+            padding: 40px 20px;
+            text-align: center;
+            background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
+        }
+
+        header h1 { font-size: 2.5rem; margin: 0; color: var(--primary); text-transform: uppercase; letter-spacing: 2px; }
+        header p { font-size: 1rem; margin: 5px 0; opacity: 0.8; }
+
+        .container { max-width: 1100px; margin: auto; padding: 20px; min-height: 70vh; }
+
+        h2 { border-left: 4px solid var(--primary); padding-left: 10px; margin-top: 30px; text-transform: uppercase; }
+
+        /* Estilo Formulario */
+        .form-container {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            padding-top: 120%; 
+            background: var(--card-bg);
+            border-radius: 15px;
+        }
+
+        @media (min-width: 768px) {
+            .form-container { padding-top: 800px; }
+        }
+
+        .form-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Equipos */
+        .teams-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .team-card { background: var(--card-bg); padding: 20px; border-radius: 15px; border: 1px solid #333; cursor: pointer; transition: 0.3s; }
+        .team-card:hover { border-color: var(--primary); }
+        .member-list { margin-top: 15px; border-top: 1px solid #444; padding-top: 10px; display: none; }
+        .member-item { display: flex; justify-content: space-between; font-size: 0.85rem; padding: 6px 0; border-bottom: 1px solid #2a2a2a; }
         
-        .container { max-width: 1000px; margin: 20px auto; padding: 20px; }
-        section { background-color: #1f1f1f; margin-bottom: 30px; padding: 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
-        h2 { color: #00e676; border-bottom: 1px solid #333; padding-bottom: 10px; margin-top: 0; }
+        /* Estilo para el Capitán */
+        .capitan-name { font-weight: bold; color: var(--primary); }
+        .position-badge { font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; background: var(--primary); color: #000; font-weight: bold; }
 
-        /* Estilo Equipos y Acordeón */
-        .accordion { background-color: #2c2c2c; color: #fff; cursor: pointer; padding: 15px; width: 100%; border: none; text-align: left; outline: none; transition: 0.4s; border-radius: 8px; margin-top: 10px; font-size: 1.1em; }
-        .active, .accordion:hover { background-color: #3d3d3d; }
-        .panel { padding: 0 15px; display: none; background-color: #1f1f1f; overflow: hidden; border-left: 2px solid #00e676; margin-bottom: 10px; }
+        /* Tablas */
+        .table-container { overflow-x: auto; background: var(--card-bg); border-radius: 10px; margin-bottom: 20px; }
+        table { width: 100%; border-collapse: collapse; }
+        th { text-align: left; padding: 12px; border-bottom: 2px solid #333; color: var(--primary); font-size: 0.8rem; }
+        td { padding: 12px; border-bottom: 1px solid #333; font-size: 0.9rem; }
         
-        /* Distincion Capitan */
-        .jugador { padding: 10px 0; border-bottom: 1px solid #333; display: flex; justify-content: space-between; }
-        .capitan-tag { color: #f1c40f; font-weight: bold; font-size: 0.8em; border: 1px solid #f1c40f; padding: 2px 6px; border-radius: 4px; }
-
-        /* Tabla de Posiciones */
-        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-        th, td { padding: 12px; text-align: center; border-bottom: 1px solid #333; }
-        th { background-color: #2c2c2c; color: #00e676; }
-
         /* Reglamento */
-        .regla { margin-bottom: 15px; line-height: 1.6; }
-        .regla-titulo { color: #00e676; font-weight: bold; display: block; margin-bottom: 5px; }
+        .regla-card { background: var(--card-bg); padding: 20px; border-radius: 15px; margin-bottom: 15px; border-left: 4px solid var(--primary); }
+        .regla-card h3 { color: var(--primary); margin-top: 0; font-size: 1.1rem; }
 
-        .btn-inscripcion { display: block; width: 200px; margin: 30px auto; padding: 15px; background-color: #00e676; color: #121212; text-align: center; text-decoration: none; font-weight: bold; border-radius: 50px; transition: 0.3s; }
-        .btn-inscripcion:hover { background-color: #00c853; transform: scale(1.05); }
-        
-        footer { text-align: center; padding: 20px; font-size: 0.8em; color: #777; }
+        .hidden { display: none; }
+
+        footer { background: #000; padding: 40px 20px; border-top: 2px solid var(--primary); text-align: center; margin-top: 50px; }
+        .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; max-width: 600px; margin: 20px auto; }
+        .ws-button { background: var(--whatsapp); color: white; text-decoration: none; padding: 10px; border-radius: 5px; font-weight: bold; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
+<nav>
+    <a onclick="showSection('inicio')">Equipos</a>
+    <a onclick="showSection('partidos')">Partidos</a>
+    <a onclick="showSection('posiciones')">Posiciones</a>
+    <a onclick="showSection('reglamento')">Reglamento</a>
+    <a onclick="showSection('inscripcion')" style="background: var(--primary); color: black;">Inscribirse</a>
+</nav>
+
 <header>
     <h1>LIGA PADEL MASTER</h1>
+    <p>EDICIÓN POR EQUIPOS | ESPERANZA</p>
 </header>
-
-<nav>
-    <a href="#equipos">Equipos</a>
-    <a href="#partidos">Partidos</a>
-    <a href="#posiciones">Posiciones</a>
-    <a href="#reglamento">Reglamento</a>
-</nav>
 
 <div class="container">
     
-    <section id="equipos">
+    <section id="inscripcion" class="hidden">
+        <h2>Formulario de Inscripción</h2>
+        <p>Completa tus datos para formar parte de la liga. La organización te contactará para asignarte un equipo.</p>
+        <div class="form-container">
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdRELM4SUdZuFpZ4TEqqhduF2LYGpu6dOcJ5MNoN8YyAoRvtw/viewform?usp=dialog">Cargando formulario...</iframe>
+        </div>
+    </section>
+
+    <section id="inicio">
         <h2>Equipos Confirmados</h2>
-        <button class="accordion">Nombre Equipo Ejemplo <span>+</span></button>
-        <div class="panel">
-            <div class="jugador">Juan Perez <span class="capitan-tag">CAPITÁN</span></div>
-            <div class="jugador">Carlos Lopez</div>
-            <div class="jugador">Ricardo Gomez</div>
-            <div class="jugador">Luis Suarez</div>
+        <div class="teams-grid">
+            <div class="team-card" onclick="toggleTeam(this)">
+                <h3>Equipo Ejemplo</h3>
+                <p><small>Haga clic para ver integrantes</small></p>
+                <div class="member-list">
+                    <div class="member-item"><span class="capitan-name">Juan Pérez</span> <span class="position-badge">CAPITÁN</span></div>
+                    <div class="member-item"><span>Mateo García</span></div>
+                    <div class="member-item"><span>Lucas Rodríguez</span></div>
+                    <div class="member-item"><span>Enzo Fernández</span></div>
+                </div>
+            </div>
+            </div>
+    </section>
+
+    <section id="partidos" class="hidden">
+        <h2>Próximos Cruces</h2>
+        <div class="table-container">
+            <table>
+                <tr><th>Cancha</th><th>Local</th><th>vs</th><th>Visitante</th></tr>
+                <tr><td>Cancha 1</td><td>Por definir</td><td>-</td><td>Por definir</td></tr>
+            </table>
         </div>
     </section>
 
-    <section id="posiciones">
-        <h2>Tabla de Posiciones</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Equipo</th>
-                    <th>PJ</th>
-                    <th>PG</th>
-                    <th>PP</th>
-                    <th>Pts</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Equipo Ejemplo</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
-
-    <section id="reglamento">
-        <h2>Reglamento</h2>
-        <div class="regla">
-            <span class="regla-titulo">1. Formato:</span>
-            Mejor de 3 sets, tie-break en todos y Punto de Oro.
-        </div>
-        <div class="regla">
-            <span class="regla-titulo">2. Puntaje:</span>
-            Partido ganado 3 pts, perdido 0 pts. Desempate por diferencia de sets.
-        </div>
-        <div class="regla">
-            <span class="regla-titulo">3. Capitán:</span>
-            Responsable de la lista, reporte de resultados y puntualidad.
-        </div>
-        <div class="regla">
-            <span class="regla-titulo">4. Tolerancia:</span>
-            15 minutos de espera. Luego se computará W.O. (6-0/6-0).
+    <section id="posiciones" class="hidden">
+        <h2>Tabla General</h2>
+        <div class="table-container">
+            <table>
+                <thead><tr><th>Pos</th><th>Equipo</th><th>PJ</th><th>Pts</th></tr></thead>
+                <tbody>
+                    <tr><td>1</td><td>Equipo Ejemplo</td><td>0</td><td>0</td></tr>
+                </tbody>
+            </table>
         </div>
     </section>
 
-    <a href="#" class="btn-inscripcion">INSCRIBIR MI EQUIPO</a>
+    <section id="reglamento" class="hidden">
+        <h2>Reglamento de la Liga</h2>
+        
+        <div class="regla-card">
+            <h3>1. Formato de Juego</h3>
+            <p>Partidos al mejor de 3 sets. Tie-break en todos los sets (6-6). Se utiliza "Punto de Oro".</p>
+        </div>
+
+        <div class="regla-card">
+            <h3>2. Puntaje</h3>
+            <p>Ganado: 3 pts. Perdido: 0 pts. Desempate por diferencia de sets y luego games.</p>
+        </div>
+
+        <div class="regla-card">
+            <h3>3. El Capitán</h3>
+            <p>Responsable de la comunicación con la organización, confirmación de lista y reporte de resultados.</p>
+        </div>
+
+        <div class="regla-card">
+            <h3>4. Puntualidad</h3>
+            <p>Tolerancia de 15 min. Superado el tiempo, se marca W.O. (6-0 / 6-0) a favor del equipo presente.</p>
+        </div>
+    </section>
+
 </div>
 
 <footer>
-    Organización Liga Padel Master - Contacto: 3496461500 <br>
-    Esperanza, Santa Fe.
+    <h3>CONSULTAS ORGANIZACIÓN</h3>
+    <div class="contact-grid">
+        <a href="https://wa.me/5493496461500" class="ws-button" target="_blank">C. Franco</a>
+        <a href="https://wa.me/5493496510129" class="ws-button" target="_blank">Fefi</a>
+        <a href="https://wa.me/5493482677784" class="ws-button" target="_blank">Puche</a>
+    </div>
 </footer>
 
 <script>
-    var acc = document.getElementsByClassName("accordion");
-    for (var i = 0; i < acc.length; i++) {
-        acc[i].addEventListener("click", function() {
-            this.classList.toggle("active");
-            var panel = this.nextElementSibling;
-            if (panel.style.display === "block") {
-                panel.style.display = "none";
-                this.querySelector("span").innerHTML = "+";
-            } else {
-                panel.style.display = "block";
-                this.querySelector("span").innerHTML = "-";
-            }
-        });
+    function showSection(id) {
+        document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
+        document.getElementById(id).classList.remove('hidden');
+        window.scrollTo(0, 0);
+    }
+
+    function toggleTeam(card) {
+        const list = card.querySelector('.member-list');
+        const isVisible = list.style.display === 'block';
+        // Opcional: cerrar otros antes de abrir este
+        document.querySelectorAll('.member-list').forEach(el => el.style.display = 'none');
+        list.style.display = isVisible ? 'none' : 'block';
     }
 </script>
 
