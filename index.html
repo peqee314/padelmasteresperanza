@@ -5,218 +5,130 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liga Padel Master</title>
     <style>
-        :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #27ae60;
-            --accent-color: #f1c40f;
-            --text-light: #ecf0f1;
-            --bg-color: #eef2f3;
-        }
+        body { font-family: 'Roboto', sans-serif; background-color: #121212; color: #e0e0e0; margin: 0; padding: 0; }
+        header { background-color: #1f1f1f; padding: 20px; text-align: center; border-bottom: 3px solid #00e676; }
+        nav { display: flex; justify-content: center; background-color: #2c2c2c; padding: 10px; position: sticky; top: 0; z-index: 1000; }
+        nav a { color: #00e676; text-decoration: none; margin: 0 15px; font-weight: bold; font-size: 0.9em; text-transform: uppercase; }
+        
+        .container { max-width: 1000px; margin: 20px auto; padding: 20px; }
+        section { background-color: #1f1f1f; margin-bottom: 30px; padding: 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        h2 { color: #00e676; border-bottom: 1px solid #333; padding-bottom: 10px; margin-top: 0; }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            margin: 0;
-            padding: 0;
-            color: #333;
-        }
+        /* Estilo Equipos y Acordeón */
+        .accordion { background-color: #2c2c2c; color: #fff; cursor: pointer; padding: 15px; width: 100%; border: none; text-align: left; outline: none; transition: 0.4s; border-radius: 8px; margin-top: 10px; font-size: 1.1em; }
+        .active, .accordion:hover { background-color: #3d3d3d; }
+        .panel { padding: 0 15px; display: none; background-color: #1f1f1f; overflow: hidden; border-left: 2px solid #00e676; margin-bottom: 10px; }
+        
+        /* Distincion Capitan */
+        .jugador { padding: 10px 0; border-bottom: 1px solid #333; display: flex; justify-content: space-between; }
+        .capitan-tag { color: #f1c40f; font-weight: bold; font-size: 0.8em; border: 1px solid #f1c40f; padding: 2px 6px; border-radius: 4px; }
 
-        header {
-            background: linear-gradient(135deg, var(--primary-color), #34495e);
-            color: var(--text-light);
-            padding: 40px 20px;
-            text-align: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
-
-        .container {
-            max-width: 900px;
-            margin: -30px auto 40px;
-            padding: 0 20px;
-        }
-
-        section {
-            background: white;
-            border-radius: 12px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-        }
-
-        h2 {
-            color: var(--primary-color);
-            font-size: 1.8rem;
-            border-left: 5px solid var(--secondary-color);
-            padding-left: 15px;
-            margin-top: 0;
-        }
-
-        /* Estilos de Equipos y Acordeón */
-        .accordion {
-            background-color: #f8f9fa;
-            color: var(--primary-color);
-            cursor: pointer;
-            padding: 20px;
-            width: 100%;
-            text-align: left;
-            border: 1px solid #eee;
-            outline: none;
-            transition: all 0.3s ease;
-            font-weight: 600;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .accordion:hover {
-            background-color: #f0f0f0;
-            border-color: var(--secondary-color);
-        }
-
-        .panel {
-            padding: 0 20px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-            background-color: white;
-        }
-
-        .jugadores-list {
-            list-style: none;
-            padding: 10px 0;
-        }
-
-        .jugadores-list li {
-            padding: 12px 0;
-            border-bottom: 1px solid #f1f1f1;
-            display: flex;
-            align-items: center;
-        }
-
-        /* Distinción del Capitán */
-        .capitan {
-            font-weight: bold;
-            color: var(--primary-color);
-        }
-
-        .capitan::after {
-            content: 'CAPITÁN';
-            font-size: 0.7rem;
-            background: var(--accent-color);
-            color: #000;
-            padding: 3px 8px;
-            border-radius: 20px;
-            margin-left: 12px;
-            letter-spacing: 0.5px;
-        }
+        /* Tabla de Posiciones */
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        th, td { padding: 12px; text-align: center; border-bottom: 1px solid #333; }
+        th { background-color: #2c2c2c; color: #00e676; }
 
         /* Reglamento */
-        .regla-box {
-            background: #fdfdfd;
-            border: 1px solid #f0f0f0;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-        }
+        .regla { margin-bottom: 15px; line-height: 1.6; }
+        .regla-titulo { color: #00e676; font-weight: bold; display: block; margin-bottom: 5px; }
 
-        .regla-box h3 {
-            margin-top: 0;
-            color: var(--secondary-color);
-            font-size: 1.2rem;
-        }
-
-        footer {
-            text-align: center;
-            padding: 30px;
-            color: #7f8c8d;
-            font-size: 0.9rem;
-        }
+        .btn-inscripcion { display: block; width: 200px; margin: 30px auto; padding: 15px; background-color: #00e676; color: #121212; text-align: center; text-decoration: none; font-weight: bold; border-radius: 50px; transition: 0.3s; }
+        .btn-inscripcion:hover { background-color: #00c853; transform: scale(1.05); }
+        
+        footer { text-align: center; padding: 20px; font-size: 0.8em; color: #777; }
     </style>
 </head>
 <body>
 
 <header>
     <h1>LIGA PADEL MASTER</h1>
-    <p>Excelencia en competición por equipos</p>
 </header>
 
-<div class="container">
-    <section id="equipos">
-        <h2>Equipos Inscriptos</h2>
-        
-        <div class="equipo-item">
-            <button class="accordion">Nombre del Equipo A <span>+</span></button>
-            <div class="panel">
-                <ul class="jugadores-list">
-                    <li class="capitan">Nombre del Jugador 1</li>
-                    <li>Nombre del Jugador 2</li>
-                    <li>Nombre del Jugador 3</li>
-                    <li>Nombre del Jugador 4</li>
-                </ul>
-            </div>
-        </div>
+<nav>
+    <a href="#equipos">Equipos</a>
+    <a href="#partidos">Partidos</a>
+    <a href="#posiciones">Posiciones</a>
+    <a href="#reglamento">Reglamento</a>
+</nav>
 
-        <div class="equipo-item">
-            <button class="accordion">Nombre del Equipo B <span>+</span></button>
-            <div class="panel">
-                <ul class="jugadores-list">
-                    <li class="capitan">Nombre del Jugador 1</li>
-                    <li>Nombre del Jugador 2</li>
-                    <li>Nombre del Jugador 3</li>
-                    <li>Nombre del Jugador 4</li>
-                </ul>
-            </div>
+<div class="container">
+    
+    <section id="equipos">
+        <h2>Equipos Confirmados</h2>
+        <button class="accordion">Nombre Equipo Ejemplo <span>+</span></button>
+        <div class="panel">
+            <div class="jugador">Juan Perez <span class="capitan-tag">CAPITÁN</span></div>
+            <div class="jugador">Carlos Lopez</div>
+            <div class="jugador">Ricardo Gomez</div>
+            <div class="jugador">Luis Suarez</div>
         </div>
+    </section>
+
+    <section id="posiciones">
+        <h2>Tabla de Posiciones</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Equipo</th>
+                    <th>PJ</th>
+                    <th>PG</th>
+                    <th>PP</th>
+                    <th>Pts</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Equipo Ejemplo</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+            </tbody>
+        </table>
     </section>
 
     <section id="reglamento">
-        <h2>Reglamento de la Liga</h2>
-        
-        <div class="regla-box">
-            <h3>1. Formato de Juego</h3>
-            <p>Los encuentros se disputarán al mejor de 3 sets. Se utilizará tie-break en todos los sets en caso de llegar a 6-6. Se aplica la regla de "Punto de Oro".</p>
+        <h2>Reglamento</h2>
+        <div class="regla">
+            <span class="regla-titulo">1. Formato:</span>
+            Mejor de 3 sets, tie-break en todos y Punto de Oro.
         </div>
-
-        <div class="regla-box">
-            <h3>2. Puntaje y Clasificación</h3>
-            <p>Victoria: 3 puntos. Derrota: 0 puntos. Los desempates en la tabla general se definirán por diferencia de sets y, de persistir, por diferencia de games.</p>
+        <div class="regla">
+            <span class="regla-titulo">2. Puntaje:</span>
+            Partido ganado 3 pts, perdido 0 pts. Desempate por diferencia de sets.
         </div>
-
-        <div class="regla-box">
-            <h3>3. Responsabilidades del Capitán</h3>
-            <p>El capitán es el único interlocutor válido con la organización. Debe confirmar la lista de buena fe, reportar resultados y asegurar la presencia de su equipo en los horarios asignados.</p>
+        <div class="regla">
+            <span class="regla-titulo">3. Capitán:</span>
+            Responsable de la lista, reporte de resultados y puntualidad.
         </div>
-
-        <div class="regla-box">
-            <h3>4. Puntualidad y W.O.</h3>
-            <p>Se establece una tolerancia máxima de 15 minutos. Cumplido el plazo, el equipo ausente perderá el partido por Walkover (W.O.) con un resultado de 6-0 / 6-0.</p>
+        <div class="regla">
+            <span class="regla-titulo">4. Tolerancia:</span>
+            15 minutos de espera. Luego se computará W.O. (6-0/6-0).
         </div>
     </section>
+
+    <a href="#" class="btn-inscripcion">INSCRIBIR MI EQUIPO</a>
 </div>
 
 <footer>
-    <p>Organización Liga Padel Master | Contacto: 3496461500</p>
+    Organización Liga Padel Master - Contacto: 3496461500 <br>
+    Esperanza, Santa Fe.
 </footer>
 
 <script>
     var acc = document.getElementsByClassName("accordion");
-    var i;
-
-    for (i = 0; i < acc.length; i++) {
+    for (var i = 0; i < acc.length; i++) {
         acc[i].addEventListener("click", function() {
             this.classList.toggle("active");
             var panel = this.nextElementSibling;
-            var icon = this.querySelector("span");
-            
-            if (panel.style.maxHeight) {
-                panel.style.maxHeight = null;
-                icon.innerHTML = "+";
+            if (panel.style.display === "block") {
+                panel.style.display = "none";
+                this.querySelector("span").innerHTML = "+";
             } else {
-                panel.style.maxHeight = panel.scrollHeight + "px";
-                icon.innerHTML = "-";
-            } 
+                panel.style.display = "block";
+                this.querySelector("span").innerHTML = "-";
+            }
         });
     }
 </script>
