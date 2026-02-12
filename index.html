@@ -5,232 +5,104 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liga Padel Master</title>
     <style>
-        :root {
-            --primary: #d4ff00;
-            --dark-bg: #121212;
-            --card-bg: #1e1e1e;
-            --text: #ffffff;
-            --whatsapp: #25d366;
-            --accent: #ffc107;
-        }
-
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            margin: 0;
-            background-color: var(--dark-bg);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        /* Navegación */
-        nav {
-            background: #000;
-            padding: 1rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            border-bottom: 2px solid var(--primary);
-            flex-wrap: wrap;
-        }
-
-        nav a { color: white; text-decoration: none; font-weight: bold; text-transform: uppercase; font-size: 0.75rem; cursor: pointer; padding: 8px 12px; border-radius: 5px; }
-        nav a:hover { background: rgba(212, 255, 0, 0.1); color: var(--primary); }
-
-        /* Header */
-        header {
-            padding: 40px 20px;
-            text-align: center;
-            background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
-        }
-
-        .logo-sede-header {
-            height: 80px;
-            margin-bottom: 15px;
-        }
-
-        header h1 { font-size: 2.5rem; margin: 0; color: var(--primary); text-transform: uppercase; letter-spacing: 2px; }
-        header p { font-size: 1rem; margin: 5px 0; opacity: 0.8; }
-
-        .container { max-width: 900px; margin: auto; padding: 20px; min-height: 70vh; }
-
-        h2 { border-left: 4px solid var(--primary); padding-left: 15px; margin: 40px 0 20px; text-transform: uppercase; color: var(--primary); }
-
-        /* Tablas */
-        .table-container { overflow-x: auto; background: var(--card-bg); border-radius: 15px; border: 1px solid #333; margin-bottom: 30px; }
-        table { width: 100%; border-collapse: collapse; }
-        th { text-align: left; padding: 15px; background: #252525; color: var(--primary); font-size: 0.85rem; text-transform: uppercase; }
-        td { padding: 15px; border-bottom: 1px solid #333; font-size: 0.95rem; }
+        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 20px; background-color: #f4f4f4; }
+        header { background: #2c3e50; color: #fff; padding: 1rem; text-align: center; border-radius: 8px 8px 0 0; }
+        section { background: #fff; margin: 20px 0; padding: 20px; border-radius: 8px; shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        h2 { color: #2c3e50; border-bottom: 2px solid #2c3e50; padding-bottom: 5px; }
         
-        .win-tag { color: var(--primary); font-weight: bold; font-size: 0.8rem; border: 1px solid var(--primary); padding: 2px 6px; border-radius: 4px; }
-
-        /* Reglamento Boxes */
-        .regla-box { background: var(--card-bg); padding: 20px; border-radius: 15px; margin-bottom: 15px; border: 1px solid #333; }
+        /* Estilos de Equipos y Acordeón */
+        .accordion { background-color: #eee; color: #444; cursor: pointer; padding: 18px; width: 100%; text-align: left; border: none; outline: none; transition: 0.4s; font-weight: bold; border-radius: 5px; margin-bottom: 5px; }
+        .active, .accordion:hover { background-color: #ccc; }
+        .panel { padding: 0 18px; display: none; background-color: white; overflow: hidden; border-left: 3px solid #2c3e50; }
         
-        .hidden { display: none; }
+        ul { list-style: none; padding: 0; }
+        li { padding: 8px 0; border-bottom: 1px solid #eee; }
         
-        /* Equipos Grid */
-        .teams-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-        .team-card { background: var(--card-bg); padding: 20px; border-radius: 15px; border: 1px solid #333; cursor: pointer; }
-        .member-list { margin-top: 15px; border-top: 1px solid #444; padding-top: 10px; display: none; }
+        /* Distinción del Capitán */
+        .capitan { font-weight: bold; color: #2c3e50; }
+        .capitan-tag { font-size: 0.8em; background: #f1c40f; color: #000; padding: 2px 6px; border-radius: 4px; margin-left: 10px; text-transform: uppercase; }
 
-        footer { background: #000; padding: 40px 20px; border-top: 2px solid var(--primary); text-align: center; margin-top: 50px; }
-        .ws-button { background: var(--whatsapp); color: white; text-decoration: none; padding: 10px 20px; border-radius: 5px; font-weight: bold; display: inline-block; margin: 5px; }
+        /* Estilos de Reglamento */
+        .regla-item { margin-bottom: 15px; }
+        .regla-item h3 { margin: 0 0 5px 0; color: #e67e22; font-size: 1.1em; }
+        
+        footer { text-align: center; margin-top: 40px; font-size: 0.9em; color: #666; }
     </style>
 </head>
 <body>
 
-<nav>
-    <a onclick="showSection('inicio')">Equipos</a>
-    <a onclick="showSection('partidos')">Partidos</a>
-    <a onclick="showSection('posiciones')">Posiciones</a>
-    <a onclick="showSection('reglamento')">Reglamento</a>
-    <a onclick="showSection('inscripcion')" style="background: var(--primary); color: black;">Inscribirse</a>
-</nav>
-
 <header>
-    <img src="esperanza-padel.png" alt="Esperanza Padel Logo" class="logo-sede-header" onerror="this.style.display='none'">
     <h1>LIGA PADEL MASTER</h1>
-    <p>EDICIÓN POR EQUIPOS | ESPERANZA</p>
+    <p>Gestión de Equipos y Torneos</p>
 </header>
 
-<div class="container">
+<section id="equipos">
+    <h2>Equipos Inscriptos</h2>
     
-    <section id="partidos" class="hidden">
-        <h2>Próximos Cruces (Jueves)</h2>
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Cancha</th>
-                        <th>Local</th>
-                        <th>vs</th>
-                        <th>Visitante</th>
-                        <th>Horario</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>Cancha 1</td><td>Equipo A</td><td>vs</td><td>Equipo B</td><td>20:00 hs</td></tr>
-                    <tr><td>Cancha 2</td><td>Equipo C</td><td>vs</td><td>Equipo D</td><td>20:00 hs</td></tr>
-                    <tr><td>Cancha 3</td><td>Equipo E</td><td>vs</td><td>Equipo F</td><td>21:30 hs</td></tr>
-                </tbody>
-            </table>
-        </div>
+    <button class="accordion">Nombre del Equipo A</button>
+    <div class="panel">
+        <ul>
+            <li class="capitan">Nombre del Jugador 1 <span class="capitan-tag">Capitán</span></li>
+            <li>Nombre del Jugador 2</li>
+            <li>Nombre del Jugador 3</li>
+            <li>Nombre del Jugador 4</li>
+        </ul>
+    </div>
 
-        <h2>Resultados Fecha Anterior</h2>
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Encuentro</th>
-                        <th>P1</th>
-                        <th>P2</th>
-                        <th>P3</th>
-                        <th>Global</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>E1 vs E6</td>
-                        <td>6-4 / 6-2</td>
-                        <td>3-6 / 4-6</td>
-                        <td>7-5 / 6-3</td>
-                        <td><span class="win-tag">GANÓ E1 (2-1)</span></td>
-                    </tr>
-                    </tbody>
-            </table>
-        </div>
-    </section>
+    <button class="accordion">Nombre del Equipo B</button>
+    <div class="panel">
+        <ul>
+            <li class="capitan">Nombre del Jugador 1 <span class="capitan-tag">Capitán</span></li>
+            <li>Nombre del Jugador 2</li>
+            <li>Nombre del Jugador 3</li>
+            <li>Nombre del Jugador 4</li>
+        </ul>
+    </div>
+</section>
 
-    <section id="posiciones" class="hidden">
-        <h2>Tabla de Posiciones</h2>
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Pos</th>
-                        <th>Equipo</th>
-                        <th>PJ</th>
-                        <th>PG</th>
-                        <th>PP</th>
-                        <th>Sets +/-</th>
-                        <th>Pts</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>1</td><td>Nombre Equipo 1</td><td>1</td><td>1</td><td>0</td><td>+2</td><td>**3**</td></tr>
-                    <tr><td>2</td><td>Nombre Equipo 2</td><td>1</td><td>0</td><td>1</td><td>-2</td><td>**0**</td></tr>
-                    <tr><td>3</td><td>Nombre Equipo 3</td><td>0</td><td>0</td><td>0</td><td>0</td><td>**0**</td></tr>
-                    <tr><td>4</td><td>Nombre Equipo 4</td><td>0</td><td>0</td><td>0</td><td>0</td><td>**0**</td></tr>
-                    <tr><td>5</td><td>Nombre Equipo 5</td><td>0</td><td>0</td><td>0</td><td>0</td><td>**0**</td></tr>
-                    <tr><td>6</td><td>Nombre Equipo 6</td><td>0</td><td>0</td><td>0</td><td>0</td><td>**0**</td></tr>
-                </tbody>
-            </table>
-        </div>
-        <p><small>* Puntuación: 1 pto por partido ganado en la serie. +1 pto extra por ganar la serie 3-0.</small></p>
-    </section>
+<section id="reglamento">
+    <h2>Reglamento de la Liga</h2>
+    
+    <div class="regla-item">
+        <h3>1. Formato de Juego</h3>
+        <p>Los encuentros se disputarán al mejor de 3 sets. Se utilizará tie-break en todos los sets en caso de llegar a 6-6. Se aplica la regla de "Punto de Oro".</p>
+    </div>
 
-    <section id="inicio">
-        <h2>Equipos Confirmados</h2>
-        <div class="teams-grid">
-            <script>
-                for(let i=1; i<=6; i++){
-                    document.write(`
-                        <div class="team-card" onclick="toggleTeam(this)">
-                            <h3>Equipo ${i}</h3>
-                            <p style="font-size:0.8rem; color:#aaa;">Click para ver integrantes</p>
-                            <div class="member-list">
-                                <div style="display:flex; justify-content:space-between; font-size:0.8rem;"><span>Jugador 1</span><span>Revés</span></div>
-                                <div style="display:flex; justify-content:space-between; font-size:0.8rem;"><span>Jugador 2</span><span>Drive</span></div>
-                                <div style="display:flex; justify-content:space-between; font-size:0.8rem;"><span>Jugador 3</span><span>Revés</span></div>
-                                <div style="display:flex; justify-content:space-between; font-size:0.8rem;"><span>Jugador 4</span><span>Drive</span></div>
-                                <div style="display:flex; justify-content:space-between; font-size:0.8rem;"><span>Jugador 5</span><span>Revés</span></div>
-                                <div style="display:flex; justify-content:space-between; font-size:0.8rem;"><span>Jugador 6</span><span>Drive</span></div>
-                            </div>
-                        </div>
-                    `);
-                }
-            </script>
-        </div>
-    </section>
+    <div class="regla-item">
+        <h3>2. Puntaje y Clasificación</h3>
+        <p>Victoria: 3 puntos. Derrota: 0 puntos. Los desempates en la tabla general se definirán por diferencia de sets y, de persistir, por diferencia de games.</p>
+    </div>
 
-    <section id="reglamento" class="hidden">
-        <div style="background:white; padding:10px; border-radius:10px; display:inline-block; margin-bottom:10px;">
-            <img src="esperanza-padel.png" alt="Sede" style="height:40px;">
-        </div>
-        <h2>Reglamento Oficial</h2>
-        <div class="regla-box">
-            <h3>Sede: Esperanza Padel</h3>
-            <p>Todos los encuentros se disputarán los jueves en el complejo oficial.</p>
-        </div>
-        </section>
+    <div class="regla-item">
+        <h3>3. Responsabilidades del Capitán</h3>
+        <p>El capitán es el único interlocutor válido con la organización. Debe confirmar la lista de buena fe, reportar resultados y asegurar la presencia de su equipo en los horarios asignados.</p>
+    </div>
 
-    <section id="inscripcion" class="hidden">
-        <h2>Inscripciones</h2>
-        <p>Formulario de Google Forms aquí...</p>
-    </section>
-</div>
+    <div class="regla-item">
+        <h3>4. Puntualidad y W.O.</h3>
+        <p>Se establece una tolerancia máxima de 15 minutos. Cumplido el plazo, el equipo ausente perderá el partido por Walkover (W.O.) con un resultado de 6-0 / 6-0.</p>
+    </div>
+</section>
 
 <footer>
-    <h3>ORGANIZACIÓN</h3>
-    <a href="https://wa.me/5493496461500" class="ws-button" target="_blank">C. Franco</a>
-    <a href="https://wa.me/5493496510129" class="ws-button" target="_blank">Fefi</a>
-    <a href="https://wa.me/5493482677784" class="ws-button" target="_blank">Puche</a>
+    <p>Para consultas, contactar al administrador: 3496461500</p>
 </footer>
 
 <script>
-    function showSection(id) {
-        document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
-        document.getElementById(id).classList.remove('hidden');
-        window.scrollTo(0, 0);
-    }
-    function toggleTeam(card) {
-        const list = card.querySelector('.member-list');
-        const isVisible = list.style.display === 'block';
-        document.querySelectorAll('.member-list').forEach(el => el.style.display = 'none');
-        list.style.display = isVisible ? 'none' : 'block';
+    // Script para el funcionamiento del acordeón de equipos
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+      acc[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        if (panel.style.display === "block") {
+          panel.style.display = "none";
+        } else {
+          panel.style.display = "block";
+        }
+      });
     }
 </script>
 
