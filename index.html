@@ -86,8 +86,12 @@
         th { text-align: left; padding: 12px; border-bottom: 2px solid #333; color: var(--primary); font-size: 0.8rem; }
         td { padding: 12px; border-bottom: 1px solid #333; font-size: 0.9rem; }
         
+        /* Estilo Reglamento */
         .regla-card { background: var(--card-bg); padding: 20px; border-radius: 15px; margin-bottom: 15px; border-left: 4px solid var(--primary); }
-        .regla-card h3 { color: var(--primary); margin-top: 0; font-size: 1.1rem; }
+        .regla-card h3 { color: var(--primary); margin-top: 0; font-size: 1.1rem; text-transform: uppercase; }
+        .regla-card p { margin-bottom: 10px; font-size: 0.95rem; }
+        .nota-importante { background: rgba(212, 255, 0, 0.1); padding: 15px; border-radius: 10px; border: 1px dashed var(--primary); margin-top: 20px; }
+        .alerta-expulsion { color: #ff4444; font-weight: bold; text-align: center; border: 2px solid #ff4444; padding: 10px; margin-top: 20px; text-transform: uppercase; }
 
         .hidden { display: none; }
 
@@ -218,10 +222,50 @@
 
     <section id="reglamento" class="hidden">
         <h2>Reglamento de la Liga</h2>
-        <div class="regla-card"><h3>1. Formato de Juego</h3><p>Mejor de 3 sets, tie-break en todos y Punto de Oro.</p></div>
-        <div class="regla-card"><h3>2. Puntaje</h3><p>Ganado: 3 pts. Perdido: 0 pts.</p></div>
-        <div class="regla-card"><h3>3. El Capitán</h3><p>Responsable de comunicación y reporte de resultados.</p></div>
-        <div class="regla-card"><h3>4. Puntualidad</h3><p>Tolerancia de 15 min. Superado el tiempo es W.O.</p></div>
+        
+        <div class="regla-card">
+            <h3>1. Formato de Juego</h3>
+            <p>Se disputarán 2 sets con <strong>Punto de Oro</strong>. En caso de empate en sets, se definirá por un <strong>Super Tiebreak a 11 puntos</strong> (sin diferencia de dos).</p>
+        </div>
+
+        <div class="regla-card">
+            <h3>2. Sistema de Puntaje</h3>
+            <ul>
+                <li><strong>Ganado en 2 sets:</strong> +3 puntos.</li>
+                <li><strong>Ganado en 3 sets:</strong> +2 puntos.</li>
+                <li><strong>Premio Especial:</strong> El equipo que gane los 3 partidos de una jornada recibirá <strong>+1 punto extra</strong> de premio.</li>
+            </ul>
+        </div>
+
+        <div class="regla-card">
+            <h3>3. El Capitán</h3>
+            <p>Cada equipo designará un capitán, quien será el <strong>único nexo oficial</strong> entre la organización y el equipo.</p>
+        </div>
+
+        <div class="regla-card">
+            <h3>4. Horarios y Estrategia</h3>
+            <p>Para evitar cambios de último momento, cada equipo tendrá 1 partido en cada horario disponible todos los jueves. El equipo decide internamente su formación para cada turno según disponibilidad y estrategia.</p>
+            <p><strong>Ausencias:</strong> Si un jugador falta, otro integrante deberá jugar 2 partidos ese día. Para evitar ventajas deportivas, ese jugador descansará la fecha siguiente y el ausente deberá jugar 2 partidos. Cualquier excepción por caso fortuito deberá ser negociada y aceptada por el capitán rival.</p>
+        </div>
+
+        <div class="regla-card">
+            <h3>5. Puntualidad y Formación</h3>
+            <p>La formación interna es privada del equipo. Si un integrante llega <strong>10 minutos tarde</strong> por cualquier motivo, se otorgará <strong>W.O.</strong> automático. El equipo presente ganará con un resultado de <strong>6-0 / 6-0</strong>.</p>
+        </div>
+
+        <div class="regla-card">
+            <h3>6. El Comodín (Estrategia Mensual)</h3>
+            <p>Cada equipo dispone de <strong>1 comodín mensual</strong>. Al usarlo, la organización exigirá al equipo rival que presente su formación antes del martes previo a la fecha, permitiendo al equipo que usó el comodín armar sus cruces a beneficio.</p>
+            <p><em>Nota:</em> Si el equipo rival no cumple con la formación presentada, se aplicará un castigo decidido por los 6 capitanes. En caso de doble solicitud de comodín en un mismo cruce, se otorgará al capitán que lo pidió primero.</p>
+        </div>
+
+        <div class="nota-importante">
+            <strong>ACLARACIONES IMPORTANTES:</strong> La organización es ajena a problemas climáticos, eléctricos o desperfectos de terceros. Ante complicaciones, la solución se decidirá en conjunto entre capitanes y organización.
+        </div>
+
+        <div class="alerta-expulsion">
+            Ser responsables, cordiales y respetuosos. No se tolerará agresión física ni faltas de respeto. Motivo de EXPULSIÓN INMEDIATA.
+        </div>
     </section>
 
 </div>
