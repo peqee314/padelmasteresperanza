@@ -170,14 +170,13 @@
                 <tr>
                     <th>Pos</th>
                     <th>Equipo</th>
-                    <th>PJ</th>
-                    <th>Sets F</th>
-                    <th>Sets C</th>
                     <th>Pts</th>
+                    <th>PJ</th>
+                    <th>DS</th>
+                    <th>DG</th>
                 </tr>
             </thead>
-            <tbody id="tabla-posiciones-body">
-                </tbody>
+            <tbody id="tabla-posiciones-body"></tbody>
         </table>
     </div>
 </section>
@@ -246,159 +245,135 @@
 
 <script>
     // ==========================================
-    // 1. DICCIONARIO DE DATOS (Edita aquí los equipos)
+    // 1. DICCIONARIO DE DATOS
     // ==========================================
     const datosEquipos = [
-        {
-            nombre: "La Sordeta",
-            comodin: "DISPONIBLE",
-            capitan: "Juan Weiner",
-            jugadores: ["Bruno Correnti", "Fer Simonetto", "Lauti Fain", "Mauro Perbellini", "Claudio Pucheta"]
-        },
-        {
-            nombre: "Set y Sed Padel Team",
-            comodin: "DISPONIBLE",
-            capitan: "Fernando Reppetti",
-            jugadores: ["Emiliano Villar", "Fabricio Muller", "Nicolas Audello", "German Oreggioni", "Juan Pablo Fiore"]
-        },
-        {
-            nombre: "El Señor de los Globillos",
-            comodin: "DISPONIBLE",
-            capitan: "Fernando Villata",
-            jugadores: ["Damian Falkemberg", "Guillermo Zhender", "Ariel Escalera", "Alex Giuppone", "C.Franco"]
-        },
-        {
-            nombre: "Los Fantasmas",
-            comodin: "DISPONIBLE",
-            capitan: "Roy Melchiorre",
-            jugadores: ["Fernando Montardit", "Alejandro Fuhr", "Julian Tschaggeny", "Facundo Niello", "Luis Taris"]
-        },
-        {
-            nombre: "Los Error no Forzado",
-            comodin: "DISPONIBLE",
-            capitan: "Ramón Dobbler",
-            jugadores: ["Martin Exner", "Josue Asecas", "Pablo Beresvil", "Santiago Angiulla", "Nicolas Wenke"]
-        },
-        {
-            nombre: "Sed Point",
-            comodin: "DISPONIBLE",
-            capitan: "Marcelo Sieguel",
-            jugadores: ["Alex Galleano", "Javier Giletta", "Jona Perrig", "Noe Montenegro", "Juan Perren"]
-        }
+        { nombre: "La Sordeta", comodin: "DISPONIBLE", capitan: "Juan Weiner", jugadores: ["Bruno Correnti", "Fer Simonetto", "Lauti Fain", "Mauro Perbellini", "Claudio Pucheta"] },
+        { nombre: "Set y Sed Padel Team", comodin: "DISPONIBLE", capitan: "Fernando Reppetti", jugadores: ["Emiliano Villar", "Fabricio Muller", "Nicolas Audello", "German Oreggioni", "Juan Pablo Fiore"] },
+        { nombre: "El Señor de los Globillos", comodin: "DISPONIBLE", capitan: "Fernando Villata", jugadores: ["Damian Falkemberg", "Guillermo Zhender", "Ariel Escalera", "Alex Giuppone", "C.Franco"] },
+        { nombre: "Los Fantasmas", comodin: "DISPONIBLE", capitan: "Roy Melchiorre", jugadores: ["Fernando Montardit", "Alejandro Fuhr", "Julian Tschaggeny", "Facundo Niello", "Luis Taris"] },
+        { nombre: "Los Error no Forzado", comodin: "DISPONIBLE", capitan: "Ramón Dobbler", jugadores: ["Martin Exner", "Josue Asecas", "Pablo Beresvil", "Santiago Angiulla", "Nicolas Wenke"] },
+        { nombre: "Sed Point", comodin: "DISPONIBLE", capitan: "Marcelo Sieguel", jugadores: ["Alex Galleano", "Javier Giletta", "Jona Perrig", "Noe Montenegro", "Juan Perren"] }
     ];
-    // 1. Cargá aquí los resultados de cada jueves
-const resultadosData = [
-    // FECHA 1
-    { fecha: 1, local: "La Sordeta", visit: "Sed Point", s1: [0,0], s2: [0,0], stb: [0,0] },
-    { fecha: 1, local: "La Sordeta", visit: "Sed Point", s1: [0,0], s2: [0,0], stb: [0,0] },
-    { fecha: 1, local: "La Sordeta", visit: "Sed Point", s1: [0,0], s2: [0,0], stb: [0,0] },
-    { fecha: 1, local: "Set y Sed Padel Team", visit: "Los Fantasmas", s1: [0,0], s2: [0,0], stb: [0,0] },
-    { fecha: 1, local: "Set y Sed Padel Team", visit: "Los Fantasmas", s1: [0,0], s2: [0,0], stb: [0,0] },
-    { fecha: 1, local: "Set y Sed Padel Team", visit: "Los Fantasmas", s1: [0,0], s2: [0,0], stb: [0,0] },
-    { fecha: 1, local: "El Señor de los Globillos", visit: "Los Error no Forzado", s1: [0,0], s2: [0,0], stb: [0,0] },
-    { fecha: 1, local: "El Señor de los Globillos", visit: "Los Error no Forzado", s1: [0,0], s2: [0,0], stb: [0,0] },
-    { fecha: 1, local: "El Señor de los Globillos", visit: "Los Error no Forzado", s1: [0,0], s2: [0,0], stb: [0,0] }, 
-    // En este ejemplo, La Sordeta ya sumó 3 victorias en la Fecha 1 y el sistema le dará el +1 automáticamente.
-];
-    function calcularTabla() {
-    let tabla = datosEquipos.map(e => ({ nombre: e.nombre, pj: 0, sf: 0, sc: 0, pts: 0 }));
 
-    resultadosData.forEach(r => {
-        // SEGURIDAD: Si no hay puntos cargados en el set 1, ignoramos el partido
-        if (r.s1[0] === 0 && r.s1[1] === 0) return;
-
-        let loc = tabla.find(t => t.nombre === r.local);
-        let vis = tabla.find(t => t.nombre === r.visit);
-        if (!loc || !vis) return;
-
-        loc.pj++; vis.pj++;
-        let sLoc = (r.s1[0]>r.s1[1]?1:0) + (r.s2[0]>r.s2[1]?1:0) + (r.stb[0]>r.stb[1]?1:0);
-        let sVis = (r.s1[1]>r.s1[0]?1:0) + (r.s2[1]>r.s2[0]?1:0) + (r.stb[1]>r.stb[0]?1:0);
+    const resultadosData = [
+        // EJEMPLO FECHA 1: 3 partidos ganados por La Sordeta (2-0, 2-0, 2-0)
+        // Esto debería dar: 9 puntos (partidos) + 1 punto (bono) = 10 total.
+        { fecha: 1, local: "La Sordeta", visit: "Sed Point", s1: [0,0], s2: [0,0], stb: [0,0] },
+        { fecha: 1, local: "La Sordeta", visit: "Sed Point", s1: [0,0], s2: [0,0], stb: [0,0] },
+        { fecha: 1, local: "La Sordeta", visit: "Sed Point", s1: [0,0], s2: [0,0], stb: [0,0] },
+        { fecha: 1, local: "El Señor de los Globillos", visit: "Los Error no Forzado", s1: [0,0], s2: [0,0], stb: [0,0] },
+        { fecha: 1, local: "El Señor de los Globillos", visit: "Los Error no Forzado", s1: [0,0], s2: [0,0], stb: [0,0] },
+        { fecha: 1, local: "El Señor de los Globillos", visit: "Los Error no Forzado", s1: [0,0], s2: [0,0], stb: [0,0] },
         
-        loc.sf += sLoc; loc.sc += sVis;
-        vis.sf += sVis; vis.sc += sLoc;
+        // EJEMPLO SETS: Set y Sed gana 2-1 (3 sets) -> Debería sumar +2 puntos.
+        { fecha: 1, local: "Set y Sed Padel Team", visit: "Los Fantasmas", s1: [0,0], s2: [0,0], stb: [0,0] },
+        { fecha: 1, local: "Set y Sed Padel Team", visit: "Los Fantasmas", s1: [0,0], s2: [0,0], stb: [0,0] },
+        { fecha: 1, local: "Set y Sed Padel Team", visit: "Los Fantasmas", s1: [0,0], s2: [0,0], stb: [0,0] }
+    ];
 
-        if (sLoc > sVis) {
-            loc.pts += (r.stb[0] > 0 || r.stb[1] > 0) ? 2 : 3;
-        } else {
-            vis.pts += (r.stb[0] > 0 || r.stb[1] > 0) ? 2 : 3;
-        }
-    });
+    function calcularTabla() {
+        let tabla = datosEquipos.map(e => ({ 
+            nombre: e.nombre, pj: 0, sf: 0, sc: 0, gf: 0, gc: 0, pts: 0 
+        }));
 
-    // LÓGICA DEL BONO +1 (Solo para partidos jugados)
-    const fechas = [...new Set(resultadosData.map(r => r.fecha))];
-    fechas.forEach(f => {
-        const partidosFecha = resultadosData.filter(r => r.fecha === f && (r.s1[0] !== 0 || r.s1[1] !== 0));
-        datosEquipos.forEach(eq => {
-            let victoriasEnFecha = 0;
-            partidosFecha.forEach(p => {
-                let sLoc = (p.s1[0]>p.s1[1]?1:0) + (p.s2[0]>p.s2[1]?1:0) + (p.stb[0]>p.stb[1]?1:0);
-                let sVis = (p.s1[1]>p.s1[0]?1:0) + (p.s2[1]>p.s2[0]?1:0) + (p.stb[1]>p.stb[0]?1:0);
-                if(p.local === eq.nombre && sLoc > sVis) victoriasEnFecha++;
-                if(p.visit === eq.nombre && sVis > sLoc) victoriasEnFecha++;
-            });
-            if (victoriasEnFecha >= 3) {
-                let item = tabla.find(t => t.nombre === eq.nombre);
-                if(item) item.pts += 1;
+        // 1. Cálculo de Puntos por partido, Sets y Games
+        resultadosData.forEach(r => {
+            if (r.s1[0] === 0 && r.s1[1] === 0) return;
+
+            let loc = tabla.find(t => t.nombre === r.local);
+            let vis = tabla.find(t => t.nombre === r.visit);
+            
+            loc.pj++; vis.pj++;
+            
+            // Sets ganados en este partido
+            let sLoc = (r.s1[0]>r.s1[1]?1:0) + (r.s2[0]>r.s2[1]?1:0) + (r.stb[0]>r.stb[1]?1:0);
+            let sVis = (r.s1[1]>r.s1[0]?1:0) + (r.s2[1]>r.s2[0]?1:0) + (r.stb[1]>r.stb[0]?1:0);
+            
+            loc.sf += sLoc; loc.sc += sVis;
+            vis.sf += sVis; vis.sc += sLoc;
+
+            // Games (incluye STB)
+            loc.gf += (r.s1[0] + r.s2[0] + r.stb[0]);
+            loc.gc += (r.s1[1] + r.s2[1] + r.stb[1]);
+            vis.gf += (r.s1[1] + r.s2[1] + r.stb[1]);
+            vis.gc += (r.s1[0] + r.s2[0] + r.stb[0]);
+
+            // Puntos: +3 si es en 2 sets, +2 si es en 3 sets (STB)
+            if (sLoc > sVis) {
+                loc.pts += (r.stb[0] > 0 || r.stb[1] > 0) ? 2 : 3;
+            } else {
+                vis.pts += (r.stb[1] > 0 || r.stb[0] > 0) ? 2 : 3;
             }
         });
-    });
 
-    return tabla.sort((a, b) => b.pts - a.pts || (b.sf - b.sc) - (a.sf - a.sc));
-}
-    // ==========================================
-    // 2. FUNCIONES DE CARGA Y CONTROL
-    // ==========================================
+        // 2. Lógica del BONO +1 (3 victorias en una fecha)
+        const fechasUnicas = [...new Set(resultadosData.map(r => r.fecha))];
+        fechasUnicas.forEach(f => {
+            const partidosDeLaFecha = resultadosData.filter(r => r.fecha === f && (r.s1[0] !== 0 || r.s1[1] !== 0));
+            
+            datosEquipos.forEach(eq => {
+                let winsEnFecha = 0;
+                partidosDeLaFecha.forEach(p => {
+                    let sL = (p.s1[0]>p.s1[1]?1:0) + (p.s2[0]>p.s2[1]?1:0) + (p.stb[0]>p.stb[1]?1:0);
+                    let sV = (p.s1[1]>p.s1[0]?1:0) + (p.s2[1]>p.s2[0]?1:0) + (p.stb[1]>p.stb[0]?1:0);
+                    
+                    if(p.local === eq.nombre && sL > sV) winsEnFecha++;
+                    if(p.visit === eq.nombre && sV > sL) winsEnFecha++;
+                });
+                
+                if (winsEnFecha >= 3) {
+                    let item = tabla.find(t => t.nombre === eq.nombre);
+                    if(item) item.pts += 1;
+                }
+            });
+        });
+
+        // 3. Ordenar: Puntos -> Dif Sets -> Dif Games
+        return tabla.sort((a, b) => b.pts - a.pts || (b.sf - b.sc) - (a.sf - a.sc) || (b.gf - b.gc) - (a.gf - a.gc));
+    }
+
+    function renderizarTabla() {
+        const cuerpo = document.getElementById('tabla-posiciones-body');
+        if(!cuerpo) return;
+        cuerpo.innerHTML = ""; 
+
+        const datosCalculados = calcularTabla();
+
+        datosCalculados.forEach((eq, i) => {
+            const ds = eq.sf - eq.sc;
+            const dg = eq.gf - eq.gc;
+            cuerpo.innerHTML += `
+                <tr>
+                    <td>${i + 1}</td>
+                    <td>${eq.nombre}</td>
+                    <td><strong>${eq.pts}</strong></td>
+                    <td>${eq.pj}</td>
+                    <td>${ds > 0 ? '+' + ds : ds}</td>
+                    <td>${dg > 0 ? '+' + dg : dg}</td>
+                </tr>`;
+        });
+    }
+
     function cargarEquipos() {
         const container = document.getElementById('teams-container');
         if(!container) return;
         container.innerHTML = ""; 
-
         datosEquipos.forEach(equipo => {
             const card = document.createElement('div');
             card.className = "team-card";
             card.onclick = function() { toggleTeam(this); };
-
-            const listaJugadores = equipo.jugadores.map(j => `<div class="member-item"><span>${j}</span></div>`).join('');
-            const colorComodin = equipo.comodin === 'USADO' ? '#ff4444' : 'var(--primary)';
-
+            const listaJ = equipo.jugadores.map(j => `<div class="member-item"><span>${j}</span></div>`).join('');
+            const colC = equipo.comodin === 'USADO' ? '#ff4444' : 'var(--primary)';
             card.innerHTML = `
-                <span class="comodin-status" style="border-color: ${colorComodin}; color: ${colorComodin}">
-                    Comodín: ${equipo.comodin}
-                </span>
+                <span class="comodin-status" style="border-color: ${colC}; color: ${colC}">Comodín: ${equipo.comodin}</span>
                 <h3>${equipo.nombre}</h3>
-                <p><small>Haga clic para ver integrantes</small></p>
+                <p><small>Integrantes</small></p>
                 <div class="member-list">
                     <div class="member-item"><span class="capitan-name">${equipo.capitan}</span> <span class="position-badge">CAPITÁN</span></div>
-                    ${listaJugadores}
-                </div>
-            `;
+                    ${listaJ}
+                </div>`;
             container.appendChild(card);
-        });
-    }
-     function renderizarTabla() {
-        // Buscamos el lugar en el HTML (Paso B)
-        const cuerpoTabla = document.getElementById('tabla-posiciones-body');
-        if(!cuerpoTabla) return;
-        
-        // Obtenemos los datos calculados (Paso 2)
-        const datos = calcularTabla();
-        
-        // Limpiamos la tabla para que no se dupliquen los datos
-        cuerpoTabla.innerHTML = ""; 
-
-        // Dibujamos cada fila de la tabla de posiciones
-        datos.forEach((equipo, index) => {
-            cuerpoTabla.innerHTML += `
-                <tr>
-                    <td>${index + 1}</td>
-                    <td>${equipo.nombre}</td>
-                    <td>${equipo.pj}</td>
-                    <td>${equipo.sf}</td>
-                    <td>${equipo.sc}</td>
-                    <td><strong>${equipo.pts}</strong></td>
-                </tr>
-            `;
         });
     }
 
@@ -416,8 +391,7 @@ const resultadosData = [
 
     function updateCountdown() {
         const target = new Date('2026-03-05T19:30:00');
-        const now = new Date();
-        const diff = target - now;
+        const diff = target - new Date();
         const display = document.getElementById('countdown');
         if (diff <= 0) { display.innerHTML = "¡LA FECHA HA COMENZADO!"; return; }
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
@@ -426,7 +400,6 @@ const resultadosData = [
         display.innerHTML = `PRÓXIMA FECHA: ${days}d ${hours}h ${mins}m`;
     }
 
-    // Inicialización
     window.onload = function() {
         cargarEquipos();
         renderizarTabla();
