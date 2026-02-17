@@ -289,25 +289,27 @@
     // 1. Cargá aquí los resultados de cada jueves
 const resultadosData = [
     // FECHA 1
-    { fecha: 1, local: "La Sordeta", visit: "Sed Point", s1: [2,6], s2: [2,6], stb: [0,0] },
-    { fecha: 1, local: "La Sordeta", visit: "Sed Point", s1: [6,0], s2: [6,0], stb: [0,0] },
-    { fecha: 1, local: "La Sordeta", visit: "Sed Point", s1: [6,3], s2: [6,1], stb: [0,0] },
-    { fecha: 1, local: "Set y Sed Padel Team", visit: "Los Fantasmas", s1: [6,4], s2: [6,2], stb: [0,0] },
-    { fecha: 1, local: "Set y Sed Padel Team", visit: "Los Fantasmas", s1: [6,0], s2: [6,0], stb: [0,0] },
-    { fecha: 1, local: "Set y Sed Padel Team", visit: "Los Fantasmas", s1: [6,3], s2: [6,1], stb: [0,0] },
-    { fecha: 1, local: "El Señor de los Globillos", visit: "Los Error no Forzado", s1: [6,4], s2: [6,2], stb: [0,0] },
-    { fecha: 1, local: "El Señor de los Globillos", visit: "Los Error no Forzado", s1: [6,0], s2: [6,0], stb: [0,0] },
-    { fecha: 1, local: "El Señor de los Globillos", visit: "Los Error no Forzado", s1: [6,3], s2: [6,1], stb: [0,0] }, 
+    { fecha: 1, local: "La Sordeta", visit: "Sed Point", s1: [0,0], s2: [0,0], stb: [0,0] },
+    { fecha: 1, local: "La Sordeta", visit: "Sed Point", s1: [0,0], s2: [0,0], stb: [0,0] },
+    { fecha: 1, local: "La Sordeta", visit: "Sed Point", s1: [0,0], s2: [0,0], stb: [0,0] },
+    { fecha: 1, local: "Set y Sed Padel Team", visit: "Los Fantasmas", s1: [0,0], s2: [0,0], stb: [0,0] },
+    { fecha: 1, local: "Set y Sed Padel Team", visit: "Los Fantasmas", s1: [0,0], s2: [0,0], stb: [0,0] },
+    { fecha: 1, local: "Set y Sed Padel Team", visit: "Los Fantasmas", s1: [0,0], s2: [0,0], stb: [0,0] },
+    { fecha: 1, local: "El Señor de los Globillos", visit: "Los Error no Forzado", s1: [0,0], s2: [0,0], stb: [0,0] },
+    { fecha: 1, local: "El Señor de los Globillos", visit: "Los Error no Forzado", s1: [0,0], s2: [0,0], stb: [0,0] },
+    { fecha: 1, local: "El Señor de los Globillos", visit: "Los Error no Forzado", s1: [0,0], s2: [0,0], stb: [0,0] }, 
     // En este ejemplo, La Sordeta ya sumó 3 victorias en la Fecha 1 y el sistema le dará el +1 automáticamente.
 ];
     function calcularTabla() {
-    // 1. Inicializamos la tabla
     let tabla = datosEquipos.map(e => ({ nombre: e.nombre, pj: 0, sf: 0, sc: 0, pts: 0 }));
 
-    // 2. Calculamos puntos por partido y sets
     resultadosData.forEach(r => {
+        // SEGURIDAD: Si no hay puntos cargados en el set 1, ignoramos el partido
+        if (r.s1[0] === 0 && r.s1[1] === 0) return;
+
         let loc = tabla.find(t => t.nombre === r.local);
         let vis = tabla.find(t => t.nombre === r.visit);
+        if (!loc || !vis) return;
 
         loc.pj++; vis.pj++;
         let sLoc = (r.s1[0]>r.s1[1]?1:0) + (r.s2[0]>r.s2[1]?1:0) + (r.stb[0]>r.stb[1]?1:0);
@@ -323,32 +325,26 @@ const resultadosData = [
         }
     });
 
-    // 3. LÓGICA DEL BONO +1 (Por fecha)
-    const totalFechas = [...new Set(resultadosData.map(r => r.fecha))]; // Obtenemos lista de fechas [1, 2...]
-    
-    totalFechas.forEach(f => {
-        const partidosDeFecha = resultadosData.filter(r => r.fecha === f);
-        
+    // LÓGICA DEL BONO +1 (Solo para partidos jugados)
+    const fechas = [...new Set(resultadosData.map(r => r.fecha))];
+    fechas.forEach(f => {
+        const partidosFecha = resultadosData.filter(r => r.fecha === f && (r.s1[0] !== 0 || r.s1[1] !== 0));
         datosEquipos.forEach(eq => {
             let victoriasEnFecha = 0;
-            partidosDeFecha.forEach(p => {
+            partidosFecha.forEach(p => {
                 let sLoc = (p.s1[0]>p.s1[1]?1:0) + (p.s2[0]>p.s2[1]?1:0) + (p.stb[0]>p.stb[1]?1:0);
                 let sVis = (p.s1[1]>p.s1[0]?1:0) + (p.s2[1]>p.s2[0]?1:0) + (p.stb[1]>p.stb[0]?1:0);
-                
                 if(p.local === eq.nombre && sLoc > sVis) victoriasEnFecha++;
                 if(p.visit === eq.nombre && sVis > sLoc) victoriasEnFecha++;
             });
-
             if (victoriasEnFecha >= 3) {
-                let equipoEnTabla = tabla.find(t => t.nombre === eq.nombre);
-                equipoEnTabla.pts += 1; // ¡Bono aplicado!
+                let item = tabla.find(t => t.nombre === eq.nombre);
+                if(item) item.pts += 1;
             }
         });
     });
 
-    // 4. Ordenar
-    tabla.sort((a, b) => b.pts - a.pts || (b.sf - b.sc) - (a.sf - a.sc));
-    return tabla;
+    return tabla.sort((a, b) => b.pts - a.pts || (b.sf - b.sc) - (a.sf - a.sc));
 }
     // ==========================================
     // 2. FUNCIONES DE CARGA Y CONTROL
