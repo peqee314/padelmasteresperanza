@@ -163,20 +163,24 @@
     </section>
 
     <section id="posiciones" class="hidden">
-        <h2>Tabla General</h2>
-        <div class="table-container">
-            <table>
-                <thead><tr><th>Pos</th><th>Equipo</th><th>PJ</th><th>Sets F</th><th>Sets C</th><th>Pts</th></tr></thead>
-                <tbody>
-                    <script>
-                        for(let i=1; i<=6; i++){
-                            document.write(`<tr><td>${i}</td><td>Equipo ${i}</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>`);
-                        }
-                    </script>
+    <h2>Tabla General</h2>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Pos</th>
+                    <th>Equipo</th>
+                    <th>PJ</th>
+                    <th>Sets F</th>
+                    <th>Sets C</th>
+                    <th>Pts</th>
+                </tr>
+            </thead>
+            <tbody id="tabla-posiciones-body">
                 </tbody>
-            </table>
-        </div>
-    </section>
+        </table>
+    </div>
+</section>
 
     <section id="reglamento" class="hidden">
         <h2>Reglamento de la Liga</h2>
@@ -282,7 +286,70 @@
             jugadores: ["Alex Galleano", "Javier Giletta", "Jona Perrig", "Noe Montenegro", "Juan Perren"]
         }
     ];
+    // 1. Cargá aquí los resultados de cada jueves
+const resultadosData = [
+    // FECHA 1
+    { fecha: 1, local: "La Sordeta", visit: "Sed Point", s1: [2,6], s2: [2,6], stb: [0,0] },
+    { fecha: 1, local: "La Sordeta", visit: "Sed Point", s1: [6,0], s2: [6,0], stb: [0,0] },
+    { fecha: 1, local: "La Sordeta", visit: "Sed Point", s1: [6,3], s2: [6,1], stb: [0,0] },
+    { fecha: 1, local: "Set y Sed Padel Team", visit: "Los Fantasmas", s1: [6,4], s2: [6,2], stb: [0,0] },
+    { fecha: 1, local: "Set y Sed Padel Team", visit: "Los Fantasmas", s1: [6,0], s2: [6,0], stb: [0,0] },
+    { fecha: 1, local: "Set y Sed Padel Team", visit: "Los Fantasmas", s1: [6,3], s2: [6,1], stb: [0,0] },
+    { fecha: 1, local: "El Señor de los Globillos", visit: "Los Error no Forzado", s1: [6,4], s2: [6,2], stb: [0,0] },
+    { fecha: 1, local: "El Señor de los Globillos", visit: "Los Error no Forzado", s1: [6,0], s2: [6,0], stb: [0,0] },
+    { fecha: 1, local: "El Señor de los Globillos", visit: "Los Error no Forzado", s1: [6,3], s2: [6,1], stb: [0,0] }, 
+    // En este ejemplo, La Sordeta ya sumó 3 victorias en la Fecha 1 y el sistema le dará el +1 automáticamente.
+];
+    function calcularTabla() {
+    // 1. Inicializamos la tabla
+    let tabla = datosEquipos.map(e => ({ nombre: e.nombre, pj: 0, sf: 0, sc: 0, pts: 0 }));
 
+    // 2. Calculamos puntos por partido y sets
+    resultadosData.forEach(r => {
+        let loc = tabla.find(t => t.nombre === r.local);
+        let vis = tabla.find(t => t.nombre === r.visit);
+
+        loc.pj++; vis.pj++;
+        let sLoc = (r.s1[0]>r.s1[1]?1:0) + (r.s2[0]>r.s2[1]?1:0) + (r.stb[0]>r.stb[1]?1:0);
+        let sVis = (r.s1[1]>r.s1[0]?1:0) + (r.s2[1]>r.s2[0]?1:0) + (r.stb[1]>r.stb[0]?1:0);
+        
+        loc.sf += sLoc; loc.sc += sVis;
+        vis.sf += sVis; vis.sc += sLoc;
+
+        if (sLoc > sVis) {
+            loc.pts += (r.stb[0] > 0 || r.stb[1] > 0) ? 2 : 3;
+        } else {
+            vis.pts += (r.stb[0] > 0 || r.stb[1] > 0) ? 2 : 3;
+        }
+    });
+
+    // 3. LÓGICA DEL BONO +1 (Por fecha)
+    const totalFechas = [...new Set(resultadosData.map(r => r.fecha))]; // Obtenemos lista de fechas [1, 2...]
+    
+    totalFechas.forEach(f => {
+        const partidosDeFecha = resultadosData.filter(r => r.fecha === f);
+        
+        datosEquipos.forEach(eq => {
+            let victoriasEnFecha = 0;
+            partidosDeFecha.forEach(p => {
+                let sLoc = (p.s1[0]>p.s1[1]?1:0) + (p.s2[0]>p.s2[1]?1:0) + (p.stb[0]>p.stb[1]?1:0);
+                let sVis = (p.s1[1]>p.s1[0]?1:0) + (p.s2[1]>p.s2[0]?1:0) + (p.stb[1]>p.stb[0]?1:0);
+                
+                if(p.local === eq.nombre && sLoc > sVis) victoriasEnFecha++;
+                if(p.visit === eq.nombre && sVis > sLoc) victoriasEnFecha++;
+            });
+
+            if (victoriasEnFecha >= 3) {
+                let equipoEnTabla = tabla.find(t => t.nombre === eq.nombre);
+                equipoEnTabla.pts += 1; // ¡Bono aplicado!
+            }
+        });
+    });
+
+    // 4. Ordenar
+    tabla.sort((a, b) => b.pts - a.pts || (b.sf - b.sc) - (a.sf - a.sc));
+    return tabla;
+}
     // ==========================================
     // 2. FUNCIONES DE CARGA Y CONTROL
     // ==========================================
@@ -313,6 +380,31 @@
             container.appendChild(card);
         });
     }
+     function renderizarTabla() {
+        // Buscamos el lugar en el HTML (Paso B)
+        const cuerpoTabla = document.getElementById('tabla-posiciones-body');
+        if(!cuerpoTabla) return;
+        
+        // Obtenemos los datos calculados (Paso 2)
+        const datos = calcularTabla();
+        
+        // Limpiamos la tabla para que no se dupliquen los datos
+        cuerpoTabla.innerHTML = ""; 
+
+        // Dibujamos cada fila de la tabla de posiciones
+        datos.forEach((equipo, index) => {
+            cuerpoTabla.innerHTML += `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>${equipo.nombre}</td>
+                    <td>${equipo.pj}</td>
+                    <td>${equipo.sf}</td>
+                    <td>${equipo.sc}</td>
+                    <td><strong>${equipo.pts}</strong></td>
+                </tr>
+            `;
+        });
+    }
 
     function showSection(id) {
         document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
@@ -341,6 +433,7 @@
     // Inicialización
     window.onload = function() {
         cargarEquipos();
+        renderizarTabla();
         setInterval(updateCountdown, 60000);
         updateCountdown();
     };
@@ -348,4 +441,3 @@
 
 </body>
 </html>
-
