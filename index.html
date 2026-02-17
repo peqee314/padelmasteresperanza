@@ -94,7 +94,7 @@
 </head>
 <body>
 
-<div id="countdown">PRÓXIMA FECHA: Jueves 5 de Marzo, 19:30hs</div>
+<div id="countdown">PRÓXIMA FECHA: Cargando...</div>
 
 <nav>
     <a onclick="showSection('inicio')">Equipos</a>
@@ -120,27 +120,8 @@
 
     <section id="inicio">
         <h2>Equipos y Comodines</h2>
-        <div class="teams-grid">
-            <script>
-                for(let i=1; i<=6; i++){
-                    document.write(`
-                        <div class="team-card" onclick="toggleTeam(this)">
-                            <span class="comodin-status">Comodín: DISPONIBLE</span>
-                            <h3>Equipo ${i}</h3>
-                            <p><small>Haga clic para ver integrantes</small></p>
-                            <div class="member-list">
-                                <div class="member-item"><span class="capitan-name">Nombre Capitán</span> <span class="position-badge">CAPITÁN</span></div>
-                                <div class="member-item"><span>Jugador 2</span></div>
-                                <div class="member-item"><span>Jugador 3</span></div>
-                                <div class="member-item"><span>Jugador 4</span></div>
-                                <div class="member-item"><span>Jugador 5</span></div>
-                                <div class="member-item"><span>Jugador 6</span></div>
-                            </div>
-                        </div>
-                    `);
-                }
-            </script>
-        </div>
+        <div id="teams-container" class="teams-grid">
+            </div>
     </section>
 
     <section id="partidos" class="hidden">
@@ -167,7 +148,7 @@
             <table>
                 <thead><tr><th>Cancha</th><th>Hora</th><th>Encuentro</th><th>Resultado</th></tr></thead>
                 <tbody>
-                    <tr><td>Cancha 1</td><td>19:30hs</td><td>Equipo 1 vs Equipo 2</td><td>-</td></tr>
+                     <tr><td>Cancha 1</td><td>19:30hs</td><td>Equipo 1 vs Equipo 2</td><td>-</td></tr>
                     <tr><td>Cancha 2</td><td>19:30hs</td><td>Equipo 3 vs Equipo 4</td><td>-</td></tr>
                     <tr><td>Cancha 3</td><td>19:30hs</td><td>Equipo 5 vs Equipo 6</td><td>-</td></tr>
                     <tr><td>Cancha 1</td><td>20:30hs</td><td>Equipo 1 vs Equipo 2</td><td>-</td></tr>
@@ -250,7 +231,7 @@
 <footer>
     <h3>SEDE: ESPERANZA PADEL CENTER</h3>
     <p>Pte Sáenz Peña 1151, Esperanza, Santa Fe</p>
-    <a href="https://maps.google.com/?q=Pte+Saenz+Peña+1151+Esperanza+Santa+Fe" target="_blank" class="map-button">📍 VER UBICACIÓN EN MAPA</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=Esperanza+Padel+Center" target="_blank" class="map-button">📍 VER UBICACIÓN EN MAPA</a>
     
     <div class="contact-grid">
         <a href="https://wa.me/5493496461500" class="ws-button" target="_blank">C. Franco</a>
@@ -260,6 +241,79 @@
 </footer>
 
 <script>
+    // ==========================================
+    // 1. DICCIONARIO DE DATOS (Edita aquí los equipos)
+    // ==========================================
+    const datosEquipos = [
+        {
+            nombre: "La Sordeta",
+            comodin: "DISPONIBLE",
+            capitan: "Juan Weiner",
+            jugadores: ["Bruno Correnti", "Fer Simonetto", "Lauti Fain", "Mauro Perbellini", "Claudio Pucheta"]
+        },
+        {
+            nombre: "Set y Sed Padel Team",
+            comodin: "DISPONIBLE",
+            capitan: "Fernando Reppetti",
+            jugadores: ["Emiliano Villar", "Fabricio Muller", "Nicolas Audello", "German Oreggioni", "Juan Pablo Fiore"]
+        },
+        {
+            nombre: "El Señor de los Globillos",
+            comodin: "DISPONIBLE",
+            capitan: "Fernando Villata",
+            jugadores: ["Damian Falkemberg", "Guillermo Zhender", "Ariel Escalera", "Alex Giuppone", "C.Franco"]
+        },
+        {
+            nombre: "Los Fantasmas",
+            comodin: "DISPONIBLE",
+            capitan: "Roy Melchiorre",
+            jugadores: ["Fernando Montardit", "Alejandro Fuhr", "Julian Tschaggeny", "Facundo Niello", "Luis Taris"]
+        },
+        {
+            nombre: "Equipo 5",
+            comodin: "DISPONIBLE",
+            capitan: "Ramón Dobbler",
+            jugadores: ["Martin Exner", "Josue Asecas", "Pablo Beresvil", "Santiago Angiulla", "Nicolas Wenke"]
+        },
+        {
+            nombre: "Sed Point",
+            comodin: "DISPONIBLE",
+            capitan: "Marcelo Sieguel",
+            jugadores: ["Alex Galleano", "Javier Giletta", "Jona Perrig", "Noe Montenegro", "Juan Perren"]
+        }
+    ];
+
+    // ==========================================
+    // 2. FUNCIONES DE CARGA Y CONTROL
+    // ==========================================
+    function cargarEquipos() {
+        const container = document.getElementById('teams-container');
+        if(!container) return;
+        container.innerHTML = ""; 
+
+        datosEquipos.forEach(equipo => {
+            const card = document.createElement('div');
+            card.className = "team-card";
+            card.onclick = function() { toggleTeam(this); };
+
+            const listaJugadores = equipo.jugadores.map(j => `<div class="member-item"><span>${j}</span></div>`).join('');
+            const colorComodin = equipo.comodin === 'USADO' ? '#ff4444' : 'var(--primary)';
+
+            card.innerHTML = `
+                <span class="comodin-status" style="border-color: ${colorComodin}; color: ${colorComodin}">
+                    Comodín: ${equipo.comodin}
+                </span>
+                <h3>${equipo.nombre}</h3>
+                <p><small>Haga clic para ver integrantes</small></p>
+                <div class="member-list">
+                    <div class="member-item"><span class="capitan-name">${equipo.capitan}</span> <span class="position-badge">CAPITÁN</span></div>
+                    ${listaJugadores}
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
     function showSection(id) {
         document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
         document.getElementById(id).classList.remove('hidden');
@@ -276,14 +330,20 @@
         const target = new Date('2026-03-05T19:30:00');
         const now = new Date();
         const diff = target - now;
-        if (diff <= 0) { document.getElementById('countdown').innerHTML = "¡LA FECHA HA COMENZADO!"; return; }
+        const display = document.getElementById('countdown');
+        if (diff <= 0) { display.innerHTML = "¡LA FECHA HA COMENZADO!"; return; }
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
         const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        document.getElementById('countdown').innerHTML = `PRÓXIMA FECHA: ${days}d ${hours}h ${mins}m`;
+        display.innerHTML = `PRÓXIMA FECHA: ${days}d ${hours}h ${mins}m`;
     }
-    setInterval(updateCountdown, 60000);
-    updateCountdown();
+
+    // Inicialización
+    window.onload = function() {
+        cargarEquipos();
+        setInterval(updateCountdown, 60000);
+        updateCountdown();
+    };
 </script>
 
 </body>
