@@ -58,6 +58,7 @@
         .container { max-width: 1100px; margin: auto; padding: 20px; min-height: 70vh; }
 
         h2 { border-left: 4px solid var(--primary); padding-left: 10px; margin-top: 30px; text-transform: uppercase; }
+        h3.fecha-title { color: var(--primary); margin-top: 25px; border-bottom: 1px solid #333; padding-bottom: 5px; }
 
         .form-container { position: relative; overflow: hidden; width: 100%; padding-top: 120%; background: var(--card-bg); border-radius: 15px; }
         @media (min-width: 768px) { .form-container { padding-top: 800px; } }
@@ -84,6 +85,14 @@
         .nota-importante { background: rgba(212, 255, 0, 0.1); padding: 15px; border-radius: 10px; border: 1px dashed var(--primary); margin-top: 20px; }
         .alerta-expulsion { color: #ff4444; font-weight: bold; text-align: center; border: 2px solid #ff4444; padding: 10px; margin-top: 20px; text-transform: uppercase; }
 
+        /* ESTILOS FORO NOTICIAS */
+        .news-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+        .news-card { background: var(--card-bg); border-radius: 15px; border-left: 5px solid var(--primary); padding: 20px; position: relative; }
+        .news-date { color: var(--primary); font-size: 0.8rem; font-weight: bold; margin-bottom: 10px; display: block; }
+        .news-tag { position: absolute; top: 20px; right: 20px; background: #333; color: #fff; font-size: 0.6rem; padding: 2px 8px; border-radius: 4px; text-transform: uppercase; }
+        .news-card h3 { margin: 0 0 10px 0; color: var(--primary); text-transform: uppercase; }
+        .news-card p { margin: 0; font-size: 0.95rem; color: #ccc; }
+
         .hidden { display: none; }
 
         footer { background: #000; padding: 40px 20px; border-top: 2px solid var(--primary); text-align: center; margin-top: 50px; }
@@ -98,7 +107,9 @@
 
 <nav>
     <a onclick="showSection('inicio')">Equipos</a>
+    <a onclick="showSection('noticias')">Noticias</a>
     <a onclick="showSection('partidos')">Partidos</a>
+    <a onclick="showSection('calendario')">Próximas Fechas</a>
     <a onclick="showSection('posiciones')">Posiciones</a>
     <a onclick="showSection('reglamento')">Reglamento</a>
     <a onclick="showSection('inscripcion')" style="background: var(--primary); color: black;">Inscribirse</a>
@@ -118,6 +129,12 @@
         </div>
     </section>
 
+    <section id="noticias" class="hidden">
+        <h2>Foro de Noticias</h2>
+        <div id="news-container" class="news-grid">
+            </div>
+    </section>
+
     <section id="inicio">
         <h2>Equipos y Comodines</h2>
         <div id="teams-container" class="teams-grid">
@@ -130,15 +147,15 @@
             <table>
                 <thead><tr><th>Cancha</th><th>Hora</th><th>Local</th><th>vs</th><th>Visitante</th></tr></thead>
                 <tbody>
-                    <tr><td>Cancha 1</td><td>19:30hs</td><td>La Sordeta</td><td>vs</td><td>El Señor de los Globillos</td></tr>
-                    <tr><td>Cancha 2</td><td>19:30hs</td><td>Sed Point</td><td>vs</td><td>Los Fantasmas</td></tr>
-                    <tr><td>Cancha 3</td><td>19:30hs</td><td>Set y Sed Padel Team</td><td>vs</td><td>Los Error no Forzado</td></tr>
-                    <tr><td>Cancha 1</td><td>20:30hs</td><td>Set y Sed Padel Team</td><td>vs</td><td>Los Error no Forzado</td></tr>
-                    <tr><td>Cancha 2</td><td>20:30hs</td><td>La Sordeta</td><td>vs</td><td>El Señor de los Globillos</td></tr>
-                    <tr><td>Cancha 3</td><td>20:30hs</td><td>Sed Point</td><td>vs</td><td>Los Fantasmas</td></tr>
-                    <tr><td>Cancha 1</td><td>21:30hs</td><td>Sed Point</td><td>vs</td><td>Los Fantasmas</td></tr>
-                    <tr><td>Cancha 2</td><td>21:30hs</td><td>Set y Sed Padel Team</td><td>vs</td><td>Los Error no Forzado</td></tr>
-                    <tr><td>Cancha 3</td><td>21:30hs</td><td>La Sordeta</td><td>vs</td><td>El Señor de los Globillos</td></tr>
+                    <tr><td>Cancha 1</td><td>19:30hs</td><td>La Sordeta</td><td>vs</td><td>Los Error no Forzado</td></tr>
+                    <tr><td>Cancha 2</td><td>19:30hs</td><td>El Señor de los Globillos</td><td>vs</td><td>Sed Point</td></tr>
+                    <tr><td>Cancha 3</td><td>19:30hs</td><td>Los Fantasmas</td><td>vs</td><td>Set y Sed Padel Team</td></tr>
+                    <tr><td>Cancha 1</td><td>20:30hs</td><td>La Sordeta</td><td>vs</td><td>Los Error no Forzado</td></tr>
+                    <tr><td>Cancha 2</td><td>20:30hs</td><td>El Señor de los Globillos</td><td>vs</td><td>Sed Point</td></tr>
+                    <tr><td>Cancha 3</td><td>20:30hs</td><td>Los Fantasmas</td><td>vs</td><td>Set y Sed Padel Team</td></tr>
+                    <tr><td>Cancha 1</td><td>21:30hs</td><td>La Sordeta</td><td>vs</td><td>Los Error no Forzado</td></tr>
+                    <tr><td>Cancha 2</td><td>21:30hs</td><td>El Señor de los Globillos</td><td>vs</td><td>Sed Point</td></tr>
+                    <tr><td>Cancha 3</td><td>21:30hs</td><td>Los Fantasmas</td><td>vs</td><td>Set y Sed Padel Team</td></tr>
                 </tbody>
             </table>
         </div>
@@ -167,6 +184,99 @@
                     <tr><td>Cancha 1</td><td>21:30hs</td><td>Set y Sed Padel Team vs Los Fantasmas</td><td>6-3 / 7-5</td></tr>
                     <tr><td>Cancha 2</td><td>21:30hs</td><td>El Señor de los Globillos vs Los Error no Forzado</td><td>7-6 / 6-4</td></tr>
                     <tr><td>Cancha 3</td><td>21:30hs</td><td>La Sordeta vs Sed Point</td><td>6-4 / 4-6 / 11-5</td></tr>
+
+                     <tr><td>Cancha 1</td><td>19:30hs</td><td>La Sordeta vs El Señor de los Globillos</td><td>6-4 / 2-6 / 6-11</td></tr>
+                    <tr><td>Cancha 2</td><td>19:30hs</td><td>Sed Point vs Los Fantasmas</td><td>3-6 / 6-0 / 7-11</td></tr>
+                    <tr><td>Cancha 3</td><td>19:30hs</td><td>Set y Sed Padel Team vs Los Error no Forzado</td><td>0-6 / 6-1 / 7-11</td></tr>
+                    <tr><td>Cancha 1</td><td>20:30hs</td><td>Set y Sed Padel Team vs Los Error no Forzado</td><td>1-6 / 0-6</td></tr>
+                    <tr><td>Cancha 2</td><td>20:30hs</td><td>La Sordeta vs El Señor de los Globillos</td><td>7-6 / 6-2</td></tr>
+                    <tr><td>Cancha 3</td><td>20:30hs</td><td>Sed Point vs Los Fantasmas</td><td>7-5 / 4-6 / 11-6</td></tr>
+                    <tr><td>Cancha 1</td><td>21:30hs</td><td>Sed Point vs Los Fantasmas</td><td>6-7 / 4-6</td></tr>
+                    <tr><td>Cancha 2</td><td>21:30hs</td><td>Set y Sed Padel Team vs Los Error no Forzado</td><td>6-1 / 2-6 / 6/11</td></tr>
+                    <tr><td>Cancha 3</td><td>21:30hs</td><td>La Sordeta vs El Señor de los Globillos</td><td>4-6 / 7-5 / 11-8</td></tr>
+
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="calendario" class="hidden">
+        <h2>Calendario de la Liga</h2>
+        <p><small>* Sujeto a cambios por la organización.</small></p>
+
+        <h3 class="fecha-title">Fecha 4</h3>
+        <div class="table-container">
+            <table>
+                <tbody>
+                    <tr><td>La Sordeta vs Los Error No Forzado</td></tr>
+                    <tr><td>El Señor de los Globillos vs Sed Point</td></tr>
+                    <tr><td>Los Fantasmas vs Set y Sed Padel Team</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 class="fecha-title">Fecha 5</h3>
+        <div class="table-container">
+            <table>
+                <tbody>
+                    <tr><td>La Sordeta vs Los Fantasmas</td></tr>
+                    <tr><td>El Señor de los Globillos vs Set y Sed Padel Team</td></tr>
+                    <tr><td>Sed Point vs Los Error No Forzado</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 class="fecha-title">Fecha 6</h3>
+        <div class="table-container">
+            <table>
+                <tbody>
+                    <tr><td>Sed Point vs La Sordeta</td></tr>
+                    <tr><td>Los Error No Forzado vs El Señor de los Globillos</td></tr>
+                    <tr><td>Los Fantasmas vs Set y Sed Padel Team</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 class="fecha-title">Fecha 7</h3>
+        <div class="table-container">
+            <table>
+                <tbody>
+                    <tr><td>Set y Sed Padel Team vs La Sordeta</td></tr>
+                    <tr><td>Los Fantasmas vs El Señor de los Globillos</td></tr>
+                    <tr><td>Los Error No Forzado vs Sed Point</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 class="fecha-title">Fecha 8</h3>
+        <div class="table-container">
+            <table>
+                <tbody>
+                    <tr><td>El Señor de los Globillos vs La Sordeta</td></tr>
+                    <tr><td>Los Fantasmas vs Sed Point</td></tr>
+                    <tr><td>Los Error No Forzado vs Set y Sed Padel Team</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 class="fecha-title">Fecha 9</h3>
+        <div class="table-container">
+            <table>
+                <tbody>
+                    <tr><td>Los Error No Forzado vs La Sordeta</td></tr>
+                    <tr><td>Sed Point vs El Señor de los Globillos</td></tr>
+                    <tr><td>Set y Sed Padel Team vs Los Fantasmas</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 class="fecha-title">Fecha 10</h3>
+        <div class="table-container">
+            <table>
+                <tbody>
+                    <tr><td>Los Fantasmas vs La Sordeta</td></tr>
+                    <tr><td>Set y Sed Padel Team vs El Señor de los Globillos</td></tr>
+                    <tr><td>Los Error No Forzado vs Sed Point</td></tr>
                 </tbody>
             </table>
         </div>
@@ -258,25 +368,29 @@
     // 1. DICCIONARIO DE DATOS
     // ==========================================
     const datosEquipos = [
-        { nombre: "La Sordeta", comodin: "DISPONIBLE", capitan: "Juan Weiner", jugadores: ["Bruno Correnti", "Fer Simonetto", "Lauti Fain", "Mauro Perbellini", "Claudio Pucheta"] },
+        { nombre: "La Sordeta", comodin: "USADO", capitan: "Juan Weiner", jugadores: ["Bruno Correnti", "Fer Simonetto", "Lauti Fain", "Mauro Perbellini", "Claudio Pucheta"] },
         { nombre: "Set y Sed Padel Team", comodin: "DISPONIBLE", capitan: "Fernando Reppetti", jugadores: ["Emiliano Villar", "Fabricio Muller", "Nicolas Audello", "German Oreggioni", "Juan Pablo Fiore"] },
-        { nombre: "El Señor de los Globillos", comodin: "NO DISPONIBLE", capitan: "Fernando Villata", jugadores: ["Damian Falkemberg", "Guillermo Zhender", "Ariel Escalera", "Nicolás Kuzmic", "C.Franco"] },
+        { nombre: "El Señor de los Globillos", comodin: "USADO", capitan: "Fernando Villata", jugadores: ["Damian Falkemberg", "Guillermo Zhender", "Ariel Escalera", "Nicolás Kuzmic", "C.Franco"] },
         { nombre: "Los Fantasmas", comodin: "DISPONIBLE", capitan: "Roy Melchiorre", jugadores: ["Fernando Montardit", "Alejandro Fuhr", "Julian Tschaggeny", "Facundo Niello", "Luis Taris"] },
         { nombre: "Los Error no Forzado", comodin: "DISPONIBLE", capitan: "Ramón Dobbler", jugadores: ["Martin Exner", "Josue Montenegro", "Pablo Beresvil", "Santiago Angiulla", "Nicolas Wenke"] },
-        { nombre: "Sed Point", comodin: "DISPONIBLE", capitan: "Marcelo Sieguel", jugadores: ["Alex Galleano", "Javier Giletta", "Jona Perrig", "Noe Montenegro", "Juan Perren"] }
+        { nombre: "Sed Point", comodin: "USADO", capitan: "Marcelo Sieguel", jugadores: ["Alex Galleano", "Alan Ordoñez", "Jona Perrig", "Noe Montenegro", "Juan Perren"] }
+    ];
+
+    // DATOS DEL FORO DE NOTICIAS
+    const noticiasData = [
+        { fecha: "1 de Abril, 2026", etiqueta: "PREDIO", titulo: "Mejoras del Club", contenido: "Se está avanzando con el cerramiento de la cancha 4, lo que nos va a permitir anexar un cupo extra de 2 equipos mas (12 jugadores)." },
+        { fecha: "1 de Abril, 2026", etiqueta: "REMERAS", titulo: "Remeras Cool Elastic", contenido: "Ya está realizado el pedido, recuerden que 1 participante de cada equipo deberá transferir el total a un miembro de la organización. MIENTRAS MAS SE DEMOREN, MAS VAN A TARDAR LAS REMERAS." },
+        { fecha: "28 de Marzo, 2026", etiqueta: "CANCHAS", titulo: "Demora de partidos y malestar", contenido: "Para que no haya mas disgustos en lo referido al tiempo en el que están disponibles las canchas, ya que el predio tiene alquilados los turnos siguientes, desde la organizacion decidimos que en cada fecha los 3 cruces por equipo van a suceder en la misma cancha, por tal motivo las demoras las arreglaran entre compañeros de equipo." },
+        { fecha: "25 de Marzo, 2026", etiqueta: "FECHAS", titulo: "Alargue del torneo", contenido: "Por cuestiones de logica de cruces y de duracion de la temporada de la liga, se decidió extender la cantidad de fechas; así cada equipo se entrentara con los demas 2 veces." }
     ];
 
     const resultadosData = [
-        // EJEMPLO FECHA 1: 3 partidos ganados por La Sordeta (2-0, 2-0, 2-0)
-        // Esto debería dar: 9 puntos (partidos) + 1 punto (bono) = 10 total.
         { fecha: 1, local: "La Sordeta", visit: "Sed Point", s1: [6,1], s2: [6,2], stb: [0,0] },
         { fecha: 1, local: "La Sordeta", visit: "Sed Point", s1: [0,6], s2: [4,6], stb: [0,0] },
         { fecha: 1, local: "La Sordeta", visit: "Sed Point", s1: [6,4], s2: [4,6], stb: [11,5] },
         { fecha: 1, local: "El Señor de los Globillos", visit: "Los Error no Forzado", s1: [3,6], s2: [2,6], stb: [0,0] },
         { fecha: 1, local: "El Señor de los Globillos", visit: "Los Error no Forzado", s1: [1,6], s2: [4,6], stb: [0,0] },
         { fecha: 1, local: "El Señor de los Globillos", visit: "Los Error no Forzado", s1: [7,6], s2: [6,4], stb: [0,0] },
-        
-        // EJEMPLO SETS: Set y Sed gana 2-1 (3 sets) -> Debería sumar +2 puntos.
         { fecha: 1, local: "Set y Sed Padel Team", visit: "Los Fantasmas", s1: [2,6], s2: [3,6], stb: [0,0] },
         { fecha: 1, local: "Set y Sed Padel Team", visit: "Los Fantasmas", s1: [5,7], s2: [3,6], stb: [0,0] },
         { fecha: 1, local: "Set y Sed Padel Team", visit: "Los Fantasmas", s1: [6,3], s2: [7,5], stb: [0,0] },
@@ -289,68 +403,69 @@
         { fecha: 2, local: "El Señor de los Globillos", visit: "Los Fantasmas", s1: [6,7], s2: [4,6], stb: [0,0] },
         { fecha: 2, local: "Sed Point", visit: "Los Error no Forzado", s1: [5,7], s2: [4,6], stb: [0,0] },
         { fecha: 2, local: "Sed Point", visit: "Los Error no Forzado", s1: [5,7], s2: [4,6], stb: [0,0] },
-        { fecha: 2, local: "Sed Point", visit: "Los Error no Forzado", s1: [6,3], s2: [6,1], stb: [0,0] }
+        { fecha: 2, local: "Sed Point", visit: "Los Error no Forzado", s1: [6,3], s2: [6,1], stb: [0,0] },
 
+        { fecha: 3, local: "La Sordeta", visit: "El Señor de los Globillos", s1: [6,4], s2: [2,6], stb: [6,11] },
+        { fecha: 3, local: "La Sordeta", visit: "El Señor de los Globillos", s1: [7,6], s2: [6,2], stb: [0,0] },
+        { fecha: 3, local: "La Sordeta", visit: "El Señor de los Globillos", s1: [4,6], s2: [7,5], stb: [11,8] },
+        { fecha: 3, local: "Sed Point", visit: "Los Fantasmas", s1: [3,6], s2: [6,0], stb: [7,11] },
+        { fecha: 3, local: "Sed Point", visit: "Los Fantasmas", s1: [7,5], s2: [4,6], stb: [11,6] },
+        { fecha: 3, local: "Sed Point", visit: "Los Fantasmas", s1: [6,7], s2: [4,6], stb: [0,0] },
+        { fecha: 3, local: "Set y Sed Padel Team", visit: "Los Error no Forzado", s1: [0,6], s2: [6,1], stb: [7,11] },
+        { fecha: 3, local: "Set y Sed Padel Team", visit: "Los Error no Forzado", s1: [1,6], s2: [0,6], stb: [0,0] },
+        { fecha: 3, local: "Set y Sed Padel Team", visit: "Los Error no Forzado", s1: [6,1], s2: [2,6], stb: [6,11] }
     ];
+
+    function cargarNoticias() {
+        const container = document.getElementById('news-container');
+        if(!container) return;
+        container.innerHTML = "";
+        noticiasData.forEach(noticia => {
+            container.innerHTML += `
+                <div class="news-card">
+                    <span class="news-tag">${noticia.etiqueta}</span>
+                    <span class="news-date">${noticia.fecha}</span>
+                    <h3>${noticia.titulo}</h3>
+                    <p>${noticia.contenido}</p>
+                </div>`;
+        });
+    }
 
     function calcularTabla() {
         let tabla = datosEquipos.map(e => ({ 
             nombre: e.nombre, pj: 0, sf: 0, sc: 0, gf: 0, gc: 0, pts: 0 
         }));
 
-        // 1. Cálculo de Puntos por partido, Sets y Games
         resultadosData.forEach(r => {
             if (r.s1[0] === 0 && r.s1[1] === 0) return;
-
             let loc = tabla.find(t => t.nombre === r.local);
             let vis = tabla.find(t => t.nombre === r.visit);
-            
             loc.pj++; vis.pj++;
-            
-            // Sets ganados en este partido
             let sLoc = (r.s1[0]>r.s1[1]?1:0) + (r.s2[0]>r.s2[1]?1:0) + (r.stb[0]>r.stb[1]?1:0);
             let sVis = (r.s1[1]>r.s1[0]?1:0) + (r.s2[1]>r.s2[0]?1:0) + (r.stb[1]>r.stb[0]?1:0);
-            
             loc.sf += sLoc; loc.sc += sVis;
             vis.sf += sVis; vis.sc += sLoc;
-
-            // Games (incluye STB)
             loc.gf += (r.s1[0] + r.s2[0] + r.stb[0]);
             loc.gc += (r.s1[1] + r.s2[1] + r.stb[1]);
             vis.gf += (r.s1[1] + r.s2[1] + r.stb[1]);
             vis.gc += (r.s1[0] + r.s2[0] + r.stb[0]);
-
-            // Puntos: +3 si es en 2 sets, +2 si es en 3 sets (STB)
-            if (sLoc > sVis) {
-                loc.pts += (r.stb[0] > 0 || r.stb[1] > 0) ? 2 : 3;
-            } else {
-                vis.pts += (r.stb[1] > 0 || r.stb[0] > 0) ? 2 : 3;
-            }
+            if (sLoc > sVis) { loc.pts += (r.stb[0] > 0 || r.stb[1] > 0) ? 2 : 3; } else { vis.pts += (r.stb[1] > 0 || r.stb[0] > 0) ? 2 : 3; }
         });
 
-        // 2. Lógica del BONO +1 (3 victorias en una fecha)
         const fechasUnicas = [...new Set(resultadosData.map(r => r.fecha))];
         fechasUnicas.forEach(f => {
             const partidosDeLaFecha = resultadosData.filter(r => r.fecha === f && (r.s1[0] !== 0 || r.s1[1] !== 0));
-            
             datosEquipos.forEach(eq => {
                 let winsEnFecha = 0;
                 partidosDeLaFecha.forEach(p => {
                     let sL = (p.s1[0]>p.s1[1]?1:0) + (p.s2[0]>p.s2[1]?1:0) + (p.stb[0]>p.stb[1]?1:0);
                     let sV = (p.s1[1]>p.s1[0]?1:0) + (p.s2[1]>p.s2[0]?1:0) + (p.stb[1]>p.stb[0]?1:0);
-                    
                     if(p.local === eq.nombre && sL > sV) winsEnFecha++;
                     if(p.visit === eq.nombre && sV > sL) winsEnFecha++;
                 });
-                
-                if (winsEnFecha >= 3) {
-                    let item = tabla.find(t => t.nombre === eq.nombre);
-                    if(item) item.pts += 1;
-                }
+                if (winsEnFecha >= 3) { let item = tabla.find(t => t.nombre === eq.nombre); if(item) item.pts += 1; }
             });
         });
-
-        // 3. Ordenar: Puntos -> Dif Sets -> Dif Games
         return tabla.sort((a, b) => b.pts - a.pts || (b.sf - b.sc) - (a.sf - a.sc) || (b.gf - b.gc) - (a.gf - a.gc));
     }
 
@@ -358,21 +473,10 @@
         const cuerpo = document.getElementById('tabla-posiciones-body');
         if(!cuerpo) return;
         cuerpo.innerHTML = ""; 
-
         const datosCalculados = calcularTabla();
-
         datosCalculados.forEach((eq, i) => {
-            const ds = eq.sf - eq.sc;
-            const dg = eq.gf - eq.gc;
-            cuerpo.innerHTML += `
-                <tr>
-                    <td>${i + 1}</td>
-                    <td>${eq.nombre}</td>
-                    <td><strong>${eq.pts}</strong></td>
-                    <td>${eq.pj}</td>
-                    <td>${ds > 0 ? '+' + ds : ds}</td>
-                    <td>${dg > 0 ? '+' + dg : dg}</td>
-                </tr>`;
+            const ds = eq.sf - eq.sc; const dg = eq.gf - eq.gc;
+            cuerpo.innerHTML += `<tr><td>${i+1}</td><td>${eq.nombre}</td><td><strong>${eq.pts}</strong></td><td>${eq.pj}</td><td>${ds>0?'+'+ds:ds}</td><td>${dg>0?'+'+dg:dg}</td></tr>`;
         });
     }
 
@@ -386,14 +490,7 @@
             card.onclick = function() { toggleTeam(this); };
             const listaJ = equipo.jugadores.map(j => `<div class="member-item"><span>${j}</span></div>`).join('');
             const colC = equipo.comodin === 'USADO' ? '#ff4444' : 'var(--primary)';
-            card.innerHTML = `
-                <span class="comodin-status" style="border-color: ${colC}; color: ${colC}">Comodín: ${equipo.comodin}</span>
-                <h3>${equipo.nombre}</h3>
-                <p><small>Integrantes</small></p>
-                <div class="member-list">
-                    <div class="member-item"><span class="capitan-name">${equipo.capitan}</span> <span class="position-badge">CAPITÁN</span></div>
-                    ${listaJ}
-                </div>`;
+            card.innerHTML = `<span class="comodin-status" style="border-color: ${colC}; color: ${colC}">Comodín: ${equipo.comodin}</span><h3>${equipo.nombre}</h3><p><small>Integrantes</small></p><div class="member-list"><div class="member-item"><span class="capitan-name">${equipo.capitan}</span> <span class="position-badge">CAPITÁN</span></div>${listaJ}</div>`;
             container.appendChild(card);
         });
     }
@@ -411,18 +508,21 @@
     }
 
     function updateCountdown() {
-        const target = new Date('2026-03-26T19:30:00');
+        const target = new Date('2026-04-09T19:30:00');
         const diff = target - new Date();
         const display = document.getElementById('countdown');
-        if (diff <= 0) { display.innerHTML = "¡LA FECHA HA COMENZADO!"; return; }
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        display.innerHTML = `PRÓXIMA FECHA: ${days}d ${hours}h ${mins}m`;
+        if (display) {
+            if (diff <= 0) { display.innerHTML = "¡LA FECHA HA COMENZADO!"; return; }
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            display.innerHTML = `PRÓXIMA FECHA: ${days}d ${hours}h ${mins}m`;
+        }
     }
 
     window.onload = function() {
         cargarEquipos();
+        cargarNoticias(); // Cargamos las noticias al iniciar
         renderizarTabla();
         setInterval(updateCountdown, 60000);
         updateCountdown();
