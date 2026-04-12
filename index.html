@@ -95,6 +95,24 @@
 
         .hidden { display: none; }
 
+        /* BOTÓN COMPARTIR */
+        .share-btn {
+            background: var(--whatsapp);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+        .share-btn:hover { opacity: 0.9; }
+
         footer { background: #000; padding: 40px 20px; border-top: 2px solid var(--primary); text-align: center; margin-top: 50px; }
         .map-button { background: #333; color: white; text-decoration: none; padding: 10px 20px; border-radius: 5px; font-size: 0.8rem; margin: 15px 0; display: inline-block; border: 1px solid var(--primary); }
         .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; max-width: 600px; margin: 20px auto; }
@@ -143,19 +161,20 @@
 
     <section id="partidos" class="hidden">
         <h2>Próximos Cruces</h2>
+        <button class="share-btn" onclick="compartirWhatsApp('partidos')">🟢 Compartir Cruces</button>
         <div class="table-container">
-            <table>
+            <table id="tabla-proximos-cruces">
                 <thead><tr><th>Cancha</th><th>Hora</th><th>Local</th><th>vs</th><th>Visitante</th></tr></thead>
                 <tbody>
-                    <tr><td>Cancha 1</td><td>19:30hs</td><td>La Sordeta</td><td>vs</td><td>Los Error no Forzado</td></tr>
-                    <tr><td>Cancha 2</td><td>19:30hs</td><td>El Señor de los Globillos</td><td>vs</td><td>Sed Point</td></tr>
-                    <tr><td>Cancha 3</td><td>19:30hs</td><td>Los Fantasmas</td><td>vs</td><td>Set y Sed Padel Team</td></tr>
-                    <tr><td>Cancha 1</td><td>20:30hs</td><td>La Sordeta</td><td>vs</td><td>Los Error no Forzado</td></tr>
-                    <tr><td>Cancha 2</td><td>20:30hs</td><td>El Señor de los Globillos</td><td>vs</td><td>Sed Point</td></tr>
-                    <tr><td>Cancha 3</td><td>20:30hs</td><td>Los Fantasmas</td><td>vs</td><td>Set y Sed Padel Team</td></tr>
-                    <tr><td>Cancha 1</td><td>21:30hs</td><td>La Sordeta</td><td>vs</td><td>Los Error no Forzado</td></tr>
-                    <tr><td>Cancha 2</td><td>21:30hs</td><td>El Señor de los Globillos</td><td>vs</td><td>Sed Point</td></tr>
-                    <tr><td>Cancha 3</td><td>21:30hs</td><td>Los Fantasmas</td><td>vs</td><td>Set y Sed Padel Team</td></tr>
+                    <tr><td>Cancha 1</td><td>19:30hs</td><td>El Señor de los Globillos</td><td>vs</td><td>Set y Sed Padel Team</td></tr>
+                    <tr><td>Cancha 2</td><td>19:30hs</td><td>Los Fantasmas</td><td>vs</td><td>Los Error no Forzado</td></tr>
+                    <tr><td>Cancha 3</td><td>19:30hs</td><td>La Sordeta</td><td>vs</td><td>Sed Point</td></tr>
+                    <tr><td>Cancha 1</td><td>20:30hs</td><td>El Señor de los Globillos</td><td>vs</td><td>Set y Sed Padel Team</td></tr>
+                    <tr><td>Cancha 2</td><td>20:30hs</td><td>Los Fantasmas</td><td>vs</td><td>Los Error no Forzado</td></tr>
+                    <tr><td>Cancha 3</td><td>20:30hs</td><td>La Sordeta</td><td>vs</td><td>Sed Point</td></tr>
+                    <tr><td>Cancha 1</td><td>21:30hs</td><td>El Señor de los Globillos</td><td>vs</td><td>Set y Sed Padel Team</td></tr>
+                    <tr><td>Cancha 2</td><td>21:30hs</td><td>Los Fantasmas</td><td>vs</td><td>Los Error no Forzado</td></tr>
+                    <tr><td>Cancha 3</td><td>21:30hs</td><td>La Sordeta</td><td>vs</td><td>Sed Point</td></tr>
                 </tbody>
             </table>
         </div>
@@ -195,6 +214,16 @@
                     <tr><td>Cancha 2</td><td>21:30hs</td><td>Set y Sed Padel Team vs Los Error no Forzado</td><td>6-1 / 2-6 / 6/11</td></tr>
                     <tr><td>Cancha 3</td><td>21:30hs</td><td>La Sordeta vs El Señor de los Globillos</td><td>4-6 / 7-5 / 11-8</td></tr>
 
+                     <tr><td>Cancha 1</td><td>19:30hs</td><td>La Sordeta vs Los Error no Forzado</td><td>6-4 / 5-7 / 8-11</td></tr>
+                    <tr><td>Cancha 1</td><td>20:30hs</td><td>La Sordeta vs Los Error no Forzado</td><td>3-6 / 5-7 / 0-0</td></tr>
+                    <tr><td>Cancha 1</td><td>21:30hs</td><td>La Sordeta vs Los Error no Forzado</td><td>6-4 / 1-6 / 6-11</td></tr>
+                    <tr><td>Cancha 2</td><td>19:30hs</td><td>El Señor de los Globillos vs Sed Point</td><td>6-2 / 6-2</td></tr>
+                    <tr><td>Cancha 2</td><td>20:30hs</td><td>El Señor de los Globillos vs Sed Point</td><td>1-6 / 2-6</td></tr>
+                    <tr><td>Cancha 2</td><td>21:30hs</td><td>El Señor de los Globillos vs Sed Point</td><td>1-6 / 3-6 / 11-6</td></tr>
+                    <tr><td>Cancha 3</td><td>19:30hs</td><td>Los Fantasmas vs Set y Sed Padel Team</td><td>7-6 / 6-4</td></tr>
+                    <tr><td>Cancha 3</td><td>20:30hs</td><td>Los Fantasmas vs Set y Sed Padel Team</td><td>5-7 / 6-4 / 6/11</td></tr>
+                    <tr><td>Cancha 3</td><td>21:30hs</td><td>Los Fantasmas vs Set y Sed Padel Team</td><td>5-7 / 6-3 / 9-11</td></tr>
+
                 </tbody>
             </table>
         </div>
@@ -203,17 +232,6 @@
     <section id="calendario" class="hidden">
         <h2>Calendario de la Liga</h2>
         <p><small>* Sujeto a cambios por la organización.</small></p>
-
-        <h3 class="fecha-title">Fecha 4</h3>
-        <div class="table-container">
-            <table>
-                <tbody>
-                    <tr><td>La Sordeta vs Los Error No Forzado</td></tr>
-                    <tr><td>El Señor de los Globillos vs Sed Point</td></tr>
-                    <tr><td>Los Fantasmas vs Set y Sed Padel Team</td></tr>
-                </tbody>
-            </table>
-        </div>
 
         <h3 class="fecha-title">Fecha 5</h3>
         <div class="table-container">
@@ -280,10 +298,11 @@
                 </tbody>
             </table>
         </div>
-    </section>
+        </section>
 
     <section id="posiciones" class="hidden">
     <h2>Tabla General</h2>
+    <button class="share-btn" onclick="compartirWhatsApp('posiciones')">🟢 Compartir Tabla</button>
     <div class="table-container">
         <table>
             <thead>
@@ -376,8 +395,8 @@
         { nombre: "Sed Point", comodin: "USADO", capitan: "Marcelo Sieguel", jugadores: ["Alex Galleano", "Alan Ordoñez", "Jona Perrig", "Noe Montenegro", "Juan Perren"] }
     ];
 
-    // DATOS DEL FORO DE NOTICIAS
     const noticiasData = [
+        { fecha: "7 de Abril, 2026", etiqueta: "REMERAS", titulo: "Cancelación", contenido: "El dia de la fecha se abono el total de las camisetas para cada equipo, en el grupo se whatsapp se adjuntó el comprobante de pago." },
         { fecha: "1 de Abril, 2026", etiqueta: "PREDIO", titulo: "Mejoras del Club", contenido: "Se está avanzando con el cerramiento de la cancha 4, lo que nos va a permitir anexar un cupo extra de 2 equipos mas (12 jugadores)." },
         { fecha: "1 de Abril, 2026", etiqueta: "REMERAS", titulo: "Remeras Cool Elastic", contenido: "Ya está realizado el pedido, recuerden que 1 participante de cada equipo deberá transferir el total a un miembro de la organización. MIENTRAS MAS SE DEMOREN, MAS VAN A TARDAR LAS REMERAS." },
         { fecha: "28 de Marzo, 2026", etiqueta: "CANCHAS", titulo: "Demora de partidos y malestar", contenido: "Para que no haya mas disgustos en lo referido al tiempo en el que están disponibles las canchas, ya que el predio tiene alquilados los turnos siguientes, desde la organizacion decidimos que en cada fecha los 3 cruces por equipo van a suceder en la misma cancha, por tal motivo las demoras las arreglaran entre compañeros de equipo." },
@@ -413,7 +432,17 @@
         { fecha: 3, local: "Sed Point", visit: "Los Fantasmas", s1: [6,7], s2: [4,6], stb: [0,0] },
         { fecha: 3, local: "Set y Sed Padel Team", visit: "Los Error no Forzado", s1: [0,6], s2: [6,1], stb: [7,11] },
         { fecha: 3, local: "Set y Sed Padel Team", visit: "Los Error no Forzado", s1: [1,6], s2: [0,6], stb: [0,0] },
-        { fecha: 3, local: "Set y Sed Padel Team", visit: "Los Error no Forzado", s1: [6,1], s2: [2,6], stb: [6,11] }
+        { fecha: 3, local: "Set y Sed Padel Team", visit: "Los Error no Forzado", s1: [6,1], s2: [2,6], stb: [6,11] },
+
+        { fecha: 4, local: "Sed Point", visit: "El Señor de los Globillos", s1: [2,6], s2: [2,6], stb: [0,0] },
+        { fecha: 4, local: "Sed Point", visit: "El Señor de los Globillos", s1: [6,1], s2: [6,2], stb: [0,0] },
+        { fecha: 4, local: "Sed Point", visit: "El Señor de los Globillos", s1: [6,1], s2: [6,3], stb: [0,0] },
+        { fecha: 4, local: "Los Error no Forzado", visit: "La Sordeta", s1: [4,6], s2: [7,5], stb: [11,8] },
+        { fecha: 4, local: "Los Error no Forzado", visit: "La Sordeta", s1: [6,3], s2: [7,5], stb: [0,0] },
+        { fecha: 4, local: "Los Error no Forzado", visit: "La Sordeta", s1: [4,6], s2: [6,1], stb: [11,6] },
+        { fecha: 4, local: "Set y Sed Padel Team", visit: "Los Fantasmas", s1: [6,7], s2: [4,6], stb: [0,0] },
+        { fecha: 4, local: "Set y Sed Padel Team", visit: "Los Fantasmas", s1: [7,5], s2: [4,6], stb: [11,6] },
+        { fecha: 4, local: "Set y Sed Padel Team", visit: "Los Fantasmas", s1: [7,5], s2: [3,6], stb: [11,9] }
     ];
 
     function cargarNoticias() {
@@ -480,6 +509,34 @@
         });
     }
 
+    // ==========================================
+    // NUEVA FUNCIÓN COMPARTIR WHATSAPP
+    // ==========================================
+    function compartirWhatsApp(tipo) {
+        let texto = "";
+        
+        if (tipo === 'posiciones') {
+            const datos = calcularTabla();
+            texto = "*🏆 TABLA DE POSICIONES - LIGA PADEL MASTER*\n\n";
+            datos.forEach((eq, i) => {
+                texto += `${i + 1}. ${eq.nombre} - ${eq.pts} pts\n`;
+            });
+        } else if (tipo === 'partidos') {
+            texto = "*🎾 PRÓXIMA FECHA - LIGA PADEL MASTER*\n\n";
+            const filas = document.querySelectorAll('#tabla-proximos-cruces tbody tr');
+            filas.forEach(fila => {
+                const celdas = fila.cells;
+                texto += `📍 ${celdas[0].innerText} | ⏰ ${celdas[1].innerText}\n`;
+                texto += `👉 ${celdas[2].innerText} vs ${celdas[4].innerText}\n`;
+                texto += `--------------------\n`;
+            });
+        }
+
+        texto += "\n🔗 Ver más en: " + window.location.href;
+        const encodedText = encodeURIComponent(texto);
+        window.open(`https://wa.me/?text=${encodedText}`, '_blank');
+    }
+
     function cargarEquipos() {
         const container = document.getElementById('teams-container');
         if(!container) return;
@@ -508,7 +565,7 @@
     }
 
     function updateCountdown() {
-        const target = new Date('2026-04-09T19:30:00');
+        const target = new Date('2026-04-23T19:30:00');
         const diff = target - new Date();
         const display = document.getElementById('countdown');
         if (display) {
@@ -522,7 +579,7 @@
 
     window.onload = function() {
         cargarEquipos();
-        cargarNoticias(); // Cargamos las noticias al iniciar
+        cargarNoticias();
         renderizarTabla();
         setInterval(updateCountdown, 60000);
         updateCountdown();
