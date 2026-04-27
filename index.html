@@ -166,15 +166,15 @@
             <table id="tabla-proximos-cruces">
                 <thead><tr><th>Cancha</th><th>Hora</th><th>Local</th><th>vs</th><th>Visitante</th></tr></thead>
                 <tbody>
-                    <tr><td>Cancha 1</td><td>19:30hs</td><td>El Señor de los Globillos</td><td>vs</td><td>Set y Sed Padel Team</td></tr>
-                    <tr><td>Cancha 2</td><td>19:30hs</td><td>Los Fantasmas</td><td>vs</td><td>Los Error no Forzado</td></tr>
-                    <tr><td>Cancha 3</td><td>19:30hs</td><td>La Sordeta</td><td>vs</td><td>Sed Point</td></tr>
-                    <tr><td>Cancha 1</td><td>20:30hs</td><td>El Señor de los Globillos</td><td>vs</td><td>Set y Sed Padel Team</td></tr>
-                    <tr><td>Cancha 2</td><td>20:30hs</td><td>Los Fantasmas</td><td>vs</td><td>Los Error no Forzado</td></tr>
-                    <tr><td>Cancha 3</td><td>20:30hs</td><td>La Sordeta</td><td>vs</td><td>Sed Point</td></tr>
-                    <tr><td>Cancha 1</td><td>21:30hs</td><td>El Señor de los Globillos</td><td>vs</td><td>Set y Sed Padel Team</td></tr>
-                    <tr><td>Cancha 2</td><td>21:30hs</td><td>Los Fantasmas</td><td>vs</td><td>Los Error no Forzado</td></tr>
-                    <tr><td>Cancha 3</td><td>21:30hs</td><td>La Sordeta</td><td>vs</td><td>Sed Point</td></tr>
+                    <tr><td>Cancha 1</td><td>19:30hs</td><td>Sed Point</td><td>vs</td><td>Set y Sed Padel Team</td></tr>
+                    <tr><td>Cancha 2</td><td>19:30hs</td><td>El Señor de los Globillos</td><td>vs</td><td>Los Error no Forzado</td></tr>
+                    <tr><td>Cancha 3</td><td>19:30hs</td><td>La Sordeta</td><td>vs</td><td>Los Fantasmas</td></tr>
+                    <tr><td>Cancha 1</td><td>20:30hs</td><td>Sed Point</td><td>vs</td><td>Set y Sed Padel Team</td></tr>
+                    <tr><td>Cancha 2</td><td>20:30hs</td><td>El Señor de los Globillos</td><td>vs</td><td>Los Error no Forzado</td></tr>
+                    <tr><td>Cancha 3</td><td>20:30hs</td><td>La Sordeta</td><td>vs</td><td>Los Fantasmas</td></tr>
+                    <tr><td>Cancha 1</td><td>21:30hs</td><td>Sed Point</td><td>vs</td><td>Set y Sed Padel Team</td></tr>
+                    <tr><td>Cancha 2</td><td>21:30hs</td><td>El Señor de los Globillos</td><td>vs</td><td>Los Error no Forzado</td></tr>
+                    <tr><td>Cancha 3</td><td>21:30hs</td><td>La Sordeta</td><td>vs</td><td>Los Fantasmas</td></tr>
                 </tbody>
             </table>
         </div>
@@ -224,6 +224,15 @@
                     <tr><td>Cancha 3</td><td>20:30hs</td><td>Los Fantasmas vs Set y Sed Padel Team</td><td>5-7 / 6-4 / 6/11</td></tr>
                     <tr><td>Cancha 3</td><td>21:30hs</td><td>Los Fantasmas vs Set y Sed Padel Team</td><td>5-7 / 6-3 / 9-11</td></tr>
 
+                    <tr><td>Cancha 1</td><td>19:30hs</td><td>El Señor de los Globillos vs Set y Sed Padel Team</td><td>6-0 / 7-6 / 0-0</td></tr>
+                    <tr><td>Cancha 1</td><td>20:30hs</td><td>El Señor de los Globillos vs Set y Sed Padel Team</td><td>6-7 / 5-7 / 0-0</td></tr>
+                    <tr><td>Cancha 1</td><td>21:30hs</td><td>El Señor de los Globillos vs Set y Sed Padel Team</td><td>6-4 / 6-4 / 0-0</td></tr>
+                    <tr><td>Cancha 2</td><td>19:30hs</td><td>Los Fantasmas vs Los Error no Forzado</td><td>1-6 / 1-6</td></tr>
+                    <tr><td>Cancha 2</td><td>20:30hs</td><td>Los Fantasmas vs Los Error no Forzado</td><td>2-6 / 4-6</td></tr>
+                    <tr><td>Cancha 2</td><td>21:30hs</td><td>Los Fantasmas vs Los Error no Forzado</td><td>6-2 / 6-4</td></tr>
+                    <tr><td>Cancha 3</td><td>19:30hs</td><td>Sed Point vs Set y La Sordeta</td><td>2-6 / 3-6</td></tr>
+                    <tr><td>Cancha 3</td><td>20:30hs</td><td>Sed Point vs Set y La Sordeta</td><td>6-2 / 6-4</td></tr>
+                    <tr><td>Cancha 3</td><td>21:30hs</td><td>Sed Point vs Set y La Sordeta</td><td>6-2 / 6-1</td></tr>
                 </tbody>
             </table>
         </div>
@@ -387,15 +396,16 @@
     // 1. DICCIONARIO DE DATOS
     // ==========================================
     const datosEquipos = [
-        { nombre: "La Sordeta", comodin: "USADO", capitan: "Juan Weiner", jugadores: ["Bruno Correnti", "Fer Simonetto", "Lauti Fain", "Mauro Perbellini", "Claudio Pucheta"] },
-        { nombre: "Set y Sed Padel Team", comodin: "USADO", capitan: "Fernando Reppetti", jugadores: ["Emiliano Villar", "Fabricio Muller", "Nicolas Audello", "German Oreggioni", "Juan Pablo Fiore"] },
-        { nombre: "El Señor de los Globillos", comodin: "USADO", capitan: "Fernando Villata", jugadores: ["Damian Falkemberg", "Guillermo Zhender", "Ariel Escalera", "Nicolás Kuzmic", "C.Franco"] },
+        { nombre: "La Sordeta", comodin: "DISPONIBLE", capitan: "Juan Weiner", jugadores: ["Bruno Correnti", "Fer Simonetto", "Lauti Fain", "Mauro Perbellini", "Claudio Pucheta"] },
+        { nombre: "Set y Sed Padel Team", comodin: "DISPONIBLE", capitan: "Fernando Reppetti", jugadores: ["Emiliano Villar", "Fabricio Muller", "Nicolas Audello", "German Oreggioni", "Juan Pablo Fiore"] },
+        { nombre: "El Señor de los Globillos", comodin: "DISPONIBLE", capitan: "Fernando Villata", jugadores: ["Damian Falkemberg", "Guillermo Zhender", "Ariel Escalera", "Nicolás Kuzmic", "C.Franco"] },
         { nombre: "Los Fantasmas", comodin: "DISPONIBLE", capitan: "Roy Melchiorre", jugadores: ["Fernando Montardit", "Alejandro Fuhr", "Julian Tschaggeny", "Facundo Niello", "Luis Taris"] },
         { nombre: "Los Error no Forzado", comodin: "DISPONIBLE", capitan: "Ramón Dobbler", jugadores: ["Martin Exner", "Josue Montenegro", "Pablo Beresvil", "Santiago Angiulla", "Nicolas Wenke"] },
-        { nombre: "Sed Point", comodin: "USADO", capitan: "Marcelo Sieguel", jugadores: ["Alex Galleano", "Alan Ordoñez", "Jona Perrig", "Noe Montenegro", "Juan Perren"] }
+        { nombre: "Sed Point", comodin: "DISPONIBLE", capitan: "Marcelo Sieguel", jugadores: ["Alex Galleano", "Alan Ordoñez", "Jona Perrig", "Noe Montenegro", "Juan Perren"] }
     ];
 
     const noticiasData = [
+        { fecha: "27 de Abril, 2026", etiqueta: "COMODINES", titulo: "Reinicio", contenido: "Al comenzar la segunda mitad de la liga, se reinician los comodines como estaba espicificado." },
         { fecha: "7 de Abril, 2026", etiqueta: "REMERAS", titulo: "Cancelación", contenido: "El dia de la fecha se abono el total de las camisetas para cada equipo, en el grupo se whatsapp se adjuntó el comprobante de pago." },
         { fecha: "1 de Abril, 2026", etiqueta: "PREDIO", titulo: "Mejoras del Club", contenido: "Se está avanzando con el cerramiento de la cancha 4, lo que nos va a permitir anexar un cupo extra de 2 equipos mas (12 jugadores)." },
         { fecha: "1 de Abril, 2026", etiqueta: "REMERAS", titulo: "Remeras Cool Elastic", contenido: "Ya está realizado el pedido, recuerden que 1 participante de cada equipo deberá transferir el total a un miembro de la organización. MIENTRAS MAS SE DEMOREN, MAS VAN A TARDAR LAS REMERAS." },
@@ -442,7 +452,17 @@
         { fecha: 4, local: "Los Error no Forzado", visit: "La Sordeta", s1: [4,6], s2: [6,1], stb: [11,6] },
         { fecha: 4, local: "Set y Sed Padel Team", visit: "Los Fantasmas", s1: [6,7], s2: [4,6], stb: [0,0] },
         { fecha: 4, local: "Set y Sed Padel Team", visit: "Los Fantasmas", s1: [7,5], s2: [4,6], stb: [11,6] },
-        { fecha: 4, local: "Set y Sed Padel Team", visit: "Los Fantasmas", s1: [7,5], s2: [3,6], stb: [11,9] }
+        { fecha: 4, local: "Set y Sed Padel Team", visit: "Los Fantasmas", s1: [7,5], s2: [3,6], stb: [11,9] },
+
+        { fecha: 5, local: "El Señor de los Globillos", visit: "Set y Sed Padel Team", s1: [6,0], s2: [7,6], stb: [0,0] },
+        { fecha: 5, local: "El Señor de los Globillos", visit: "Set y Sed Padel Team", s1: [6,7], s2: [5,7], stb: [0,0] },
+        { fecha: 5, local: "El Señor de los Globillos", visit: "Set y Sed Padel Team", s1: [6,4], s2: [6,4], stb: [0,0] },
+        { fecha: 5, local: "Los Error no Forzado", visit: "Los Fantasmas", s1: [6,1], s2: [6,1], stb: [0,0] },
+        { fecha: 5, local: "Los Error no Forzado", visit: "Los Fantasmas", s1: [6,2], s2: [6,4], stb: [0,0] },
+        { fecha: 5, local: "Los Error no Forzado", visit: "Los Fantasmas", s1: [2,6], s2: [4,6], stb: [0,0] },
+        { fecha: 5, local: "Sed Point", visit: "La Sordeta", s1: [2,6], s2: [3,6], stb: [0,0] },
+        { fecha: 5, local: "Sed Point", visit: "La Sordeta", s1: [6,2], s2: [6,4], stb: [0,0] },
+        { fecha: 5, local: "Sed Point", visit: "La Sordeta", s1: [6,2], s2: [6,1], stb: [0,0] }
     ];
 
     function cargarNoticias() {
@@ -565,7 +585,7 @@
     }
 
     function updateCountdown() {
-        const target = new Date('2026-04-23T19:30:00');
+        const target = new Date('2026-04-30T19:30:00');
         const diff = target - new Date();
         const display = document.getElementById('countdown');
         if (display) {
