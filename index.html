@@ -3,120 +3,504 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liga Padel Master</title>
+    <title>Liga Padel Master v2</title>
     <style>
         :root {
-            --primary: #d4ff00;
-            --dark-bg: #121212;
-            --card-bg: #1e1e1e;
-            --text: #ffffff;
+            --primary: #ccff00; /* El color amarillo flúor característico de la pelota de pádel */
+            --primary-rgb: 204, 255, 0;
+            --dark-bg: #0a0f1d; /* Un azul marino ultra profundo, elegante e institucional de cancha de pádel */
+            --card-bg: #131a30; /* Un azul intermedio pulido para las tarjetas y contenedores */
+            --card-hover: #1b2442;
+            --text: #f1f5f9; /* Blanco nítido para una lectura perfecta */
+            --text-muted: #64748b; /* Texto secundario grisáceo */
             --whatsapp: #25d366;
+            --ying-color: #38bdf8; /* Azul cielo sutil para la Zona Ying */
+            --yang-color: #fb923c; /* Coral/Naranja suave para la Zona Yang */
+            --border-color: rgba(255, 255, 255, 0.05);
+            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 12px 36px rgba(0, 0, 0, 0.25);
         }
 
         body {
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Montserrat', 'Segoe UI', -apple-system, sans-serif;
             margin: 0;
             background-color: var(--dark-bg);
             color: var(--text);
-            line-height: 1.6;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
         }
 
+        /* Cintillo de Cuenta Regresiva Estilo Marcador Electrónico - REPARADO */
         #countdown {
-            background: var(--primary);
-            color: #000;
-            font-weight: bold;
-            padding: 8px;
-            font-size: 0.9rem;
+            background: rgba(19, 26, 48, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: var(--primary);
+            font-weight: 700;
+            padding: 12px 10px;
+            font-size: 0.68rem; /* Un pelín más chico en móviles para que entre en un solo renglón */
             text-align: center;
             text-transform: uppercase;
+            letter-spacing: 1.5px; /* Un espacio entre letras más delicado */
+            border-bottom: 1px solid rgba(204, 255, 0, 0.15);
+            line-height: 1.4; /* Le da colchón vertical si el celular es muy viejo y llega a quebrar el texto */
+            box-sizing: border-box;
         }
 
+        /* Barra de Navegación Premium - SOLUCIÓN DEFINITIVA DE CONTROL DE LÍNEA */
         nav {
-            background: #000;
-            padding: 1rem;
+            background: rgba(10, 15, 29, 0.9);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 12px 10px;
             position: sticky;
             top: 0;
             z-index: 100;
+            
+            /* Forzado de filas flexibles con control de altura de renglón */
             display: flex;
-            justify-content: center;
-            gap: 15px;
-            border-bottom: 2px solid var(--primary);
             flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 12px 6px; /* 12px de separación obligatoria entre filas de botones */
+            line-height: 1; /* Resetea el renglón del contenedor para que no herede espacios raros */
+            
+            border-bottom: 1px solid var(--border-color);
         }
 
-        nav a { color: white; text-decoration: none; font-weight: bold; text-transform: uppercase; font-size: 0.8rem; cursor: pointer; padding: 5px 10px; border-radius: 5px; }
-        nav a:hover { background: rgba(212, 255, 0, 0.1); color: var(--primary); }
-
-        header {
-            padding: 40px 20px;
+        nav a { 
+            color: var(--text-muted); 
+            text-decoration: none; 
+            font-weight: 600; 
+            text-transform: uppercase; 
+            font-size: 0.7rem; /* Un pelín más pequeña en celulares para evitar desbordes */
+            cursor: pointer; 
+            padding: 8px 10px; /* Reducido levemente para dar más aire entre botones */
+            border-radius: 8px;
+            transition: all 0.25s ease;
+            letter-spacing: 0.5px;
+            
+            /* Aislamiento de caja indestructible */
+            display: inline-block;
             text-align: center;
-            background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
+            line-height: 1.2; /* Control estricto del texto interno del botón */
+            white-space: nowrap; /* Evita que una palabra larga se parta en dos renglones dentro del botón */
+            box-sizing: border-box;
         }
 
-        header h1 { font-size: 2.5rem; margin: 0; color: var(--primary); text-transform: uppercase; letter-spacing: 2px; }
+        /* Ajuste para pantallas más grandes (Tablets y Computadoras) */
+        @media (min-width: 480px) {
+            #countdown {
+                font-size: 0.75rem;
+                letter-spacing: 2.5px;
+                padding: 14px;
+            }
+        }
+
+        /* Header con la Atmósfera de la Cancha de Cristal */
+        header {
+            padding: 100px 20px;
+            text-align: center;
+            background: radial-gradient(circle at top, #162244 0%, var(--dark-bg) 75%);
+            position: relative;
+        }
+
+        header h1 { 
+            font-size: 2.6rem; 
+            font-weight: 800;
+            margin: 0; 
+            color: #ffffff; 
+            text-transform: uppercase; 
+            letter-spacing: 6px;
+            line-height: 1.2;
+        }
         
-        .container { max-width: 1100px; margin: auto; padding: 20px; min-height: 70vh; }
+        header p {
+            font-size: 0.85rem;
+            color: var(--primary);
+            letter-spacing: 4px;
+            margin-top: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
 
-        h2 { border-left: 4px solid var(--primary); padding-left: 10px; margin-top: 30px; text-transform: uppercase; }
-        h3.fecha-title { color: var(--primary); margin-top: 25px; border-bottom: 1px solid #333; padding-bottom: 5px; }
+        .container { 
+            max-width: 1000px; 
+            margin: auto; 
+            padding: 40px 20px; 
+            min-height: 70vh; 
+        }
 
-        .form-container { position: relative; overflow: hidden; width: 100%; padding-top: 120%; background: var(--card-bg); border-radius: 15px; }
+        /* Títulos de Sección Estilizados */
+        h2 { 
+            font-size: 1.35rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: #ffffff;
+            margin-top: 50px; 
+            margin-bottom: 30px;
+            text-transform: uppercase; 
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        h2::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.1), transparent);
+        }
+
+        /* Badges Especiales de las Zonas */
+        .zona-title { 
+            font-size: 0.85rem; 
+            font-weight: 700;
+            margin-top: 35px; 
+            margin-bottom: 20px; 
+            text-transform: uppercase; 
+            letter-spacing: 2px; 
+            padding: 6px 16px;
+            border-radius: 30px;
+            display: inline-block;
+            box-shadow: var(--shadow-sm);
+        }
+        .zona-title.ying { 
+            color: var(--ying-color); 
+            background: rgba(56, 189, 248, 0.08);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+        .zona-title.yang { 
+            color: var(--yang-color); 
+            background: rgba(251, 146, 60, 0.08);
+            border: 1px solid rgba(251, 146, 60, 0.2);
+        }
+
+        h3.fecha-title { 
+            color: var(--primary); 
+            margin-top: 35px; 
+            font-size: 0.95rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            border-bottom: 2px solid var(--primary); 
+            padding-bottom: 6px; 
+            display: inline-block;
+        }
+
+        /* Iframe contenedor */
+        .form-container { 
+            position: relative; 
+            overflow: hidden; 
+            width: 100%; 
+            padding-top: 120%; 
+            background: var(--card-bg); 
+            border-radius: 20px; 
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-md);
+        }
         @media (min-width: 768px) { .form-container { padding-top: 800px; } }
         .form-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
-        .teams-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-        .team-card { background: var(--card-bg); padding: 20px; border-radius: 15px; border: 1px solid #333; cursor: pointer; transition: 0.3s; position: relative; }
-        .team-card:hover { border-color: var(--primary); }
-        .comodin-status { position: absolute; top: 15px; right: 15px; font-size: 0.7rem; padding: 3px 8px; border-radius: 20px; background: #222; border: 1px solid var(--primary); color: var(--primary); }
+        /* Tarjetas Flotantes de los Equipos */
+        .teams-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); 
+            gap: 24px; 
+            margin-bottom: 50px; 
+        }
         
-        .member-list { margin-top: 15px; border-top: 1px solid #444; padding-top: 10px; display: none; }
-        .member-item { display: flex; justify-content: space-between; font-size: 0.85rem; padding: 6px 0; border-bottom: 1px solid #2a2a2a; }
-        .capitan-name { font-weight: bold; color: var(--primary); }
-        .position-badge { font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; background: var(--primary); color: #000; font-weight: bold; }
+        .team-card { 
+            background: var(--card-bg); 
+            padding: 26px; 
+            border-radius: 16px; 
+            border: 1px solid var(--border-color); 
+            cursor: pointer; 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+            position: relative; 
+            box-shadow: var(--shadow-sm);
+        }
 
-        .table-container { overflow-x: auto; background: var(--card-bg); border-radius: 10px; margin-bottom: 20px; }
-        table { width: 100%; border-collapse: collapse; }
-        th { text-align: left; padding: 12px; border-bottom: 2px solid #333; color: var(--primary); font-size: 0.8rem; }
-        td { padding: 12px; border-bottom: 1px solid #333; font-size: 0.9rem; }
+        .team-card h3 {
+    padding-right: 130px; /* Deja espacio libre a la derecha para que el comodín nunca tape el texto */
+        }
         
-        .regla-card { background: var(--card-bg); padding: 20px; border-radius: 15px; margin-bottom: 15px; border-left: 4px solid var(--primary); }
-        .regla-card h3 { color: var(--primary); margin-top: 0; font-size: 1.1rem; text-transform: uppercase; }
-        .regla-card p { margin-bottom: 10px; font-size: 0.95rem; }
-        .nota-importante { background: rgba(212, 255, 0, 0.1); padding: 15px; border-radius: 10px; border: 1px dashed var(--primary); margin-top: 20px; }
-        .alerta-expulsion { color: #ff4444; font-weight: bold; text-align: center; border: 2px solid #ff4444; padding: 10px; margin-top: 20px; text-transform: uppercase; }
+        .team-card:hover { 
+            transform: translateY(-4px);
+            border-color: rgba(204, 255, 0, 0.25);
+            background: var(--card-hover);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .comodin-status { 
+            position: absolute; 
+            top: 26px; 
+            right: 26px; 
+            font-size: 0.65rem; 
+            font-weight: 700;
+            padding: 4px 12px; 
+            border-radius: 30px; 
+            background: rgba(204, 255, 0, 0.05); 
+            color: var(--primary); 
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(204, 255, 0, 0.2);
+        }
+        
+        /* Lista Desplegable */
+        .member-list { 
+            margin-top: 20px; 
+            border-top: 1px solid var(--border-color); 
+            padding-top: 12px; 
+            display: none; 
+        }
+        
+        .member-item { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            font-size: 0.85rem; 
+            padding: 8px 0; 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.01); 
+            color: #cbd5e1;
+        }
+        
+        .capitan-name { 
+            font-weight: 600; 
+            color: #ffffff; 
+        }
+        
+        .position-badge { 
+            font-size: 0.6rem; 
+            padding: 3px 8px; 
+            border-radius: 4px; 
+            background: var(--primary); 
+            color: #000000; 
+            font-weight: 700; 
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
 
-        /* ESTILOS FORO NOTICIAS */
-        .news-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
-        .news-card { background: var(--card-bg); border-radius: 15px; border-left: 5px solid var(--primary); padding: 20px; position: relative; }
-        .news-date { color: var(--primary); font-size: 0.8rem; font-weight: bold; margin-bottom: 10px; display: block; }
-        .news-tag { position: absolute; top: 20px; right: 20px; background: #333; color: #fff; font-size: 0.6rem; padding: 2px 8px; border-radius: 4px; text-transform: uppercase; }
-        .news-card h3 { margin: 0 0 10px 0; color: var(--primary); text-transform: uppercase; }
-        .news-card p { margin: 0; font-size: 0.95rem; color: #ccc; }
+        /* Tablas Limpias y Profesionales */
+        .table-container { 
+            overflow-x: auto; 
+            background: var(--card-bg); 
+            border-radius: 16px; 
+            margin-bottom: 40px; 
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+        }
+        
+        th { 
+            text-align: left; 
+            padding: 18px 24px; 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08); 
+            color: var(--text-muted); 
+            font-size: 0.75rem; 
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            background: rgba(0, 0, 0, 0.1);
+        }
+        
+        td { 
+            padding: 18px 24px; 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.02); 
+            font-size: 0.88rem; 
+            color: #e2e8f0;
+        }
+        
+        tr:last-child td { border-bottom: none; }
+        
+        tbody tr:hover {
+            background-color: rgba(255, 255, 255, 0.01);
+        }
+
+        /* Módulos de Reglamento */
+        .regla-card { 
+            background: var(--card-bg); 
+            padding: 26px; 
+            border-radius: 16px; 
+            margin-bottom: 20px; 
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--primary); 
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .regla-card h3 { 
+            color: #ffffff; 
+            margin-top: 0; 
+            margin-bottom: 12px;
+            font-size: 0.95rem; 
+            font-weight: 700;
+            text-transform: uppercase; 
+            letter-spacing: 0.5px;
+        }
+        
+        .regla-card p { 
+            margin: 0 0 12px 0; 
+            font-size: 0.9rem; 
+            color: #cbd5e1;
+        }
+        .regla-card p:last-child { margin-bottom: 0; }
+        
+        .nota-importante { 
+            background: rgba(19, 26, 48, 0.5); 
+            padding: 22px; 
+            border-radius: 14px; 
+            border: 1px dashed rgba(204, 255, 0, 0.2); 
+            margin-top: 35px; 
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .alerta-expulsion { 
+            color: #ff5555; 
+            font-weight: 700; 
+            text-align: center; 
+            border: 1px solid rgba(255, 85, 85, 0.25); 
+            background: rgba(255, 85, 85, 0.03);
+            padding: 16px; 
+            border-radius: 12px;
+            margin-top: 35px; 
+            text-transform: uppercase; 
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+        }
+
+        /* Foro de Noticias */
+        .news-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+        .news-card { 
+            background: var(--card-bg); 
+            border-radius: 16px; 
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--primary);
+            padding: 26px; 
+            position: relative; 
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .news-date { 
+            color: var(--text-muted); 
+            font-size: 0.75rem; 
+            font-weight: 600; 
+            margin-bottom: 6px; 
+            display: block; 
+        }
+        
+        .news-tag { 
+            position: absolute; 
+            top: 26px; 
+            right: 26px; 
+            background: var(--dark-bg); 
+            color: #ffffff; 
+            font-size: 0.6rem; 
+            padding: 4px 12px; 
+            border-radius: 30px; 
+            text-transform: uppercase; 
+            font-weight: 700;
+            border: 1px solid var(--border-color);
+        }
+        
+        .news-card h3 { 
+            margin: 0 0 10px 0; 
+            color: #ffffff; 
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase; 
+        }
+        
+        .news-card p { margin: 0; font-size: 0.9rem; color: #cbd5e1; }
 
         .hidden { display: none; }
 
-        /* BOTÓN COMPARTIR */
+        /* Botón Compartir WhatsApp */
         .share-btn {
-            background: var(--whatsapp);
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
-            font-weight: bold;
+            background: transparent;
+            color: var(--whatsapp);
+            border: 1px solid rgba(37, 211, 102, 0.25);
+            padding: 8px 18px;
+            border-radius: 8px;
+            font-weight: 700;
             cursor: pointer;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             gap: 8px;
-            margin-bottom: 10px;
-            font-size: 0.8rem;
+            margin-bottom: 16px;
+            font-size: 0.75rem;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
         }
-        .share-btn:hover { opacity: 0.9; }
+        .share-btn:hover { 
+            background: rgba(37, 211, 102, 0.04);
+            border-color: var(--whatsapp);
+        }
 
-        footer { background: #000; padding: 40px 20px; border-top: 2px solid var(--primary); text-align: center; margin-top: 50px; }
-        .map-button { background: #333; color: white; text-decoration: none; padding: 10px 20px; border-radius: 5px; font-size: 0.8rem; margin: 15px 0; display: inline-block; border: 1px solid var(--primary); }
-        .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; max-width: 600px; margin: 20px auto; }
-        .ws-button { background: var(--whatsapp); color: white; text-decoration: none; padding: 10px; border-radius: 5px; font-weight: bold; font-size: 0.8rem; display: inline-block; }
+        /* Footer */
+        footer { 
+            background: #050811; 
+            padding: 60px 20px; 
+            border-top: 1px solid var(--border-color); 
+            text-align: center; 
+            margin-top: 80px; 
+        }
+        
+        footer p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+            margin: 0;
+        }
+        
+        .map-button { 
+            background: transparent; 
+            color: #ffffff; 
+            text-decoration: none; 
+            padding: 10px 24px; 
+            border-radius: 8px; 
+            font-size: 0.75rem; 
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin: 20px 0; 
+            display: inline-block; 
+            border: 1px solid var(--border-color); 
+            transition: all 0.2s ease;
+        }
+        .map-button:hover {
+            border-color: #ffffff;
+            background: rgba(255, 255, 255, 0.02);
+        }
+        
+        .contact-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); 
+            gap: 12px; 
+            max-width: 500px; 
+            margin: 25px auto 0 auto; 
+        }
+        
+        .ws-button { 
+            background: rgba(37, 211, 102, 0.03); 
+            color: var(--whatsapp); 
+            text-decoration: none; 
+            padding: 11px; 
+            border-radius: 8px; 
+            font-weight: 700; 
+            font-size: 0.75rem; 
+            display: inline-block; 
+            border: 1px solid rgba(37, 211, 102, 0.15);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+        }
+        .ws-button:hover {
+            background: var(--whatsapp);
+            color: #ffffff;
+        }
     </style>
 </head>
 <body>
@@ -130,11 +514,11 @@
     <a onclick="showSection('calendario')">Próximas Fechas</a>
     <a onclick="showSection('posiciones')">Posiciones</a>
     <a onclick="showSection('reglamento')">Reglamento</a>
-    <a onclick="showSection('inscripcion')" style="background: var(--primary); color: black;">Inscribirse</a>
+    <a onclick="showSection('inscripcion')" style="border: 1px solid var(--primary); color: var(--primary); padding: 7px 15px;">Inscribirse</a>
 </nav>
 
 <header>
-        <h1>LIGA PADEL MASTER</h1>
+    <h1>LIGA PADEL MASTER v2</h1>
     <p>EDICIÓN POR EQUIPOS | ESPERANZA</p>
 </header>
 
@@ -149,32 +533,189 @@
 
     <section id="noticias" class="hidden">
         <h2>Foro de Noticias</h2>
-        <div id="news-container" class="news-grid">
-            </div>
+        <div id="news-container" class="news-grid"></div>
     </section>
 
     <section id="inicio">
         <h2>Equipos y Comodines</h2>
-        <div id="teams-container" class="teams-grid">
+        
+        <div class="zona-title ying">Zona Ying</div>
+        <div id="teams-container-ying" class="teams-grid">
+
+            <div class="team-card" onclick="toggleTeam(this)">
+                <span class="comodin-status">COMODÍN: DISPONIBLE</span>
+                <h3 style="margin: 0 0 10px 0; font-size: 1.15rem; text-transform: uppercase;">Los Abandonados</h3>
+                <div class="member-list">
+                    <div class="member-item"><span class="capitan-name">Marce Sieguel</span> <span class="position-badge">CAPITÁN</span></div>
+                    <div class="member-item"><span>Franco Pacheco</span></div>
+                    <div class="member-item"><span>Joel Konig</span></div>
+                    <div class="member-item"><span>Chiqui Brossio</span></div>
+                    <div class="member-item"><span>Rodri Strack</span></div>
+                    <div class="member-item"><span>Mati Oberlin</span></div>
+                </div>
             </div>
+
+            <div class="team-card" onclick="toggleTeam(this)">
+                <span class="comodin-status">COMODÍN: DISPONIBLE</span>
+                <h3 style="margin: 0 0 10px 0; font-size: 1.15rem; text-transform: uppercase;">Los Rompecristales</h3>
+                <div class="member-list">
+                    <div class="member-item"><span class="capitan-name">José Zequin</span> <span class="position-badge">CAPITÁN</span></div>
+                    <div class="member-item"><span>Facu Niello</span></div>
+                    <div class="member-item"><span>Edu Chacon</span></div>
+                    <div class="member-item"><span>Ale Fuhr</span></div>
+                    <div class="member-item"><span>Nico Kuzmik</span></div>
+                    <div class="member-item"><span>Fabri Profe</span></div>
+                </div>
+            </div>
+
+            <div class="team-card" onclick="toggleTeam(this)">
+                <span class="comodin-status">COMODÍN: DISPONIBLE</span>
+                <h3 style="margin: 0 0 10px 0; font-size: 1.15rem; text-transform: uppercase;">Punto y Asado</h3>
+                <div class="member-list">
+                    <div class="member-item"><span class="capitan-name">Jorge Basset</span> <span class="position-badge">CAPITÁN</span></div>
+                    <div class="member-item"><span>Ale Zuber</span></div>
+                    <div class="member-item"><span>Pablo Beresvil</span></div>
+                    <div class="member-item"><span>Guille Zhender</span></div>
+                    <div class="member-item"><span>Mauri Chautemps</span></div>
+                    <div class="member-item"><span>Bruno de la Fuente</span></div>
+                </div>
+            </div>
+
+            <div class="team-card" onclick="toggleTeam(this)">
+                <span class="comodin-status">COMODÍN: DISPONIBLE</span>
+                <h3 style="margin: 0 0 10px 0; font-size: 1.15rem; text-transform: uppercase;">Sin Globos no hay Paraiso</h3>
+                <div class="member-list">
+                    <div class="member-item"><span class="capitan-name">Nico Audello</span> <span class="position-badge">CAPITÁN</span></div>
+                    <div class="member-item"><span>Fer Repetti</span></div>
+                    <div class="member-item"><span>Marcos Ramirez</span></div>
+                    <div class="member-item"><span>Alex Galleano</span></div>
+                    <div class="member-item"><span>Bruno Correnti</span></div>
+                    <div class="member-item"><span>Ivan Castillo</span></div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="zona-title yang">Zona Yang</div>
+        <div id="teams-container-yang" class="teams-grid">
+
+            <div class="team-card" onclick="toggleTeam(this)">
+                <span class="comodin-status">COMODÍN: DISPONIBLE</span>
+                <h3 style="margin: 0 0 10px 0; font-size: 1.15rem; text-transform: uppercase;">Los Branca</h3>
+                <div class="member-list">
+                    <div class="member-item"><span class="capitan-name">German Oreggioni</span> <span class="position-badge">CAPITÁN</span></div>
+                    <div class="member-item"><span>Pocho Salvetti</span></div>
+                    <div class="member-item"><span>Nico Wenke</span></div>
+                    <div class="member-item"><span>Santi Angiulla</span></div>
+                    <div class="member-item"><span>Juanchi Perren</span></div>
+                    <div class="member-item"><span>Facu Hilgert</span></div>
+                </div>
+            </div>
+
+            <div class="team-card" onclick="toggleTeam(this)">
+                <span class="comodin-status">COMODÍN: DISPONIBLE</span>
+                <h3 style="margin: 0 0 10px 0; font-size: 1.15rem; text-transform: uppercase;">El Retorno de la Sordeta</h3>
+                <div class="member-list">
+                    <div class="member-item"><span class="capitan-name">Juan Weiner</span> <span class="position-badge">CAPITÁN</span></div>
+                    <div class="member-item"><span>Cuero Falkemberg</span></div>
+                    <div class="member-item"><span>Noe Montenegro</span></div>
+                    <div class="member-item"><span>Alan Alan</span></div>
+                    <div class="member-item"><span>Fer Villata</span></div>
+                    <div class="member-item"><span>Jona Perrig</span></div>
+                </div>
+            </div>
+
+            <div class="team-card" onclick="toggleTeam(this)">
+                <span class="comodin-status">COMODÍN: DISPONIBLE</span>
+                <h3 style="margin: 0 0 10px 0; font-size: 1.15rem; text-transform: uppercase;">Red Point</h3>
+                <div class="member-list">
+                    <div class="member-item"><span class="capitan-name">Turco Taris</span> <span class="position-badge">CAPITÁN</span></div>
+                    <div class="member-item"><span>Emi Villar</span></div>
+                    <div class="member-item"><span>Fer Simonetto</span></div>
+                    <div class="member-item"><span>Fede Turletti</span></div>
+                    <div class="member-item"><span>Mica Nagel</span></div>
+                    <div class="member-item"><span>Josue Montenegro</span></div>
+                </div>
+            </div>
+
+            <div class="team-card" onclick="toggleTeam(this)">
+                <span class="comodin-status">COMODÍN: DISPONIBLE</span>
+                <h3 style="margin: 0 0 10px 0; font-size: 1.15rem; text-transform: uppercase;">Fernet Branca</h3>
+                <div class="member-list">
+                    <div class="member-item"><span class="capitan-name">Ariel Escalera</span> <span class="position-badge">CAPITÁN</span></div>
+                    <div class="member-item"><span>Puche Claudio Pucheta</span></div>
+                    <div class="member-item"><span>Ramon Dobler</span></div>
+                    <div class="member-item"><span>Juli Tschaggeny</span></div>
+                    <div class="member-item"><span>Roy Roy</span></div>
+                    <div class="member-item"><span>Fefi Montardit</span></div>
+                </div>
+            </div>
+
+        </div>
     </section>
 
     <section id="partidos" class="hidden">
         <h2>Próximos Cruces</h2>
         <button class="share-btn" onclick="compartirWhatsApp('partidos')">🟢 Compartir Cruces</button>
+        
+        <div class="zona-title ying">Próxima Fecha - Zona Ying</div>
         <div class="table-container">
-            <table id="tabla-proximos-cruces">
-                <thead><tr><th>Cancha</th><th>Hora</th><th>Local</th><th>vs</th><th>Visitante</th></tr></thead>
+            <table id="tabla-proximos-cruces-ying">
+                <thead>
+                    <tr>
+                        <th>Cancha</th>
+                        <th>Hora</th>
+                        <th>Local</th>
+                        <th>vs</th>
+                        <th>Visitante</th>
+                    </tr>
+                </thead>
                 <tbody>
-                    <tr><td>Cancha 1</td><td>19:30hs</td><td>El Señor de los Globillos</td><td>vs</td><td>La Sordeta</td></tr>
-                    <tr><td>Cancha 2</td><td>19:30hs</td><td>Los Fantasmas</td><td>vs</td><td>Los Error No Forzado</td></tr>
-                    <tr><td>Cancha 3</td><td>19:30hs</td><td>Set y Sed Padel Team</td><td>vs</td><td>Sed Point</td></tr>
-                    <tr><td>Cancha 1</td><td>20:30hs</td><td>El Señor de los Globillos</td><td>vs</td><td>La Sordeta</td></tr>
-                    <tr><td>Cancha 2</td><td>20:30hs</td><td>Los Fantasmas</td><td>vs</td><td>Los Error No Forzado</td></tr>
-                    <tr><td>Cancha 3</td><td>20:30hs</td><td>Set y Sed Padel Team</td><td>vs</td><td>Sed Point</td></tr>
-                    <tr><td>Cancha 1</td><td>21:30hs</td><td>El Señor de los Globillos</td><td>vs</td><td>La Sordeta</td></tr>
-                    <tr><td>Cancha 2</td><td>21:30hs</td><td>Los Fantasmas</td><td>vs</td><td>Los Error No Forzado</td></tr>
-                    <tr><td>Cancha 3</td><td>21:30hs</td><td>Set y Sed Padel Team</td><td>vs</td><td>Sed Point</td></tr>
+                    <tr>
+                        <td>Cancha 1</td>
+                        <td>19:30 a 22:30</td>
+                        <td>Los Abandonados</td>
+                        <td style="color: var(--primary); font-weight: bold;">vs</td>
+                        <td>Los Rompecristales</td>
+                    </tr>
+                    <tr>
+                        <td>Cancha 2</td>
+                        <td>19:30 a 22:30</td>
+                        <td>Punto y Asado</td>
+                        <td style="color: var(--primary); font-weight: bold;">vs</td>
+                        <td>Sin Globos no hay Paraiso</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="zona-title yang">Próxima Fecha - Zona Yang</div>
+        <div class="table-container">
+            <table id="tabla-proximos-cruces-yang">
+                <thead>
+                    <tr>
+                        <th>Cancha</th>
+                        <th>Hora</th>
+                        <th>Local</th>
+                        <th>vs</th>
+                        <th>Visitante</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Cancha 3</td>
+                        <td>19:30 a 22:30</td>
+                        <td>Los Branca</td>
+                        <td style="color: var(--primary); font-weight: bold;">vs</td>
+                        <td>El Retorno de la Sordeta</td>
+                    </tr>
+                    <tr>
+                        <td>Cancha 4</td>
+                        <td>19:30 a 22:30</td>
+                        <td>Red Point</td>
+                        <td style="color: var(--primary); font-weight: bold;">vs</td>
+                        <td>Fernet Branca</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -182,108 +723,20 @@
         <h2>Resultados Fecha Anterior</h2>
         <div class="table-container">
             <table>
-                <thead><tr><th>Cancha</th><th>Hora</th><th>Encuentro</th><th>Resultado</th></tr></thead>
+                <thead>
+                    <tr>
+                        <th>Cancha</th>
+                        <th>Hora</th>
+                        <th>Encuentro</th>
+                        <th>Resultado</th>
+                    </tr>
+                </thead>
                 <tbody>
-                     <tr><td>Cancha 1</td><td>19:30hs</td><td>La Sordeta vs Set y Sed Padel Team</td><td>4-6 / 5-7</td></tr>
-                    <tr><td>Cancha 2</td><td>19:30hs</td><td>El Señor de los Globillos vs Los Fantasmas</td><td>7-6 / 6-7 / 10-11</td></tr>
-                    <tr><td>Cancha 3</td><td>19:30hs</td><td>Sed Point vs Los Error no Forzado</td><td>5-7 / 4-6</td></tr>
-                    <tr><td>Cancha 1</td><td>20:30hs</td><td>Sed Point vs Los Error no Forzado</td><td>5-7 / 4-6</td></tr>
-                    <tr><td>Cancha 2</td><td>20:30hs</td><td>La Sordeta vs Set y Sed Padel Team</td><td>0-6 / 7-5 / 11-10</td></tr>
-                    <tr><td>Cancha 3</td><td>20:30hs</td><td>El Señor de los Globillos vs Los Fantasmas</td><td>4-6 / 6-2 / 8-11</td></tr>
-                    <tr><td>Cancha 1</td><td>21:30hs</td><td>El Señor de los Globillos vs Los Fantasmas</td><td>6-7 / 4-6</td></tr>
-                    <tr><td>Cancha 2</td><td>21:30hs</td><td>Sed Point vs Los Error no Forzado</td><td>6-3 / 6-1</td></tr>
-                    <tr><td>Cancha 3</td><td>21:30hs</td><td>La Sordeta vs Set y Sed Padel Team</td><td>6-3 / 6-2</td></tr>
-
-                     <tr><td>Cancha 1</td><td>19:30hs</td><td>La Sordeta vs Sed Point</td><td>6-1 / 6-2</td></tr>
-                    <tr><td>Cancha 2</td><td>19:30hs</td><td>Set y Sed Padel Team vs Los Fantasmas</td><td>2-6 / 3-6</td></tr>
-                    <tr><td>Cancha 3</td><td>19:30hs</td><td>El Señor de los Globillos vs Los Error no Forzado</td><td>3-6 / 2-6</td></tr>
-                    <tr><td>Cancha 1</td><td>20:30hs</td><td>El Señor de los Globillos vs Los Error no Forzado</td><td>1-6 / 4-6</td></tr>
-                    <tr><td>Cancha 2</td><td>20:30hs</td><td>La Sordeta vs Sed Point</td><td>0-6 / 4-6</td></tr>
-                    <tr><td>Cancha 3</td><td>20:30hs</td><td>Set y Sed Padel Team vs Los Fantasmas</td><td>5-7 / 3-6</td></tr>
-                    <tr><td>Cancha 1</td><td>21:30hs</td><td>Set y Sed Padel Team vs Los Fantasmas</td><td>6-3 / 7-5</td></tr>
-                    <tr><td>Cancha 2</td><td>21:30hs</td><td>El Señor de los Globillos vs Los Error no Forzado</td><td>7-6 / 6-4</td></tr>
-                    <tr><td>Cancha 3</td><td>21:30hs</td><td>La Sordeta vs Sed Point</td><td>6-4 / 4-6 / 11-5</td></tr>
-
-                     <tr><td>Cancha 1</td><td>19:30hs</td><td>La Sordeta vs El Señor de los Globillos</td><td>6-4 / 2-6 / 6-11</td></tr>
-                    <tr><td>Cancha 2</td><td>19:30hs</td><td>Sed Point vs Los Fantasmas</td><td>3-6 / 6-0 / 7-11</td></tr>
-                    <tr><td>Cancha 3</td><td>19:30hs</td><td>Set y Sed Padel Team vs Los Error no Forzado</td><td>0-6 / 6-1 / 7-11</td></tr>
-                    <tr><td>Cancha 1</td><td>20:30hs</td><td>Set y Sed Padel Team vs Los Error no Forzado</td><td>1-6 / 0-6</td></tr>
-                    <tr><td>Cancha 2</td><td>20:30hs</td><td>La Sordeta vs El Señor de los Globillos</td><td>7-6 / 6-2</td></tr>
-                    <tr><td>Cancha 3</td><td>20:30hs</td><td>Sed Point vs Los Fantasmas</td><td>7-5 / 4-6 / 11-6</td></tr>
-                    <tr><td>Cancha 1</td><td>21:30hs</td><td>Sed Point vs Los Fantasmas</td><td>6-7 / 4-6</td></tr>
-                    <tr><td>Cancha 2</td><td>21:30hs</td><td>Set y Sed Padel Team vs Los Error no Forzado</td><td>6-1 / 2-6 / 6/11</td></tr>
-                    <tr><td>Cancha 3</td><td>21:30hs</td><td>La Sordeta vs El Señor de los Globillos</td><td>4-6 / 7-5 / 11-8</td></tr>
-
-                     <tr><td>Cancha 1</td><td>19:30hs</td><td>La Sordeta vs Los Error no Forzado</td><td>6-4 / 5-7 / 8-11</td></tr>
-                    <tr><td>Cancha 1</td><td>20:30hs</td><td>La Sordeta vs Los Error no Forzado</td><td>3-6 / 5-7 / 0-0</td></tr>
-                    <tr><td>Cancha 1</td><td>21:30hs</td><td>La Sordeta vs Los Error no Forzado</td><td>6-4 / 1-6 / 6-11</td></tr>
-                    <tr><td>Cancha 2</td><td>19:30hs</td><td>El Señor de los Globillos vs Sed Point</td><td>6-2 / 6-2</td></tr>
-                    <tr><td>Cancha 2</td><td>20:30hs</td><td>El Señor de los Globillos vs Sed Point</td><td>1-6 / 2-6</td></tr>
-                    <tr><td>Cancha 2</td><td>21:30hs</td><td>El Señor de los Globillos vs Sed Point</td><td>1-6 / 3-6 / 11-6</td></tr>
-                    <tr><td>Cancha 3</td><td>19:30hs</td><td>Los Fantasmas vs Set y Sed Padel Team</td><td>7-6 / 6-4</td></tr>
-                    <tr><td>Cancha 3</td><td>20:30hs</td><td>Los Fantasmas vs Set y Sed Padel Team</td><td>5-7 / 6-4 / 6/11</td></tr>
-                    <tr><td>Cancha 3</td><td>21:30hs</td><td>Los Fantasmas vs Set y Sed Padel Team</td><td>5-7 / 6-3 / 9-11</td></tr>
-
-                    <tr><td>Cancha 1</td><td>19:30hs</td><td>El Señor de los Globillos vs Set y Sed Padel Team</td><td>6-0 / 7-6 / 0-0</td></tr>
-                    <tr><td>Cancha 1</td><td>20:30hs</td><td>El Señor de los Globillos vs Set y Sed Padel Team</td><td>6-7 / 5-7 / 0-0</td></tr>
-                    <tr><td>Cancha 1</td><td>21:30hs</td><td>El Señor de los Globillos vs Set y Sed Padel Team</td><td>6-4 / 6-4 / 0-0</td></tr>
-                    <tr><td>Cancha 2</td><td>19:30hs</td><td>Los Fantasmas vs Los Error no Forzado</td><td>1-6 / 1-6</td></tr>
-                    <tr><td>Cancha 2</td><td>20:30hs</td><td>Los Fantasmas vs Los Error no Forzado</td><td>2-6 / 4-6</td></tr>
-                    <tr><td>Cancha 2</td><td>21:30hs</td><td>Los Fantasmas vs Los Error no Forzado</td><td>6-2 / 6-4</td></tr>
-                    <tr><td>Cancha 3</td><td>19:30hs</td><td>Sed Point vs Set y La Sordeta</td><td>2-6 / 3-6</td></tr>
-                    <tr><td>Cancha 3</td><td>20:30hs</td><td>Sed Point vs Set y La Sordeta</td><td>6-2 / 6-4</td></tr>
-                    <tr><td>Cancha 3</td><td>21:30hs</td><td>Sed Point vs Set y La Sordeta</td><td>6-2 / 6-1</td></tr>
-
-                    <tr><td>Cancha 1</td><td>19:30hs</td><td>El Señor de los Globillos vs Set y Sed Padel Team</td><td>6-0 / 7-6 / 0-0</td></tr>
-                    <tr><td>Cancha 1</td><td>20:30hs</td><td>El Señor de los Globillos vs Set y Sed Padel Team</td><td>6-7 / 5-7 / 0-0</td></tr>
-                    <tr><td>Cancha 1</td><td>21:30hs</td><td>El Señor de los Globillos vs Set y Sed Padel Team</td><td>6-4 / 6-4 / 0-0</td></tr>
-                    <tr><td>Cancha 2</td><td>19:30hs</td><td>Los Fantasmas vs Los Error no Forzado</td><td>1-6 / 1-6</td></tr>
-                    <tr><td>Cancha 2</td><td>20:30hs</td><td>Los Fantasmas vs Los Error no Forzado</td><td>2-6 / 4-6</td></tr>
-                    <tr><td>Cancha 2</td><td>21:30hs</td><td>Los Fantasmas vs Los Error no Forzado</td><td>6-2 / 6-4</td></tr>
-                    <tr><td>Cancha 3</td><td>19:30hs</td><td>Sed Point vs Set y La Sordeta</td><td>2-6 / 3-6</td></tr>
-                    <tr><td>Cancha 3</td><td>20:30hs</td><td>Sed Point vs Set y La Sordeta</td><td>6-2 / 6-4</td></tr>
-                    <tr><td>Cancha 3</td><td>21:30hs</td><td>Sed Point vs Set y La Sordeta</td><td>6-2 / 6-1</td></tr>
-
-                    <tr><td>Cancha 1</td><td>19:30hs</td><td>Sed Point vs Set y Sed Padel Team</td><td>6-4 / 3-6 / 3-11</td></tr>
-                    <tr><td>Cancha 1</td><td>20:30hs</td><td>Sed Point vs Set y Sed Padel Team</td><td>6-1 / 6-3 / 0-0</td></tr>
-                    <tr><td>Cancha 1</td><td>21:30hs</td><td>Sed Point vs Set y Sed Padel Team</td><td>6-4 / 6-0 / 0-0</td></tr>
-                    <tr><td>Cancha 2</td><td>19:30hs</td><td>El Señor de los Globillos vs Los Error no Forzado</td><td>3-6 / 2-6</td></tr>
-                    <tr><td>Cancha 2</td><td>20:30hs</td><td>El Señor de los Globillos vs Los Error no Forzado</td><td>6-7 / 1-6</td></tr>
-                    <tr><td>Cancha 2</td><td>21:30hs</td><td>El Señor de los Globillos vs Los Error no Forzado</td><td>7-6 / 2-6 / 9-11</td></tr>
-                    <tr><td>Cancha 3</td><td>19:30hs</td><td>La Sordeta vs Los Fantasmas</td><td>7-5 / 3-6 / 10-11</td></tr>
-                    <tr><td>Cancha 3</td><td>20:30hs</td><td>La Sordeta vs Los Fantasmas</td><td>2-6 / 2-6</td></tr>
-                    <tr><td>Cancha 3</td><td>21:30hs</td><td>La Sordeta vs Los Fantasmas</td><td>3-6 / 4-6</td></tr>
-
-                    <tr><td>Cancha 1</td><td>19:30hs</td><td>El Señor de los Globillos vs Los Fantasmas</td><td>7-6 / 6-1</td></tr>
-                    <tr><td>Cancha 1</td><td>20:30hs</td><td>El Señor de los Globillos vs Los Fantasmas</td><td>7-6 / 3-6 / 8-11</td></tr>
-                    <tr><td>Cancha 1</td><td>21:30hs</td><td>El Señor de los Globillos vs Los Fantasmas</td><td>3-6 / 6-7</td></tr>
-                    <tr><td>Cancha 2</td><td>19:30hs</td><td>Set y Sed Padel Team vs La Sordeta</td><td>1-6 / 6-7</td></tr>
-                    <tr><td>Cancha 2</td><td>20:30hs</td><td>Set y Sed Padel Team vs La Sordeta</td><td>6-7 / 6-1 / 10-11</td></tr>
-                    <tr><td>Cancha 2</td><td>21:30hs</td><td>Set y Sed Padel Team vs La Sordeta</td><td>7-6 / 6-3</td></tr>
-                    <tr><td>Cancha 3</td><td>19:30hs</td><td>Los Error no Forzado vs Sed Point</td><td>4-6 / 6-7</td></tr>
-                    <tr><td>Cancha 3</td><td>20:30hs</td><td>Los Error no Forzado vs Sed Point</td><td>7-5 / 6-3</td></tr>
-                    <tr><td>Cancha 3</td><td>21:30hs</td><td>Los Error no Forzado vs Sed Point</td><td>6-7 / 6-4 / 3-11</td></tr>
-
-                    <tr><td>Cancha 1</td><td>19:30hs</td><td>Los Error No Forzado vs La Sordeta</td><td>6-4 / 6-1</td></tr>
-                    <tr><td>Cancha 1</td><td>20:30hs</td><td>Los Error No Forzado vs La Sordeta</td><td>6-0 / 6-3</td></tr>
-                    <tr><td>Cancha 1</td><td>21:30hs</td><td>Los Error No Forzado vs La Sordeta</td><td>6-3 / 7-6</td></tr>
-                    <tr><td>Cancha 2</td><td>19:30hs</td><td>Los Fantasmas vs Sed Point</td><td>6-3 / 6-2</td></tr>
-                    <tr><td>Cancha 2</td><td>20:30hs</td><td>Los Fantasmas vs Sed Point</td><td>6-2 / 6-4</td></tr>
-                    <tr><td>Cancha 2</td><td>21:30hs</td><td>Los Fantasmas vs Sed Point</td><td>3-6 / 4-6</td></tr>
-                    <tr><td>Cancha 3</td><td>19:30hs</td><td>Set y Sed Padel Team vs El Señor de los Globillos</td><td>6-4 / 3-6 / 9/11</td></tr>
-                    <tr><td>Cancha 3</td><td>20:30hs</td><td>Set y Sed Padel Team vs El Señor de los Globillos</td><td>4-6 / 2-6</td></tr>
-                    <tr><td>Cancha 3</td><td>21:30hs</td><td>Set y Sed Padel Team vs El Señor de los Globillos</td><td>5-7 / 7-6 / 11-6</td></tr>
-
-                    <tr><td>Cancha 1</td><td>19:30hs</td><td>Los Fantasmas vs La Sordeta</td><td>2-6 / 6-2 / 11-9</td></tr>
-                    <tr><td>Cancha 1</td><td>20:30hs</td><td>Los Fantasmas vs La Sordeta</td><td>7-6 / 7-6</td></tr>
-                    <tr><td>Cancha 1</td><td>21:30hs</td><td>Los Fantasmas vs La Sordeta</td><td>6-7 / 6-1 / 11-6</td></tr>
-                    <tr><td>Cancha 2</td><td>19:30hs</td><td>El Señor de los Globillos vs Sed Point</td><td>4-6 / 6-2 / 11-4</td></tr>
-                    <tr><td>Cancha 2</td><td>20:30hs</td><td>El Señor de los Globillos vs Sed Point</td><td>7-5 / 3-6 / 7-11</td></tr>
-                    <tr><td>Cancha 2</td><td>21:30hs</td><td>El Señor de los Globillos vs Sed Point</td><td>6-2 / 7-5</td></tr>
-                    <tr><td>Cancha 3</td><td>19:30hs</td><td>Set y Sed Padel Team vs Los Error No Forzado</td><td>6-4 / 5-7 / 11/7</td></tr>
-                    <tr><td>Cancha 3</td><td>20:30hs</td><td>Set y Sed Padel Team vs Los Error No Forzado</td><td>4-6 / 6-3 / 11-9</td></tr>
-                    <tr><td>Cancha 3</td><td>21:30hs</td><td>Set y Sed Padel Team vs Los Error No Forzado</td><td>4-6 / 5-7</td></tr>
-                    
+                    <tr>
+                        <td colspan="4" style="text-align: center; color: var(--text-muted); font-size: 0.85rem;">
+                            Los resultados se actualizarán al finalizar la fecha en curso.
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -291,39 +744,125 @@
 
     <section id="calendario" class="hidden">
         <h2>Calendario de la Liga</h2>
-        <p><small>* Sujeto a cambios por la organización.</small></p>
+        <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: -15px; margin-bottom: 25px;">* Sujeto a cambios por la organización. Sistema todos contra todos ida y vuelta por zona.</p>
 
-        <h3 class="fecha-title">Fecha 10 - ULTIMA</h3>
+        <!-- FECHA 1 -->
+        <h3 class="fecha-title">Fecha 1</h3>
         <div class="table-container">
             <table>
                 <tbody>
-                    <tr><td>Los Fantasmas vs Los Error no Forzado</td></tr>
-                    <tr><td>La Sordeta vs El Señor de los Globillos</td></tr>
-                    <tr><td>Set y Sed Padel Team vs Sed Point</td></tr>
+                    <tr><td><span style="color: var(--ying-color); font-weight: 600;">Zona Ying:</span> Los Abandonados <strong style="color: var(--primary);">vs</strong> Los Rompecristales</td></tr>
+                    <tr><td><span style="color: var(--ying-color); font-weight: 600;">Zona Ying:</span> Punto y Asado <strong style="color: var(--primary);">vs</strong> Sin Globos no hay Paraiso</td></tr>
+                    <tr><td style="border-top: 1px dashed rgba(255, 255, 255, 0.05);"><span style="color: var(--yang-color); font-weight: 600;">Zona Yang:</span> Los Branca <strong style="color: var(--primary);">vs</strong> El Retorno de la Sordeta</td></tr>
+                    <tr><td><span style="color: var(--yang-color); font-weight: 600;">Zona Yang:</span> Red Point <strong style="color: var(--primary);">vs</strong> Fernet Branca</td></tr>
                 </tbody>
             </table>
         </div>
-        </section>
+
+        <!-- FECHA 2 -->
+        <h3 class="fecha-title">Fecha 2</h3>
+        <div class="table-container">
+            <table>
+                <tbody>
+                    <tr><td><span style="color: var(--ying-color); font-weight: 600;">Zona Ying:</span> Los Rompecristales <strong style="color: var(--primary);">vs</strong> Punto y Asado</td></tr>
+                    <tr><td><span style="color: var(--ying-color); font-weight: 600;">Zona Ying:</span> Sin Globos no hay Paraiso <strong style="color: var(--primary);">vs</strong> Los Abandonados</td></tr>
+                    <tr><td style="border-top: 1px dashed rgba(255, 255, 255, 0.05);"><span style="color: var(--yang-color); font-weight: 600;">Zona Yang:</span> El Retorno de la Sordeta <strong style="color: var(--primary);">vs</strong> Red Point</td></tr>
+                    <tr><td><span style="color: var(--yang-color); font-weight: 600;">Zona Yang:</span> Fernet Branca <strong style="color: var(--primary);">vs</strong> Los Branca</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- FECHA 3 -->
+        <h3 class="fecha-title">Fecha 3</h3>
+        <div class="table-container">
+            <table>
+                <tbody>
+                    <tr><td><span style="color: var(--ying-color); font-weight: 600;">Zona Ying:</span> Los Abandonados <strong style="color: var(--primary);">vs</strong> Punto y Asado</td></tr>
+                    <tr><td><span style="color: var(--ying-color); font-weight: 600;">Zona Ying:</span> Los Rompecristales <strong style="color: var(--primary);">vs</strong> Sin Globos no hay Paraiso</td></tr>
+                    <tr><td style="border-top: 1px dashed rgba(255, 255, 255, 0.05);"><span style="color: var(--yang-color); font-weight: 600;">Zona Yang:</span> Los Branca <strong style="color: var(--primary);">vs</strong> Red Point</td></tr>
+                    <tr><td><span style="color: var(--yang-color); font-weight: 600;">Zona Yang:</span> El Retorno de la Sordeta <strong style="color: var(--primary);">vs</strong> Fernet Branca</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- FECHA 4 (VUELTA) -->
+        <h3 class="fecha-title">Fecha 4 (Segunda Vuelta)</h3>
+        <div class="table-container">
+            <table>
+                <tbody>
+                    <tr><td><span style="color: var(--ying-color); font-weight: 600;">Zona Ying:</span> Los Rompecristales <strong style="color: var(--primary);">vs</strong> Los Abandonados</td></tr>
+                    <tr><td><span style="color: var(--ying-color); font-weight: 600;">Zona Ying:</span> Sin Globos no hay Paraiso <strong style="color: var(--primary);">vs</strong> Punto y Asado</td></tr>
+                    <tr><td style="border-top: 1px dashed rgba(255, 255, 255, 0.05);"><span style="color: var(--yang-color); font-weight: 600;">Zona Yang:</span> El Retorno de la Sordeta <strong style="color: var(--primary);">vs</strong> Los Branca</td></tr>
+                    <tr><td><span style="color: var(--yang-color); font-weight: 600;">Zona Yang:</span> Fernet Branca <strong style="color: var(--primary);">vs</strong> Red Point</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- FECHA 5 (VUELTA) -->
+        <h3 class="fecha-title">Fecha 5 (Segunda Vuelta)</h3>
+        <div class="table-container">
+            <table>
+                <tbody>
+                    <tr><td><span style="color: var(--ying-color); font-weight: 600;">Zona Ying:</span> Punto y Asado <strong style="color: var(--primary);">vs</strong> Los Rompecristales</td></tr>
+                    <tr><td><span style="color: var(--ying-color); font-weight: 600;">Zona Ying:</span> Los Abandonados <strong style="color: var(--primary);">vs</strong> Sin Globos no hay Paraiso</td></tr>
+                    <tr><td style="border-top: 1px dashed rgba(255, 255, 255, 0.05);"><span style="color: var(--yang-color); font-weight: 600;">Zona Yang:</span> Red Point <strong style="color: var(--primary);">vs</strong> El Retorno de la Sordeta</td></tr>
+                    <tr><td><span style="color: var(--yang-color); font-weight: 600;">Zona Yang:</span> Los Branca <strong style="color: var(--primary);">vs</strong> Fernet Branca</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- FECHA 6 (VUELTA) -->
+        <h3 class="fecha-title">Fecha 6 (Segunda Vuelta)</h3>
+        <div class="table-container">
+            <table>
+                <tbody>
+                    <tr><td><span style="color: var(--ying-color); font-weight: 600;">Zona Ying:</span> Punto y Asado <strong style="color: var(--primary);">vs</strong> Los Abandonados</td></tr>
+                    <tr><td><span style="color: var(--ying-color); font-weight: 600;">Zona Ying:</span> Sin Globos no hay Paraiso <strong style="color: var(--primary);">vs</strong> Los Rompecristales</td></tr>
+                    <tr><td style="border-top: 1px dashed rgba(255, 255, 255, 0.05);"><span style="color: var(--yang-color); font-weight: 600;">Zona Yang:</span> Red Point <strong style="color: var(--primary);">vs</strong> Los Branca</td></tr>
+                    <tr><td><span style="color: var(--yang-color); font-weight: 600;">Zona Yang:</span> Fernet Branca <strong style="color: var(--primary);">vs</strong> El Retorno de la Sordeta</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
 
     <section id="posiciones" class="hidden">
-    <h2>Tabla General</h2>
-    <button class="share-btn" onclick="compartirWhatsApp('posiciones')">🟢 Compartir Tabla</button>
-    <div class="table-container">
-        <table>
-            <thead>
-                <tr>
-                    <th>Pos</th>
-                    <th>Equipo</th>
-                    <th>Pts</th>
-                    <th>PJ</th>
-                    <th>DS</th>
-                    <th>DG</th>
-                </tr>
-            </thead>
-            <tbody id="tabla-posiciones-body"></tbody>
-        </table>
-    </div>
-</section>
+        <h2>Tablas de Posiciones</h2>
+        <button class="share-btn" onclick="compartirWhatsApp('posiciones')">🟢 Compartir Tablas</button>
+        
+        <div class="zona-title ying">Posiciones - Zona Ying</div>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Pos</th>
+                        <th>Equipo</th>
+                        <th>Pts</th>
+                        <th>PJ</th>
+                        <th>DS</th>
+                        <th>DG</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-posiciones-ying-body"></tbody>
+            </table>
+        </div>
+
+        <div class="zona-title yang">Posiciones - Zona Yang</div>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Pos</th>
+                        <th>Equipo</th>
+                        <th>Pts</th>
+                        <th>PJ</th>
+                        <th>DS</th>
+                        <th>DG</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-posiciones-yang-body"></tbody>
+            </table>
+        </div>
+    </section>
 
     <section id="reglamento" class="hidden">
         <h2>Reglamento de la Liga</h2>
@@ -331,7 +870,7 @@
         <div class="regla-card">
             <h3>1. Formato de Juego</h3>
             <p>Se disputarán 2 sets con <strong>Punto de Oro</strong>. En caso de empate en sets, se definirá por un <strong>Super Tiebreak a 11 puntos</strong> (sin diferencia de dos).</p>
-            <p><strong>Frecuencia:</strong> Todos los equipos jugarán <strong>3 partidos TODOS los jueves</strong>, repartidos en los 3 horarios posibles (19:30 - 20:30 - 21:30hs).</p>
+            <p><strong>Frecuencia:</strong> Todos los equipos jugarán <strong>12 partidos TODOS los jueves</strong>, repartidos en los 3 horarios posibles (19:30 - 20:30 - 21:30hs).</p>
             <p>De esta manera, si algún jugador tiene problemas con un horario específico, podrá organizarse con su capitán para jugar en el turno que le quede más conveniente de los tres disponibles.</p>
         </div>
 
@@ -343,14 +882,14 @@
 
         <div class="regla-card">
             <h3>3. El Capitán</h3>
-            <p>Cada equipo designará un capitán que será el <strong>único nexo</strong> entre la organización y el equipo.</p>
+            <p>Cada equipo designará un capitán que será el <strong>único nexo</strong> entre la organización and el equipo.</p>
         </div>
 
         <div class="regla-card">
             <h3>4. Gestión de Formaciones</h3>
             <p>Para evitar cambios de último momento, la organización asume que el equipo tiene cubiertos los tres turnos. El equipo decide internamente cómo salir a cancha en cada horario según disponibilidad y estrategia.</p>
             <p><strong>Ausencias:</strong> Si un jugador falta, otro integrante deberá jugar 2 partidos ese día. Ese jugador que disputó 2 partidos no jugará la fecha siguiente, y el que se perdió el partido deberá jugar 2 partidos (para evitar ventajas deportivas).</p>
-            <p>Si por caso fortuito esto no es posible, deberán negociar con el capitán del equipo rival para aceptar las condiciones si no considera que hay ventaja.</p>
+            <p>Se contará con un listado de SUPLENTES, si llegado el caso no es posible que un compañero juegue 2 partidos en la misma fecha. Si por caso fortuito esto no es posible, deberán negociar con el capitán del equipo rival para aceptar las condiciones si no considera que hay ventaja.</p>
         </div>
 
         <div class="regla-card">
@@ -359,13 +898,13 @@
         </div>
 
         <div class="regla-card">
-            <h3>6. Comodín (Estrategia Mensual)</h3>
-            <p>Se otorga <strong>1 comodín mensual</strong> a cada equipo. Al usarlo, el capitán informa a la organización, la cual exigirá al equipo contrario presentar su formación antes del martes previo.</p>
-            <p>El equipo rival no podrá mentir con su formación; en caso de incumplir, se aplicará un castigo a decidir entre los 6 capitanes. Si dos equipos que se enfrentan piden comodín, se le otorgará al primero que lo solicitó.</p>
+            <h3>6. Comodín (Estrategia)</h3>
+            <p>Se otorgarán <strong>2 comodínes </strong> a cada equipo, estos sirven para saber como va a salir a cancha en cada partido de la fecha el equipo rival (de esta manera organizar ESTRATEGICAMENTE, como jugarles). Al usarlo, el capitán informa a la organización, la cual exigirá al equipo contrario presentar su formación antes del martes previo.</p>
+            <p>El equipo rival no podrá mentir con su formación; en caso de incumplir, se aplicará un castigo a decidir entre los 4 capitanes. Si dos equipos que se enfrentan piden comodín, se le otorgará al primero que lo solicitó.</p>
         </div>
 
         <div class="nota-importante">
-            <strong>ACLARACIONES IMPORTANTES:</strong> La organización es ajena a problemas de clima, electricidad o desperfectos de terceros. Ante complicaciones, se decidirá cómo afrontarlas entre capitanes y organización.
+            <strong>ACLARACIONES IMPORTANTES:</strong> La organización es ajena a problemas de clima, electricidad o desperfectos de terceros. Ante complicaciones, se decidirá cómo afrontarlas entre capitanes and organización.
         </div>
 
         <div class="alerta-expulsion">
@@ -376,272 +915,65 @@
 </div>
 
 <footer>
-    <img src="esperanza-padel.png" alt="Logo Esperanza Padel Center" style="max-width: 150px; margin-bottom: 15px; display: block; margin-left: auto; margin-right: auto;">
     <p>Pte Sáenz Peña 1151, Esperanza, Santa Fe</p>
-    <a href="https://www.google.com/maps/search/?api=1&query=Esperanza+Padel+Center" target="_blank" class="map-button">📍 VER UBICACIÓN EN MAPA</a>
-    
-    <div class="contact-grid">
-        <a href="https://wa.me/5493496461500" class="ws-button" target="_blank">C. Franco</a>
-        <a href="https://wa.me/5493496510129" class="ws-button" target="_blank">Fefi</a>
-        <a href="https://wa.me/5493482677784" class="ws-button" target="_blank">Puche</a>
-    </div>
 </footer>
 
 <script>
-    // ==========================================
-    // 1. DICCIONARIO DE DATOS
-    // ==========================================
-    const datosEquipos = [
-        { nombre: "La Sordeta", comodin: "USADO", capitan: "Juan Weiner", jugadores: ["Bruno Correnti", "Fer Simonetto", "Lauti Fain", "Mauro Perbellini", "Claudio Pucheta"] },
-        { nombre: "Set y Sed Padel Team", comodin: "DISPONIBLE", capitan: "Fernando Reppetti", jugadores: ["Emiliano Villar", "Fabricio Muller", "Nicolas Audello", "German Oreggioni", "Juan Pablo Fiore"] },
-        { nombre: "El Señor de los Globillos", comodin: "USADO", capitan: "Fernando Villata", jugadores: ["Damian Falkemberg", "Guillermo Zhender", "Ariel Escalera", "Nicolás Kuzmic", "C.Franco"] },
-        { nombre: "Los Fantasmas", comodin: "DISPONIBLE", capitan: "Roy Melchiorre", jugadores: ["Fernando Montardit", "Alejandro Fuhr", "Julian Tschaggeny", "Facundo Niello", "Luis Taris"] },
-        { nombre: "Los Error no Forzado", comodin: "DISPONIBLE", capitan: "Ramón Dobbler", jugadores: ["Martin Exner", "Josue Montenegro", "Pablo Beresvil", "Santiago Angiulla", "Nicolas Wenke"] },
-        { nombre: "Sed Point", comodin: "DISPONIBLE", capitan: "Marcelo Sieguel", jugadores: ["Alex Galleano", "Alan Ordoñez", "Jona Perrig", "Noe Montenegro", "Juan Perren"] }
-    ];
-
-    const noticiasData = [
-        { fecha: "05 de Mayo, 2026", etiqueta: "REMERAS", titulo: "Entrega", contenido: "El próximo Viernes van a estar listas para retirar las remeras, por lo cual durante la semana pueden ir retirandolas o bien se entregan todas juntas el jueves así nos sacamos una foto grupal." },
-        { fecha: "27 de Abril, 2026", etiqueta: "COMODINES", titulo: "Reinicio", contenido: "Al comenzar la segunda mitad de la liga, se reinician los comodines como estaba estipulado." },
-        { fecha: "7 de Abril, 2026", etiqueta: "REMERAS", titulo: "Cancelación", contenido: "El dia de la fecha se abono el total de las camisetas para cada equipo, en el grupo se whatsapp se adjuntó el comprobante de pago." },
-        { fecha: "1 de Abril, 2026", etiqueta: "PREDIO", titulo: "Mejoras del Club", contenido: "Se está avanzando con el cerramiento de la cancha 4, lo que nos va a permitir anexar un cupo extra de 2 equipos mas (12 jugadores)." },
-        { fecha: "1 de Abril, 2026", etiqueta: "REMERAS", titulo: "Remeras Cool Elastic", contenido: "Ya está realizado el pedido, recuerden que 1 participante de cada equipo deberá transferir el total a un miembro de la organización. MIENTRAS MAS SE DEMOREN, MAS VAN A TARDAR LAS REMERAS." },
-        { fecha: "28 de Marzo, 2026", etiqueta: "CANCHAS", titulo: "Demora de partidos y malestar", contenido: "Para que no haya mas disgustos en lo referido al tiempo en el que están disponibles las canchas, ya que el predio tiene alquilados los turnos siguientes, desde la organizacion decidimos que en cada fecha los 3 cruces por equipo van a suceder en la misma cancha, por tal motivo las demoras las arreglaran entre compañeros de equipo." },
-        { fecha: "25 de Marzo, 2026", etiqueta: "FECHAS", titulo: "Alargue del torneo", contenido: "Por cuestiones de logica de cruces y de duracion de la temporada de la liga, se decidió extender la cantidad de fechas; así cada equipo se entrentara con los demas 2 veces." }
-    ];
-
-    const resultadosData = [
-        { fecha: 1, local: "La Sordeta", visit: "Sed Point", s1: [6,1], s2: [6,2], stb: [0,0] },
-        { fecha: 1, local: "La Sordeta", visit: "Sed Point", s1: [0,6], s2: [4,6], stb: [0,0] },
-        { fecha: 1, local: "La Sordeta", visit: "Sed Point", s1: [6,4], s2: [4,6], stb: [11,5] },
-        { fecha: 1, local: "El Señor de los Globillos", visit: "Los Error no Forzado", s1: [3,6], s2: [2,6], stb: [0,0] },
-        { fecha: 1, local: "El Señor de los Globillos", visit: "Los Error no Forzado", s1: [1,6], s2: [4,6], stb: [0,0] },
-        { fecha: 1, local: "El Señor de los Globillos", visit: "Los Error no Forzado", s1: [7,6], s2: [6,4], stb: [0,0] },
-        { fecha: 1, local: "Set y Sed Padel Team", visit: "Los Fantasmas", s1: [2,6], s2: [3,6], stb: [0,0] },
-        { fecha: 1, local: "Set y Sed Padel Team", visit: "Los Fantasmas", s1: [5,7], s2: [3,6], stb: [0,0] },
-        { fecha: 1, local: "Set y Sed Padel Team", visit: "Los Fantasmas", s1: [6,3], s2: [7,5], stb: [0,0] },
-
-        { fecha: 2, local: "La Sordeta", visit: "Set y Sed Padel Team", s1: [4,6], s2: [5,7], stb: [0,0] },
-        { fecha: 2, local: "La Sordeta", visit: "Set y Sed Padel Team", s1: [0,6], s2: [7,5], stb: [11,10] },
-        { fecha: 2, local: "La Sordeta", visit: "Set y Sed Padel Team", s1: [6,3], s2: [6,2], stb: [0,0] },
-        { fecha: 2, local: "El Señor de los Globillos", visit: "Los Fantasmas", s1: [7,6], s2: [6,7], stb: [10,11] },
-        { fecha: 2, local: "El Señor de los Globillos", visit: "Los Fantasmas", s1: [4,6], s2: [6,2], stb: [8,11] },
-        { fecha: 2, local: "El Señor de los Globillos", visit: "Los Fantasmas", s1: [6,7], s2: [4,6], stb: [0,0] },
-        { fecha: 2, local: "Sed Point", visit: "Los Error no Forzado", s1: [5,7], s2: [4,6], stb: [0,0] },
-        { fecha: 2, local: "Sed Point", visit: "Los Error no Forzado", s1: [5,7], s2: [4,6], stb: [0,0] },
-        { fecha: 2, local: "Sed Point", visit: "Los Error no Forzado", s1: [6,3], s2: [6,1], stb: [0,0] },
-
-        { fecha: 3, local: "La Sordeta", visit: "El Señor de los Globillos", s1: [6,4], s2: [2,6], stb: [6,11] },
-        { fecha: 3, local: "La Sordeta", visit: "El Señor de los Globillos", s1: [7,6], s2: [6,2], stb: [0,0] },
-        { fecha: 3, local: "La Sordeta", visit: "El Señor de los Globillos", s1: [4,6], s2: [7,5], stb: [11,8] },
-        { fecha: 3, local: "Sed Point", visit: "Los Fantasmas", s1: [3,6], s2: [6,0], stb: [7,11] },
-        { fecha: 3, local: "Sed Point", visit: "Los Fantasmas", s1: [7,5], s2: [4,6], stb: [11,6] },
-        { fecha: 3, local: "Sed Point", visit: "Los Fantasmas", s1: [6,7], s2: [4,6], stb: [0,0] },
-        { fecha: 3, local: "Set y Sed Padel Team", visit: "Los Error no Forzado", s1: [0,6], s2: [6,1], stb: [7,11] },
-        { fecha: 3, local: "Set y Sed Padel Team", visit: "Los Error no Forzado", s1: [1,6], s2: [0,6], stb: [0,0] },
-        { fecha: 3, local: "Set y Sed Padel Team", visit: "Los Error no Forzado", s1: [6,1], s2: [2,6], stb: [6,11] },
-
-        { fecha: 4, local: "Sed Point", visit: "El Señor de los Globillos", s1: [2,6], s2: [2,6], stb: [0,0] },
-        { fecha: 4, local: "Sed Point", visit: "El Señor de los Globillos", s1: [6,1], s2: [6,2], stb: [0,0] },
-        { fecha: 4, local: "Sed Point", visit: "El Señor de los Globillos", s1: [6,1], s2: [6,3], stb: [0,0] },
-        { fecha: 4, local: "Los Error no Forzado", visit: "La Sordeta", s1: [4,6], s2: [7,5], stb: [11,8] },
-        { fecha: 4, local: "Los Error no Forzado", visit: "La Sordeta", s1: [6,3], s2: [7,5], stb: [0,0] },
-        { fecha: 4, local: "Los Error no Forzado", visit: "La Sordeta", s1: [4,6], s2: [6,1], stb: [11,6] },
-        { fecha: 4, local: "Set y Sed Padel Team", visit: "Los Fantasmas", s1: [6,7], s2: [4,6], stb: [0,0] },
-        { fecha: 4, local: "Set y Sed Padel Team", visit: "Los Fantasmas", s1: [7,5], s2: [4,6], stb: [11,6] },
-        { fecha: 4, local: "Set y Sed Padel Team", visit: "Los Fantasmas", s1: [7,5], s2: [3,6], stb: [11,9] },
-
-        { fecha: 5, local: "El Señor de los Globillos", visit: "Set y Sed Padel Team", s1: [6,0], s2: [7,6], stb: [0,0] },
-        { fecha: 5, local: "El Señor de los Globillos", visit: "Set y Sed Padel Team", s1: [6,7], s2: [5,7], stb: [0,0] },
-        { fecha: 5, local: "El Señor de los Globillos", visit: "Set y Sed Padel Team", s1: [6,4], s2: [6,4], stb: [0,0] },
-        { fecha: 5, local: "Los Error no Forzado", visit: "Los Fantasmas", s1: [6,1], s2: [6,1], stb: [0,0] },
-        { fecha: 5, local: "Los Error no Forzado", visit: "Los Fantasmas", s1: [6,2], s2: [6,4], stb: [0,0] },
-        { fecha: 5, local: "Los Error no Forzado", visit: "Los Fantasmas", s1: [2,6], s2: [4,6], stb: [0,0] },
-        { fecha: 5, local: "Sed Point", visit: "La Sordeta", s1: [2,6], s2: [3,6], stb: [0,0] },
-        { fecha: 5, local: "Sed Point", visit: "La Sordeta", s1: [6,2], s2: [6,4], stb: [0,0] },
-        { fecha: 5, local: "Sed Point", visit: "La Sordeta", s1: [6,2], s2: [6,1], stb: [0,0] },
-
-        { fecha: 6, local: "Set y Sed Padel Team", visit: "Sed Point", s1: [4,6], s2: [6,3], stb: [11,3] },
-        { fecha: 6, local: "Set y Sed Padel Team", visit: "Sed Point", s1: [1,6], s2: [3,6], stb: [0,0] },
-        { fecha: 6, local: "Set y Sed Padel Team", visit: "Sed Point", s1: [4,6], s2: [0,6], stb: [0,0] },
-        { fecha: 6, local: "Los Error no Forzado", visit: "El Señor de los Globillos", s1: [6,3], s2: [6,2], stb: [0,0] },
-        { fecha: 6, local: "Los Error no Forzado", visit: "El Señor de los Globillos", s1: [7,6], s2: [6,1], stb: [0,0] },
-        { fecha: 6, local: "Los Error no Forzado", visit: "El Señor de los Globillos", s1: [6,7], s2: [6,2], stb: [11,9] },
-        { fecha: 6, local: "Los Fantasmas", visit: "La Sordeta", s1: [5,7], s2: [6,3], stb: [11,10] },
-        { fecha: 6, local: "Los Fantasmas", visit: "La Sordeta", s1: [6,2], s2: [6,2], stb: [0,0] },
-        { fecha: 6, local: "Los Fantasmas", visit: "La Sordeta", s1: [6,3], s2: [6,4], stb: [0,0] },
-
-        { fecha: 7, local: "El Señor de los Globillos", visit: "Los Fantasmas", s1: [7,6], s2: [6,1], stb: [0,0] },
-        { fecha: 7, local: "El Señor de los Globillos", visit: "Los Fantasmas", s1: [6,7], s2: [6,3], stb: [11,8] },
-        { fecha: 7, local: "El Señor de los Globillos", visit: "Los Fantasmas", s1: [6,3], s2: [7,6], stb: [0,0] },
-        { fecha: 7, local: "Los Error no Forzado", visit: "Sed Point", s1: [4,6], s2: [6,7], stb: [0,0] },
-        { fecha: 7, local: "Los Error no Forzado", visit: "Sed Point", s1: [7,5], s2: [6,3], stb: [0,0] },
-        { fecha: 7, local: "Los Error no Forzado", visit: "Sed Point", s1: [6,7], s2: [6,4], stb: [3,11] },
-        { fecha: 7, local: "Set y Sed Padel Team", visit: "La Sordeta", s1: [1,6], s2: [6,7], stb: [0,0] },
-        { fecha: 7, local: "Set y Sed Padel Team", visit: "La Sordeta", s1: [6,7], s2: [6,1], stb: [10,11] },
-        { fecha: 7, local: "Set y Sed Padel Team", visit: "La Sordeta", s1: [7,6], s2: [6,3], stb: [0,0] },
-
-        { fecha: 8, local: "Sed Point", visit: "Los Fantasmas", s1: [6,3], s2: [6,2], stb: [0,0] },
-        { fecha: 8, local: "Sed Point", visit: "Los Fantasmas", s1: [6,2], s2: [6,4], stb: [11,8] },
-        { fecha: 8, local: "Sed Point", visit: "Los Fantasmas", s1: [3,6], s2: [4,6], stb: [0,0] },
-        { fecha: 8, local: "Los Error no Forzado", visit: "La Sordeta", s1: [6,4], s2: [6,1], stb: [0,0] },
-        { fecha: 8, local: "Los Error no Forzado", visit: "La Sordeta", s1: [6,0], s2: [6,3], stb: [0,0] },
-        { fecha: 8, local: "Los Error no Forzado", visit: "La Sordeta", s1: [6,3], s2: [7,6], stb: [0,0] },
-        { fecha: 8, local: "El Señor de los Globillos", visit: "Set y Sed Padel Team", s1: [4,6], s2: [6,3], stb: [11,9] },
-        { fecha: 8, local: "El Señor de los Globillos", visit: "Set y Sed Padel Team", s1: [6,4], s2: [6,2], stb: [0,0] },
-        { fecha: 8, local: "El Señor de los Globillos", visit: "Set y Sed Padel Team", s1: [7,5], s2: [6,7], stb: [6,11] },
-
-        { fecha: 9, local: "Los Fantasmas", visit: "La Sordeta", s1: [2,6], s2: [6,2], stb: [11,9] },
-        { fecha: 9, local: "Los Fantasmas", visit: "La Sordeta", s1: [7,6], s2: [7,6], stb: [0,0] },
-        { fecha: 9, local: "Los Fantasmas", visit: "La Sordeta", s1: [6,7], s2: [6,1], stb: [11,6] },
-        { fecha: 9, local: "Set y Sed Padel Team", visit: "Los Error no Forzado", s1: [6,4], s2: [5,7], stb: [11,7] },
-        { fecha: 9, local: "Set y Sed Padel Team", visit: "Los Error no Forzado", s1: [4,6], s2: [6,3], stb: [11,9] },
-        { fecha: 9, local: "Set y Sed Padel Team", visit: "Los Error no Forzado", s1: [4,6], s2: [5,7], stb: [0,0] },
-        { fecha: 9, local: "El Señor de los Globillos", visit: "Sed Point", s1: [4,6], s2: [6,2], stb: [11,4] },
-        { fecha: 9, local: "El Señor de los Globillos", visit: "Sed Point", s1: [7,5], s2: [3,6], stb: [7,11] },
-        { fecha: 9, local: "El Señor de los Globillos", visit: "Sed Point", s1: [6,2], s2: [7,5], stb: [0,0] }
-    ];
-
-    function cargarNoticias() {
-        const container = document.getElementById('news-container');
-        if(!container) return;
-        container.innerHTML = "";
-        noticiasData.forEach(noticia => {
-            container.innerHTML += `
-                <div class="news-card">
-                    <span class="news-tag">${noticia.etiqueta}</span>
-                    <span class="news-date">${noticia.fecha}</span>
-                    <h3>${noticia.titulo}</h3>
-                    <p>${noticia.contenido}</p>
-                </div>`;
-        });
-    }
-
-    function calcularTabla() {
-        let tabla = datosEquipos.map(e => ({ 
-            nombre: e.nombre, pj: 0, sf: 0, sc: 0, gf: 0, gc: 0, pts: 0 
-        }));
-
-        resultadosData.forEach(r => {
-            if (r.s1[0] === 0 && r.s1[1] === 0) return;
-            let loc = tabla.find(t => t.nombre === r.local);
-            let vis = tabla.find(t => t.nombre === r.visit);
-            loc.pj++; vis.pj++;
-            let sLoc = (r.s1[0]>r.s1[1]?1:0) + (r.s2[0]>r.s2[1]?1:0) + (r.stb[0]>r.stb[1]?1:0);
-            let sVis = (r.s1[1]>r.s1[0]?1:0) + (r.s2[1]>r.s2[0]?1:0) + (r.stb[1]>r.stb[0]?1:0);
-            loc.sf += sLoc; loc.sc += sVis;
-            vis.sf += sVis; vis.sc += sLoc;
-            loc.gf += (r.s1[0] + r.s2[0] + r.stb[0]);
-            loc.gc += (r.s1[1] + r.s2[1] + r.stb[1]);
-            vis.gf += (r.s1[1] + r.s2[1] + r.stb[1]);
-            vis.gc += (r.s1[0] + r.s2[0] + r.stb[0]);
-            if (sLoc > sVis) { loc.pts += (r.stb[0] > 0 || r.stb[1] > 0) ? 2 : 3; } else { vis.pts += (r.stb[1] > 0 || r.stb[0] > 0) ? 2 : 3; }
-        });
-
-        const fechasUnicas = [...new Set(resultadosData.map(r => r.fecha))];
-        fechasUnicas.forEach(f => {
-            const partidosDeLaFecha = resultadosData.filter(r => r.fecha === f && (r.s1[0] !== 0 || r.s1[1] !== 0));
-            datosEquipos.forEach(eq => {
-                let winsEnFecha = 0;
-                partidosDeLaFecha.forEach(p => {
-                    let sL = (p.s1[0]>p.s1[1]?1:0) + (p.s2[0]>p.s2[1]?1:0) + (p.stb[0]>p.stb[1]?1:0);
-                    let sV = (p.s1[1]>p.s1[0]?1:0) + (p.s2[1]>p.s2[0]?1:0) + (p.stb[1]>p.stb[0]?1:0);
-                    if(p.local === eq.nombre && sL > sV) winsEnFecha++;
-                    if(p.visit === eq.nombre && sV > sL) winsEnFecha++;
-                });
-                if (winsEnFecha >= 3) { let item = tabla.find(t => t.nombre === eq.nombre); if(item) item.pts += 1; }
-            });
-        });
-        return tabla.sort((a, b) => b.pts - a.pts || (b.sf - b.sc) - (a.sf - a.sc) || (b.gf - b.gc) - (a.gf - a.gc));
-    }
-
-    function renderizarTabla() {
-        const cuerpo = document.getElementById('tabla-posiciones-body');
-        if(!cuerpo) return;
-        cuerpo.innerHTML = ""; 
-        const datosCalculados = calcularTabla();
-        datosCalculados.forEach((eq, i) => {
-            const ds = eq.sf - eq.sc; const dg = eq.gf - eq.gc;
-            cuerpo.innerHTML += `<tr><td>${i+1}</td><td>${eq.nombre}</td><td><strong>${eq.pts}</strong></td><td>${eq.pj}</td><td>${ds>0?'+'+ds:ds}</td><td>${dg>0?'+'+dg:dg}</td></tr>`;
-        });
-    }
-
-    // ==========================================
-    // NUEVA FUNCIÓN COMPARTIR WHATSAPP
-    // ==========================================
-    function compartirWhatsApp(tipo) {
-        let texto = "";
-        
-        if (tipo === 'posiciones') {
-            const datos = calcularTabla();
-            texto = "*🏆 TABLA DE POSICIONES - LIGA PADEL MASTER*\n\n";
-            datos.forEach((eq, i) => {
-                texto += `${i + 1}. ${eq.nombre} - ${eq.pts} pts\n`;
-            });
-        } else if (tipo === 'partidos') {
-            texto = "*🎾 PRÓXIMA FECHA - LIGA PADEL MASTER*\n\n";
-            const filas = document.querySelectorAll('#tabla-proximos-cruces tbody tr');
-            filas.forEach(fila => {
-                const celdas = fila.cells;
-                texto += `📍 ${celdas[0].innerText} | ⏰ ${celdas[1].innerText}\n`;
-                texto += `👉 ${celdas[2].innerText} vs ${celdas[4].innerText}\n`;
-                texto += `--------------------\n`;
-            });
-        }
-
-        texto += "\n🔗 Ver más en: " + window.location.href;
-        const encodedText = encodeURIComponent(texto);
-        window.open(`https://wa.me/?text=${encodedText}`, '_blank');
-    }
-
-    function cargarEquipos() {
-        const container = document.getElementById('teams-container');
-        if(!container) return;
-        container.innerHTML = ""; 
-        datosEquipos.forEach(equipo => {
-            const card = document.createElement('div');
-            card.className = "team-card";
-            card.onclick = function() { toggleTeam(this); };
-            const listaJ = equipo.jugadores.map(j => `<div class="member-item"><span>${j}</span></div>`).join('');
-            const colC = equipo.comodin === 'USADO' ? '#ff4444' : 'var(--primary)';
-            card.innerHTML = `<span class="comodin-status" style="border-color: ${colC}; color: ${colC}">Comodín: ${equipo.comodin}</span><h3>${equipo.nombre}</h3><p><small>Integrantes</small></p><div class="member-list"><div class="member-item"><span class="capitan-name">${equipo.capitan}</span> <span class="position-badge">CAPITÁN</span></div>${listaJ}</div>`;
-            container.appendChild(card);
-        });
-    }
-
     function showSection(id) {
         document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
         document.getElementById(id).classList.remove('hidden');
-    }
+    } // <-- Se cerró correctamente aquí la función de mostrar sección
 
     function toggleTeam(card) {
-        const list = card.querySelector('.member-list');
-        const isVisible = list.style.display === 'block';
-        document.querySelectorAll('.member-list').forEach(el => el.style.display = 'none');
-        list.style.display = isVisible ? 'none' : 'block';
-    }
-
-    function updateCountdown() {
-        const target = new Date('2026-05-28T19:30:00');
-        const diff = target - new Date();
-        const display = document.getElementById('countdown');
-        if (display) {
-            if (diff <= 0) { display.innerHTML = "¡LA FECHA HA COMENZADO!"; return; }
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            display.innerHTML = `PRÓXIMA FECHA: ${days}d ${hours}h ${mins}m`;
+        const memberList = card.querySelector('.member-list');
+        if (memberList) {
+            // Comprobamos tanto 'block' como el estado vacío original
+            const isVisible = memberList.style.display === 'block';
+            memberList.style.display = isVisible ? 'none' : 'block';
         }
     }
 
-    window.onload = function() {
-        cargarEquipos();
-        cargarNoticias();
-        renderizarTabla();
-        setInterval(updateCountdown, 60000);
-        updateCountdown();
-    };
-</script>
+    // ==========================================
+    // FUNCIÓN DE CUENTA REGRESIVA (AUTOMÁTICA)
+    // ==========================================
+    function initCountdown() {
+        const fechaProximaFecha = new Date('2026-06-18T19:30:00'); 
 
+        const countdownElement = document.getElementById('countdown');
+        if (!countdownElement) return;
+
+        function updateTimer() {
+            const ahora = new Date();
+            const diferencia = fechaProximaFecha - ahora;
+
+            if (diferencia <= 0) {
+                if (diferencia > -14400000) { 
+                    countdownElement.innerHTML = "🟢 PRÓXIMA FECHA: ¡LA FECHA HA COMENZADO!";
+                } else {
+                    countdownElement.innerHTML = "PRÓXIMA FECHA: Finalizada (Esperando próxima programación)";
+                }
+                return;
+            }
+
+            const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+            const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+            const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+
+            let textoTimer = "PRÓXIMA FECHA: ";
+            if (dias > 0) textoTimer += `${dias}d `;
+            textoTimer += `${horas.toString().padStart(2, '0')}h `;
+            textoTimer += `${minutos.toString().padStart(2, '0')}m `;
+            textoTimer += `${segundos.toString().padStart(2, '0')}s`;
+
+            countdownElement.innerHTML = textoTimer;
+        }
+
+        updateTimer();
+        setInterval(updateTimer, 1000);
+    }
+
+    document.addEventListener('DOMContentLoaded', initCountdown);
+</script>
 </body>
 </html>
