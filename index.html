@@ -1111,6 +1111,30 @@
         });
     }
 
+// ==========================================
+    // FUNCIÓN PARA COMPARTIR EN WHATSAPP
+    // ==========================================
+    function compartirWhatsApp(seccion) {
+        let texto = "";
+        
+        if (seccion === 'partidos') {
+            texto = "🏆 *LIGA PADEL MASTER v2 - PRÓXIMOS CRUCES* 🏆%0A%0A";
+            texto += "📅 *Próxima Fecha (02/07)*%0A%0A";
+            texto += "🔵 *Zona Ying:*%0A";
+            texto += "• Los Rompecristales vs Punto y Asado%0A";
+            texto += "• Sin Globos no hay Paraíso vs Los Abandonados%0A%0A";
+            texto += "🟠 *Zona Yang:*%0A";
+            texto += "• El Retorno de la Sordeta vs Red Point%0A";
+            texto += "• Fernet Branca vs Los Branca%0A%0A";
+            texto += "📍 ¡Revisá los horarios en la web oficial!";
+        } else if (seccion === 'posiciones') {
+            texto = "📊 *LIGA PADEL MASTER v2 - TABLA DE POSICIONES* 📊%0A%0A";
+            texto += "¡Las tablas de posiciones ya están actualizadas con los bonus de la Fecha 1! Entrá a la web para ver en qué puesto quedó tu equipo. 🎾";
+        }
+        
+        window.open(`https://api.whatsapp.com/send?text=${texto}`, '_blank');
+    }
+
     // ==========================================
     // FUNCIÓN DE CUENTA REGRESIVA (AUTOMÁTICA)
     // ==========================================
@@ -1152,6 +1176,7 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
+        showSection('inicio'); // Asegura que arranque mostrando los equipos
         initCountdown();
         calcularTablas();
     });
