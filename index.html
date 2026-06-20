@@ -501,6 +501,24 @@
             background: var(--whatsapp);
             color: #ffffff;
         }
+/* Estilos para asentar fechas ya jugadas */
+        .fecha-finalizada {
+            opacity: 0.5;
+            transition: opacity 0.3s ease;
+        }
+        .fecha-finalizada:hover {
+            opacity: 0.8; /* Permite leerla con claridad si el usuario pasa el mouse */
+        }
+        .badge-finalizado {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-muted);
+            font-size: 0.65rem;
+            padding: 3px 8px;
+            border-radius: 4px;
+            margin-left: 10px;
+            vertical-align: middle;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
     </style>
 </head>
 <body>
@@ -533,7 +551,23 @@
 
     <section id="noticias" class="hidden">
         <h2>Foro de Noticias</h2>
-        <div id="news-container" class="news-grid"></div>
+        <div id="news-container" class="news-grid">
+            
+            <div class="news-card">
+                <span class="news-date">20-06-2026</span>
+                <span class="news-tag" style="background: #ff5555;">Calendario</span>
+                <h3>🚨 REPROGRAMACIÓN: Fecha 2 se traslada al 02-07</h3>
+                <p>Se les comunica a todos los equipos que la Fecha 2 (programada originalmente para el próximo jueves 25-06) se traslada oficialmente al jueves de la semana siguiente, 2 de julio. Motivo: Se disputa un importante Torneo en la ciudad de Esperanza en el cual la gran mayoría de los jugadores de nuestra liga se encuentran afectados y participando.</p>
+            </div>
+
+            <div class="news-card">
+                <span class="news-date">18-06-2026</span>
+                <span class="news-tag" style="background: var(--card-hover);">Estrategia</span>
+                <h3>🃏 Comodín Activado: Fernet Branca</h3>
+                <p>El capitán del equipo Fernet Branca ha solicitado formalmente hacer uso de uno de sus dos comodines reglamentarios. El estado del mismo ya fue actualizado y asentado como 'USADO' en rojo en el panel principal de equipos.</p>
+            </div>
+
+        </div>
     </section>
 
     <section id="inicio">
@@ -639,7 +673,7 @@
             </div>
 
             <div class="team-card" onclick="toggleTeam(this)">
-                <span class="comodin-status">COMODÍN: DISPONIBLE</span>
+                <span class="comodin-status" style="color: #ff5555; border-color: rgba(255, 85, 85, 0.3); background: rgba(255, 85, 85, 0.05);">COMODÍN: USADO</span>
                 <h3 style="margin: 0 0 10px 0; font-size: 1.15rem; text-transform: uppercase;">Fernet Branca</h3>
                 <div class="member-list">
                     <div class="member-item"><span class="capitan-name">Ariel Escalera</span> <span class="position-badge">CAPITÁN</span></div>
@@ -674,16 +708,16 @@
                     <tr>
                         <td>Cancha 1</td>
                         <td>19:30 a 22:30</td>
-                        <td>Los Abandonados</td>
-                        <td style="color: var(--primary); font-weight: bold;">vs</td>
                         <td>Los Rompecristales</td>
+                        <td style="color: var(--primary); font-weight: bold;">vs</td>
+                        <td>Punto y Asado</td>
                     </tr>
                     <tr>
                         <td>Cancha 2</td>
                         <td>19:30 a 22:30</td>
-                        <td>Punto y Asado</td>
-                        <td style="color: var(--primary); font-weight: bold;">vs</td>
                         <td>Sin Globos no hay Paraiso</td>
+                        <td style="color: var(--primary); font-weight: bold;">vs</td>
+                        <td>Los Abandonados</td>
                     </tr>
                 </tbody>
             </table>
@@ -705,16 +739,16 @@
                     <tr>
                         <td>Cancha 3</td>
                         <td>19:30 a 22:30</td>
-                        <td>Los Branca</td>
-                        <td style="color: var(--primary); font-weight: bold;">vs</td>
                         <td>El Retorno de la Sordeta</td>
+                        <td style="color: var(--primary); font-weight: bold;">vs</td>
+                        <td>Red Point</td>
                     </tr>
                     <tr>
                         <td>Cancha 4</td>
                         <td>19:30 a 22:30</td>
-                        <td>Red Point</td>
-                        <td style="color: var(--primary); font-weight: bold;">vs</td>
                         <td>Fernet Branca</td>
+                        <td style="color: var(--primary); font-weight: bold;">vs</td>
+                        <td>Los Branca</td>
                     </tr>
                 </tbody>
             </table>
@@ -747,8 +781,8 @@
         <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: -15px; margin-bottom: 25px;">* Sujeto a cambios por la organización. Sistema todos contra todos ida y vuelta por zona.</p>
 
         <!-- FECHA 1 -->
-        <h3 class="fecha-title">Fecha 1</h3>
-        <div class="table-container">
+        <h3 class="fecha-title">Fecha 1 <span class="badge-finalizado">✓ FINALIZADA</span></h3>
+        <div class="table-container fecha-finalizada">
             <table>
                 <tbody>
                     <tr><td><span style="color: var(--ying-color); font-weight: 600;">Zona Ying:</span> Los Abandonados <strong style="color: var(--primary);">vs</strong> Los Rompecristales</td></tr>
@@ -922,22 +956,166 @@
     function showSection(id) {
         document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
         document.getElementById(id).classList.remove('hidden');
-    } // <-- Se cerró correctamente aquí la función de mostrar sección
+    }
 
     function toggleTeam(card) {
         const memberList = card.querySelector('.member-list');
         if (memberList) {
-            // Comprobamos tanto 'block' como el estado vacío original
             const isVisible = memberList.style.display === 'block';
             memberList.style.display = isVisible ? 'none' : 'block';
         }
     }
 
     // ==========================================
+    // BASE DE DATOS DE LA LIGA (CONFIGURACIÓN)
+    // ==========================================
+    const EQUIPOS = {
+        ying: ["Los Abandonados", "Los Rompecristales", "Punto y Asado", "Sin Globos no hay Paraiso"],
+        yang: ["Los Branca", "El Retorno de la Sordeta", "Red Point", "Fernet Branca"]
+    };
+
+    // ====== RESULTADOS OFICIALES CARGADOS - FECHA 1 ======
+    const resultadosFecha1 = [
+        // ---------- ZONA YING ----------
+        {
+            zona: 'ying',
+            local: 'Los Rompecristales', visitante: 'Los Abandonados',
+            partidos: [
+                { setsLoc: 2, setsVis: 0, gamesLoc: 13, gamesVis: 7 },  // 7-5 / 6-2 (Gana Rompecristales +3)
+                { setsLoc: 2, setsVis: 0, gamesLoc: 12, gamesVis: 7 },  // 6-3 / 6-4 (Gana Rompecristales +3)
+                { setsLoc: 0, setsVis: 2, gamesLoc: 7, gamesVis: 13 }   // 5-7 / 2-6 (Gana Abandonados +3)
+            ]
+        },
+        {
+            zona: 'ying',
+            local: 'Punto y Asado', visitante: 'Sin Globos no hay Paraiso',
+            partidos: [
+                { setsLoc: 2, setsVis: 0, gamesLoc: 12, gamesVis: 6 },  // 6-4 / 6-2 (Gana Punto y Asado +3)
+                { setsLoc: 2, setsVis: 0, gamesLoc: 12, gamesVis: 4 },  // 6-2 / 6-2 (Gana Punto y Asado +3)
+                { setsLoc: 1, setsVis: 2, gamesLoc: 13, gamesVis: 12 }  // 6-1 / 6-7 / 8-11 (Gana Sin Globos +2)
+            ]
+        },
+        // ---------- ZONA YANG ----------
+        {
+            zona: 'yang',
+            local: 'El Retorno de la Sordeta', visitante: 'Los Branca',
+            partidos: [
+                { setsLoc: 1, setsVis: 2, gamesLoc: 18, gamesVis: 9 },  // 3-6 / 6-2 / 9-11 (Gana Los Branca +2)
+                { setsLoc: 2, setsVis: 0, gamesLoc: 13, gamesVis: 10 }, // 7-6 / 6-4 (Gana Sordeta +3)
+                { setsLoc: 2, setsVis: 0, gamesLoc: 12, gamesVis: 6 }   // 6-2 / 6-4 (Gana Sordeta +3)
+            ]
+        },
+        {
+            zona: 'yang',
+            local: 'Fernet Branca', visitante: 'Red Point',
+            partidos: [
+                { setsLoc: 1, setsVis: 2, gamesLoc: 16, gamesVis: 23 }, // 7-6 / 4-6 / 5-11 (Gana Red Point +2)
+                { setsLoc: 0, setsVis: 2, gamesLoc: 6, gamesVis: 12 },  // 2-6 / 4-6 (Gana Red Point +3)
+                { setsLoc: 0, setsVis: 2, gamesLoc: 12, gamesVis: 14 }  // 6-7 / 6-7 (Gana Red Point +3)
+            ]
+        }
+    ];
+
+    // ==========================================
+    // MOTOR DE CÁLCULO DE ESTADÍSTICAS Y TABLAS
+    // ==========================================
+    function calcularTablas() {
+        let stats = {};
+        ['ying', 'yang'].forEach(zona => {
+            EQUIPOS[zona].forEach(eq => {
+                stats[eq] = { nombre: eq, zona: zona, pts: 0, pj: 0, ds: 0, dg: 0 };
+            });
+        });
+
+        resultadosFecha1.forEach(encuentro => {
+            let victoriasLoc = 0;
+            let victoriasVis = 0;
+
+            encuentro.partidos.forEach(p => {
+                stats[encuentro.local].pj++;
+                stats[encuentro.visitante].pj++;
+
+                stats[encuentro.local].ds += (p.setsLoc - p.setsVis);
+                stats[encuentro.visitante].ds += (p.setsVis - p.setsLoc);
+                stats[encuentro.local].dg += (p.gamesLoc - p.gamesVis);
+                stats[encuentro.visitante].dg += (p.gamesVis - p.gamesLoc);
+
+                if (p.setsLoc > p.setsVis) {
+                    victoriasLoc++;
+                    let totalSets = p.setsLoc + p.setsVis;
+                    stats[encuentro.local].pts += (totalSets === 2) ? 3 : 2;
+                } else if (p.setsVis > p.setsLoc) {
+                    victoriasVis++;
+                    let totalSets = p.setsLoc + p.setsVis;
+                    stats[encuentro.visitante].pts += (totalSets === 2) ? 3 : 2;
+                }
+            });
+
+            // CORRECCIÓN DEFINITIVA DE CONTROL DE BONUS (+1 PUNTO SI Y SOLO SI SE GANAN LOS 3 PARTIDOS)
+            if (victoriasLoc === 3) {
+                stats[encuentro.local].pts += 1;
+            }
+            if (victoriasVis === 3) {
+                stats[encuentro.visitante].pts += 1;
+            }
+        });
+
+        renderizarTablaZona('ying', stats);
+        renderizarTablaZona('yang', stats);
+        renderizarResultadosAnteriores();
+    }
+
+    function renderizarTablaZona(zona, stats) {
+        let listaOrdenada = Object.values(stats)
+            .filter(e => e.zona === zona)
+            .sort((a, b) => b.pts - a.pts || b.ds - a.ds || b.dg - a.dg);
+
+        let tbody = document.getElementById(`tabla-posiciones-${zona}-body`);
+        if (!tbody) return;
+        tbody.innerHTML = "";
+
+        listaOrdenada.forEach((eq, index) => {
+            let fila = `<tr>
+                <td><strong>${index + 1}°</strong></td>
+                <td>${eq.nombre}</td>
+                <td style="color: var(--primary); font-weight: bold;">${eq.pts}</td>
+                <td>${eq.pj}</td>
+                <td>${eq.ds > 0 ? '+' + eq.ds : eq.ds}</td>
+                <td>${eq.dg > 0 ? '+' + eq.dg : eq.dg}</td>
+            </tr>`;
+            tbody.innerHTML += fila;
+        });
+    }
+
+    function renderizarResultadosAnteriores() {
+        const tablaResultados = document.querySelector("#partidos .table-container:last-of-type tbody");
+        if (!tablaResultados || resultadosFecha1.length === 0) return;
+
+        tablaResultados.innerHTML = "";
+
+        resultadosFecha1.forEach(encuentro => {
+            let pGanadosLoc = 0;
+            let pGanadosVis = 0;
+            encuentro.partidos.forEach(p => {
+                if (p.setsLoc > p.setsVis) pGanadosLoc++;
+                else pGanadosVis++;
+            });
+
+            let fila = `<tr>
+                <td>Canchas Gral</td>
+                <td>Fecha 1</td>
+                <td><strong>${encuentro.local}</strong> vs ${encuentro.visitante}</td>
+                <td style="color: var(--primary); font-weight: bold;">${pGanadosLoc} - ${pGanadosVis} <span style="font-size:0.75rem; color:#fff; font-weight:normal;">(Partidos)</span></td>
+            </tr>`;
+            tablaResultados.innerHTML += fila;
+        });
+    }
+
+    // ==========================================
     // FUNCIÓN DE CUENTA REGRESIVA (AUTOMÁTICA)
     // ==========================================
     function initCountdown() {
-        const fechaProximaFecha = new Date('2026-06-18T19:30:00'); 
+        const fechaProximaFecha = new Date('2026-07-02T19:30:00'); 
 
         const countdownElement = document.getElementById('countdown');
         if (!countdownElement) return;
@@ -956,7 +1134,7 @@
             }
 
             const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
-            const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const horas = Math.floor((diferencia % (1000 * 60 * 24)) / (1000 * 60 * 60));
             const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
             const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
 
@@ -973,7 +1151,10 @@
         setInterval(updateTimer, 1000);
     }
 
-    document.addEventListener('DOMContentLoaded', initCountdown);
+    document.addEventListener('DOMContentLoaded', () => {
+        initCountdown();
+        calcularTablas();
+    });
 </script>
 </body>
 </html>
