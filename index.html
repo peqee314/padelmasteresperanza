@@ -667,7 +667,7 @@
             </div>
 
             <div class="team-card" onclick="toggleTeam(this)">
-                <span class="comodin-status">COMODÍN: USADO</span>
+                 <span class="comodin-status" style="color: #ff5555; border-color: rgba(255, 85, 85, 0.3); background: rgba(255, 85, 85, 0.05);">COMODÍN: USADO</span>
                 <h3 style="margin: 0 0 10px 0; font-size: 1.15rem; text-transform: uppercase;">Red Point</h3>
                 <div class="member-list">
                     <div class="member-item"><span class="capitan-name">Turco Taris</span> <span class="position-badge">CAPITÁN</span></div>
@@ -1147,7 +1147,7 @@
     // FUNCIÓN DE CUENTA REGRESIVA (AUTOMÁTICA)
     // ==========================================
     function initCountdown() {
-        const fechaProximaFecha = new Date('2026-07-02T19:30:00'); 
+        const fechaProximaFecha = new Date('2026-07-09T19:30:00'); 
 
         const countdownElement = document.getElementById('countdown');
         if (!countdownElement) return;
