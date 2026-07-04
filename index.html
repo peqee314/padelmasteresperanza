@@ -715,16 +715,16 @@
                     <tr>
                         <td>Cancha 1</td>
                         <td>19:30 a 22:30</td>
-                        <td>Los Rompecristales</td>
+                        <td>Los Abandonados</td>
                         <td style="color: var(--primary); font-weight: bold;">vs</td>
                         <td>Punto y Asado</td>
                     </tr>
                     <tr>
                         <td>Cancha 2</td>
                         <td>19:30 a 22:30</td>
-                        <td>Sin Globos no hay Paraiso</td>
+                        <td>Los Rompecristales</td>
                         <td style="color: var(--primary); font-weight: bold;">vs</td>
-                        <td>Los Abandonados</td>
+                        <td>Sin Globos no hay Paraiso</td>
                     </tr>
                 </tbody>
             </table>
@@ -746,16 +746,16 @@
                     <tr>
                         <td>Cancha 3</td>
                         <td>19:30 a 22:30</td>
-                        <td>El Retorno de la Sordeta</td>
+                        <td>Los Branca</td>
                         <td style="color: var(--primary); font-weight: bold;">vs</td>
                         <td>Red Point</td>
                     </tr>
                     <tr>
                         <td>Cancha 4</td>
                         <td>19:30 a 22:30</td>
-                        <td>Fernet Branca</td>
+                        <td>El Retorno de la Sordeta</td>
                         <td style="color: var(--primary); font-weight: bold;">vs</td>
-                        <td>Los Branca</td>
+                        <td>Fernet Branca</td>
                     </tr>
                 </tbody>
             </table>
@@ -801,8 +801,8 @@
         </div>
 
         <!-- FECHA 2 -->
-        <h3 class="fecha-title">Fecha 2</h3>
-        <div class="table-container">
+        <h3 class="fecha-title">Fecha 2 <span class="badge-finalizado">✓ FINALIZADA</span></h3>
+        <div class="table-container fecha-finalizada">
             <table>
                 <tbody>
                     <tr><td><span style="color: var(--ying-color); font-weight: 600;">Zona Ying:</span> Los Rompecristales <strong style="color: var(--primary);">vs</strong> Punto y Asado</td></tr>
@@ -1022,6 +1022,47 @@
                 { setsLoc: 0, setsVis: 2, gamesLoc: 12, gamesVis: 14 }  // 6-7 / 6-7 (Gana Red Point +3)
             ]
         }
+    ]; // <-- AQUÍ ESTABA EL ERROR, YA QUEDÓ CORREGIDO Y CERRADO
+
+    const resultadosFecha2 = [
+        // ---------- ZONA YING ----------
+        {
+            zona: 'ying',
+            local: 'Los Rompecristales', visitante: 'Punto y Asado',
+            partidos: [
+                { setsLoc: 2, setsVis: 1, gamesLoc: 20, gamesVis: 14 },  // 6-2 / 3-6 / 11-6 (Gana Rompecristales +2)
+                { setsLoc: 2, setsVis: 0, gamesLoc: 12, gamesVis: 4 },  // 6-1 / 6-3 (Gana Rompecristales +3)
+                { setsLoc: 0, setsVis: 2, gamesLoc: 2, gamesVis: 12 }   // 2-6 / 0-6 (Gana Punto y Asado +3)
+            ]
+        },
+        {
+            zona: 'ying',
+            local: 'Sin Globos no hay Paraiso', visitante: 'Los Abandonados',
+            partidos: [
+                { setsLoc: 0, setsVis: 2, gamesLoc: 12, gamesVis: 14 },  // 6-7 / 6-7 (Gana Abandonados +3)
+                { setsLoc: 0, setsVis: 2, gamesLoc: 4, gamesVis: 12 },  // 1-6 / 3-6 (Gana Abandonados +3)
+                { setsLoc: 0, setsVis: 2, gamesLoc: 6, gamesVis: 12 }  // 3-6 / 3-6 (Abandonados +3)
+            ]
+        },
+        // ---------- ZONA YANG ----------
+        {
+            zona: 'yang',
+            local: 'El Retorno de la Sordeta', visitante: 'Red Point',
+            partidos: [
+                { setsLoc: 2, setsVis: 0, gamesLoc: 12, gamesVis: 6 },  // 6-4 / 6-2 (Gana Sordeta +3)
+                { setsLoc: 1, setsVis: 2, gamesLoc: 18, gamesVis: 19 }, // 4-6 / 6-2 / 8-11 (Gana Red Point +2)
+                { setsLoc: 2, setsVis: 1, gamesLoc: 21, gamesVis: 17 }   // 6-1 / 4-6 / 11-10 (Gana Sordeta +2)
+            ]
+        },
+        {
+            zona: 'yang',
+            local: 'Fernet Branca', visitante: 'Los Branca',
+            partidos: [
+                { setsLoc: 1, setsVis: 2, gamesLoc: 20, gamesVis: 18 }, // 6-7 / 6-0 / 8-11 (Gana Los Branca +2)
+                { setsLoc: 2, setsVis: 0, gamesLoc: 13, gamesVis: 9 },  // 6-4 / 7-5 (Gana Fernet Branca +3)
+                { setsLoc: 2, setsVis: 0, gamesLoc: 12, gamesVis: 5 }  // 6-1 / 6-4 (Gana Fernet Branca +3)
+            ]
+        }
     ];
 
     // ==========================================
@@ -1035,7 +1076,10 @@
             });
         });
 
-        resultadosFecha1.forEach(encuentro => {
+        // Unificamos las dos fechas cargadas para el cálculo global de la tabla
+        let todosLosResultados = [...resultadosFecha1, ...resultadosFecha2];
+
+        todosLosResultados.forEach(encuentro => {
             let victoriasLoc = 0;
             let victoriasVis = 0;
 
@@ -1059,7 +1103,6 @@
                 }
             });
 
-            // CORRECCIÓN DEFINITIVA DE CONTROL DE BONUS (+1 PUNTO SI Y SOLO SI SE GANAN LOS 3 PARTIDOS)
             if (victoriasLoc === 3) {
                 stats[encuentro.local].pts += 1;
             }
@@ -1101,7 +1144,10 @@
 
         tablaResultados.innerHTML = "";
 
-        resultadosFecha1.forEach(encuentro => {
+        // Mostramos ambas fechas en la sección de resultados anteriores
+        let todosLosResultados = [...resultadosFecha1, ...resultadosFecha2];
+
+        todosLosResultados.forEach((encuentro, idx) => {
             let pGanadosLoc = 0;
             let pGanadosVis = 0;
             encuentro.partidos.forEach(p => {
@@ -1109,9 +1155,11 @@
                 else pGanadosVis++;
             });
 
+            let numFecha = idx < 4 ? "Fecha 1" : "Fecha 2";
+
             let fila = `<tr>
                 <td>Canchas Gral</td>
-                <td>Fecha 1</td>
+                <td>${numFecha}</td>
                 <td><strong>${encuentro.local}</strong> vs ${encuentro.visitante}</td>
                 <td style="color: var(--primary); font-weight: bold;">${pGanadosLoc} - ${pGanadosVis} <span style="font-size:0.75rem; color:#fff; font-weight:normal;">(Partidos)</span></td>
             </tr>`;
@@ -1119,7 +1167,7 @@
         });
     }
 
-// ==========================================
+    // ==========================================
     // FUNCIÓN PARA COMPARTIR EN WHATSAPP
     // ==========================================
     function compartirWhatsApp(seccion) {
@@ -1184,7 +1232,7 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-        showSection('inicio'); // Asegura que arranque mostrando los equipos
+        showSection('inicio'); 
         initCountdown();
         calcularTablas();
     });
