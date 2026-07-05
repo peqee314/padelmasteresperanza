@@ -551,7 +551,14 @@
 
     <section id="noticias" class="hidden">
         <h2>Foro de Noticias</h2>
-        <div id="news-container" class="news-grid">
+        <div id="news-container" class="news-grid
+
+            <div class="news-card">
+                <span class="news-date">05-07-2026</span>
+                <span class="news-tag" style="background: #ff5555;">Calendario</span>
+                <h3>🚨 REPROGRAMACIÓN: Fecha 3 se traslada al 16-07</h3>
+                <p>Se les comunica a todos los equipos que la Fecha 3 (programada originalmente para el próximo jueves 09-07) se traslada oficialmente al jueves de la semana siguiente (se sometió a votación de capitanes). Motivo: Se conmemoria el día de la independencia Argentina, por lo cual estarian ausentes la gran mayoria de jugadores.</p>
+            </div>
 
             <div class="news-card">
                 <span class="news-date">02-07-2026</span>
@@ -1195,7 +1202,7 @@
     // FUNCIÓN DE CUENTA REGRESIVA (AUTOMÁTICA)
     // ==========================================
     function initCountdown() {
-        const fechaProximaFecha = new Date('2026-07-09T19:30:00'); 
+        const fechaProximaFecha = new Date('2026-07-16T19:30:00'); 
 
         const countdownElement = document.getElementById('countdown');
         if (!countdownElement) return;
