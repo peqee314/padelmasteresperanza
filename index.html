@@ -674,7 +674,7 @@
             </div>
 
             <div class="team-card" onclick="toggleTeam(this)">
-                 <span class="comodin-status" style="color: #ff5555; border-color: rgba(255, 85, 85, 0.3); background: rgba(255, 85, 85, 0.05);">COMODÍN: USADO</span>
+                 <span class="comodin-status">COMODÍN: DISPONIBLE</span>
                 <h3 style="margin: 0 0 10px 0; font-size: 1.15rem; text-transform: uppercase;">Red Point</h3>
                 <div class="member-list">
                     <div class="member-item"><span class="capitan-name">Turco Taris</span> <span class="position-badge">CAPITÁN</span></div>
@@ -687,7 +687,7 @@
             </div>
 
             <div class="team-card" onclick="toggleTeam(this)">
-                <span class="comodin-status" style="color: #ff5555; border-color: rgba(255, 85, 85, 0.3); background: rgba(255, 85, 85, 0.05);">COMODÍN: USADO</span>
+                <span class="comodin-status">COMODÍN: DISPONIBLE</span>
                 <h3 style="margin: 0 0 10px 0; font-size: 1.15rem; text-transform: uppercase;">Fernet Branca</h3>
                 <div class="member-list">
                     <div class="member-item"><span class="capitan-name">Ariel Escalera</span> <span class="position-badge">CAPITÁN</span></div>
@@ -724,14 +724,14 @@
                         <td>19:30 a 22:30</td>
                         <td>Punto y Asado</td>
                         <td style="color: var(--primary); font-weight: bold;">vs</td>
-                        <td>Los Rompecristales</td>
+                        <td>Los Abandonados</td>
                     </tr>
                     <tr>
                         <td>Cancha 2</td>
                         <td>19:30 a 22:30</td>
-                        <td>Los Abandonados</td>
-                        <td style="color: var(--primary); font-weight: bold;">vs</td>
                         <td>Sin Globos no hay Paraiso</td>
+                        <td style="color: var(--primary); font-weight: bold;">vs</td>
+                        <td>Los Rompecristales</td>
                     </tr>
                 </tbody>
             </table>
@@ -755,14 +755,14 @@
                         <td>19:30 a 22:30</td>
                         <td>Red Point</td>
                         <td style="color: var(--primary); font-weight: bold;">vs</td>
-                        <td>El Retorno de la Sordeta</td>
+                        <td>Los Branca</td>
                     </tr>
                     <tr>
                         <td>Cancha 4</td>
                         <td>19:30 a 22:30</td>
-                        <td>Los Branca</td>
-                        <td style="color: var(--primary); font-weight: bold;">vs</td>
                         <td>Fernet Branca</td>
+                        <td style="color: var(--primary); font-weight: bold;">vs</td>
+                        <td>El Retorno de la Sordeta</td>
                     </tr>
                 </tbody>
             </table>
@@ -848,8 +848,8 @@
         </div>
 
         <!-- FECHA 5 (VUELTA) -->
-        <h3 class="fecha-title">Fecha 5 (Segunda Vuelta)</h3>
-        <div class="table-container">
+        <h3 class="fecha-title">Fecha 5 (Segunda Vuelta) <span class="badge-finalizado">✓ FINALIZADA</span></h3>
+        <div class="table-container fecha-finalizada">
             <table>
                 <tbody>
                     <tr><td><span style="color: var(--ying-color); font-weight: 600;">Zona Ying:</span> Punto y Asado <strong style="color: var(--primary);">vs</strong> Los Rompecristales</td></tr>
@@ -1154,6 +1154,47 @@ const resultadosFecha4 = [
             ]
         }
     ];
+const resultadosFecha5 = [
+        // ---------- ZONA YING ----------
+        {
+            zona: 'ying',
+            local: 'Punto y Asado', visitante: 'Los Rompecristales',
+            partidos: [
+                { setsLoc: 2, setsVis: 0, gamesLoc: 13, gamesVis: 7 },  // 6-1 / 7-6 (Gana Punto y Asado +3)
+                { setsLoc: 1, setsVis: 2, gamesLoc: 20, gamesVis: 19 },  // 6-2 / 4-6 / 10-11 (Gana Rompecristales +2)
+                { setsLoc: 0, setsVis: 2, gamesLoc: 6, gamesVis: 12 }   // 3-6 / 3-6 (Gana Rompecristales +3)
+            ]
+        },
+        {
+            zona: 'ying',
+            local: 'Los Abandonados', visitante: 'Sin Globos no hay Paraiso',
+            partidos: [
+                { setsLoc: 2, setsVis: 1, gamesLoc: 22, gamesVis: 19 },  // 6-3 / 5-7 / 11-9 (Gana Abandonados +2)
+                { setsLoc: 0, setsVis: 2, gamesLoc: 5, gamesVis: 12 },  // 3-6 / 2-6 (Gana Sin Globos +3)
+                { setsLoc: 2, setsVis: 1, gamesLoc: 21, gamesVis: 17 }  // 7-6 / 3-6 / 11-5 (Gana Abandonados  +2)
+            ]
+        },
+        // ---------- ZONA YANG ----------
+        {
+            zona: 'yang',
+            local: 'Red Point', visitante: 'El Retorno de la Sordeta',
+            partidos: [
+                { setsLoc: 2, setsVis: 1, gamesLoc: 22, gamesVis: 16 },  // 6-4 / 5-7 / 11-5 (Gana Red Point +2)
+                { setsLoc: 0, setsVis: 2, gamesLoc: 5, gamesVis: 12 }, // 2-6 / 3-6 (Gana Sordeta +3)
+                { setsLoc: 1, setsVis: 2, gamesLoc: 16, gamesVis: 21 }   // 4-6 / 6-4 / 6-11 (Gana Sordeta +2)
+            ]
+        },
+        {
+            zona: 'yang',
+            local: 'Los Branca', visitante: 'Fernet Branca',
+            partidos: [
+                { setsLoc: 0, setsVis: 2, gamesLoc: 5, gamesVis: 12 }, // 3-6 / 2-6 (Gana Fernet Branca +3)
+                { setsLoc: 2, setsVis: 1, gamesLoc: 19, gamesVis: 15 },  // 6-4 / 2-6 / 11-5 (Gana Los Branca +2)
+                { setsLoc: 2, setsVis: 0, gamesLoc: 12, gamesVis: 5 }  // 6-3 / 6-2 (Gana Los Branca +3)
+            ]
+        }
+    ];
+
  //
 
     // ==========================================
@@ -1168,7 +1209,7 @@ const resultadosFecha4 = [
         });
 
         // Unificamos las tres fechas cargadas para el cálculo global de la tabla
-let todosLosResultados = [...resultadosFecha1, ...resultadosFecha2, ...resultadosFecha3, ...resultadosFecha4];
+let todosLosResultados = [...resultadosFecha1, ...resultadosFecha2, ...resultadosFecha3, ...resultadosFecha4, ...resultadosFecha5];
 
         todosLosResultados.forEach(encuentro => {
             let victoriasLoc = 0;
@@ -1235,8 +1276,8 @@ let todosLosResultados = [...resultadosFecha1, ...resultadosFecha2, ...resultado
 
     tablaResultados.innerHTML = "";
 
-    // Mostramos las tres fechas en la sección de resultados anteriores
-    let todosLosResultados = [...resultadosFecha1, ...resultadosFecha2, ...resultadosFecha3, ...resultadosFecha4];
+    // Se incluyó resultadosFecha5 en el arreglo
+    let todosLosResultados = [...resultadosFecha1, ...resultadosFecha2, ...resultadosFecha3, ...resultadosFecha4, ...resultadosFecha5];
 
     todosLosResultados.forEach((encuentro, idx) => {
         let pGanadosLoc = 0;
@@ -1246,13 +1287,13 @@ let todosLosResultados = [...resultadosFecha1, ...resultadosFecha2, ...resultado
             else pGanadosVis++;
         });
 
-        // Cada fecha tiene 4 encuentros (0 a 3 = F1, 4 a 7 = F2, 8 en adelante = F3)
+        // Asignación correcta de la fecha según el índice
         let numFecha = "Fecha 1";
-if (idx >= 4 && idx < 8) numFecha = "Fecha 2";
-else if (idx >= 8 && idx < 12) numFecha = "Fecha 3";
-else if (idx >= 12 && idx < 16) numFecha = "Fecha 4";
-else if (idx >= 16 && idx < 20) numFecha = "Fecha 5";
-else if (idx >= 20 && idx < 24) numFecha = "Fecha 6";
+        if (idx >= 4 && idx < 8) numFecha = "Fecha 2";
+        else if (idx >= 8 && idx < 12) numFecha = "Fecha 3";
+        else if (idx >= 12 && idx < 16) numFecha = "Fecha 4";
+        else if (idx >= 16 && idx < 20) numFecha = "Fecha 5";
+        else if (idx >= 20 && idx < 24) numFecha = "Fecha 6";
 
         let fila = `<tr>
             <td>Canchas Gral</td>
@@ -1292,7 +1333,7 @@ else if (idx >= 20 && idx < 24) numFecha = "Fecha 6";
     // FUNCIÓN DE CUENTA REGRESIVA (AUTOMÁTICA)
     // ==========================================
     function initCountdown() {
-        const fechaProximaFecha = new Date('2026-07-30T19:30:00'); 
+        const fechaProximaFecha = new Date('2026-08-06T19:30:00'); 
 
         const countdownElement = document.getElementById('countdown');
         if (!countdownElement) return;
